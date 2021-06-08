@@ -5,7 +5,7 @@ const express = require("express");
 dotenv = require('dotenv').config();
 
 // require rutas
-
+const router = require('./routes/pages')
 
 // declaracion de express y port
 const app = express();
