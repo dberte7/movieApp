@@ -5,11 +5,10 @@ const express = require("express");
 dotenv = require('dotenv').config();
 
 // require rutas
-const router = require('./routes/pages')
-
-// declaracion de express y port
+const router = require('./routes/movie')
+console.log("iufifaijd")
+// declaracion de express
 const app = express();
-const port = process.env.PORT || 3000;
 
 // motor de vistas 
 app.set("view engine", "pug");
@@ -36,6 +35,6 @@ app.use((err, req, res, next) =>{
 });
 
 // inicializacion del servidor 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 });
