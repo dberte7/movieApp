@@ -3,20 +3,32 @@ const apiKey = process.env.API_KEY;
 
 const routes = {
     home:(req, res) => {
-        console.log("hola")
         res.status(200).send('vista inicial/login')
     },
+    // getSingUp: ,
+    // postSingUp: ,
+    // login:,
+    // logout:,
     dashboard:(req, res) => {
         res.status(200).send('dashboard')
+    },
+     // getMovies:,
+    searchTitle: async(req, res) => {
+        let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apiKey}&`)
+        console.log(data);
+        res.status(200).json(data)
+    },
+    // myMovies:,
+    createMovie: async (req, res) => {
+        res.status(200).json({message: 'Se ha guardado'})
+    },
+    editMovie: (req, res) =>{
+        let id = req.params.id
+        res.status(200).json({message: `Se ha actualizado: ${id}`})
+    },
+    deleteMovie: (req, res) =>{
+        res.status(200).json({message: 'Se ha borrado'})
     }
-/*     searchMovie:, */
-    /* searchMovies:,
-    myMovies:,
-    login:,
-    logout:,
-    createMovie:,
-    editMovie:,
-    deleteMovie: */
 }
 
 module.exports = routes;

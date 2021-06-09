@@ -6,7 +6,7 @@ dotenv = require('dotenv').config();
 
 // require rutas
 const router = require('./routes/movie')
-console.log("iufifaijd")
+
 // declaracion de express
 const app = express();
 
