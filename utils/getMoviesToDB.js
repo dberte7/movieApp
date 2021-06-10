@@ -20,7 +20,7 @@ const moviesToDB = {
                 const newFilm = await film.save();
                 console.log(`Saved on DB: ${film.title}`)
             } catch (err) {
-                res.status(400).json({ menssage: err.message })
+                console.log(`menssage: ${err.message}`)
             }
     }
 } 
