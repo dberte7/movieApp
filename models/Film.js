@@ -14,11 +14,11 @@ const filmSchema = new Schema({
                 return text.indexOf('https://') === 0;
             },
         required: true,
-        default: "../public/default-movie.png"
+        default: "./public/default-movie.png"
         }
         },
     year: {
-        type: Number,
+        type: String,
         required: true,
         },
     director: {
@@ -30,7 +30,7 @@ const filmSchema = new Schema({
         required: true
         },
     runtime: {
-        type: Number,
+        type: String,
         required: true
         },
     storyLine: {
@@ -39,8 +39,8 @@ const filmSchema = new Schema({
     actors: {
         type: String
         },
-    raiting: {
-        type: Number
+    imdbRating: {
+        type: String
         },
     reviews: {
         type: String
