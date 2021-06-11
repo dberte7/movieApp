@@ -1,6 +1,7 @@
 const Film = require('../models/Film');
 const movies = require('../utils/movies');
-const apiKey = process.env.API_KEY;
+const getMoviesToDB = require('../utils/getMoviesToDB');
+const apikey = process.env.API_KEY;
 
 const routes = {
     home:(req, res) => {
@@ -15,9 +16,28 @@ const routes = {
     },
      // getMovies:,
     searchTitle: async(req, res) => {
-        let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apiKey}&`)
-        console.log(data);
-        res.status(200).json(data)
+        let titleQ = req.params.title
+        let search = [];
+        try {
+            let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+            for (let index = 0; index < data.Search.length; index++) {
+                let id = data.Search[index].imdbID;
+                let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+                search.push(data2);
+                getMoviesToDB.arrayToDB(data2);
+            }
+            res.status(200).json(search);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
+    getAllMovies: async (req, res) => {
+        try {
+            const data = await Film.find();
+            res.status(200).json(data);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
     },
     myMovies:async (req, res) =>{
         try {
@@ -40,6 +60,7 @@ const routes = {
 }
 
 module.exports = routes;
+
 /* films:async(req, res) => {
     console.log(req.body.title);
     let data = await filmData.getfilm(`http://www.omdbapi.com/?t=${req.body.title}&apikey=${apikey}&`)
