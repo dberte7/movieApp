@@ -3,7 +3,7 @@ const Film = require('../models/Film');
 const moviesToDB = {
     arrayToDB: async (data) => {
             let movie = {
-                title: data.Title,
+                title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 image: data.Poster,
                 year: data.Year,
                 director: data.Director,
