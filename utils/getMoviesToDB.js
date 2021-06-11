@@ -3,7 +3,6 @@ const Film = require('../models/Film');
 const moviesToDB = {
     arrayToDB: async (data) => {
             let movie = {
-                //falta cambiar algunos de abajo
                 title: data.Title,
                 image: data.Poster,
                 year: data.Year,
