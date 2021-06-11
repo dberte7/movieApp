@@ -1,4 +1,4 @@
-const movies = require('../utils/movies');
+const film = require('../utils/movies');
 const apiKey = process.env.API_KEY;
 
 const routes = {
@@ -10,7 +10,7 @@ const routes = {
     // login:,
     // logout:,
     dashboard:(req, res) => {
-        res.status(200).send('dashboard')
+        res.status(200).render('dashboard')
     },
      // getMovies:,
     searchTitle: async(req, res) => {
@@ -18,9 +18,15 @@ const routes = {
         console.log(data);
         res.status(200).json(data)
     },
-    // myMovies:,
+    myMovies: (req, res) => {
+        res.status(200).render('admin')
+    },
+    createMovies:  (req, res) => {
+        res.status(200).render('create')
+    },
     createMovie: async (req, res) => {
-        res.status(200).json({message: 'Se ha guardado'})
+        res.redirect('/movies')
+        // res.status(200).json({message: 'Se ha guardado'})
     },
     editMovie: (req, res) =>{
         let id = req.params.id

@@ -6,3 +6,17 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body 
+        h1 Peliculas 
+        form(method="get" action="/createmovie")
+            input(type="submit" value="Crear")
+        h3 Lista
+        p Titulo 
+        img(src='', alt="") 
+        p Año 
+        p Genero
+        p Duración 
+        form(method="get" action="/editmovie/:id")
+            input(type="submit" value="Editar")
+        br
+        form(method="get" action="/removemovie")
+            input(type="submit" value="Eliminar")
