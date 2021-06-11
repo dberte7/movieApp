@@ -1,3 +1,4 @@
+const Film = require('../models/Film');
 const movies = require('../utils/movies');
 const apiKey = process.env.API_KEY;
 
@@ -18,7 +19,14 @@ const routes = {
         console.log(data);
         res.status(200).json(data)
     },
-    // myMovies:,
+    myMovies:async (req, res) =>{
+        try {
+            const data = await Film.find({fav:"true"})
+            res.status(200).json(data);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
     createMovie: async (req, res) => {
         res.status(200).json({message: 'Se ha guardado'})
     },

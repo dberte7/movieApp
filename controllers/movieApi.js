@@ -4,11 +4,6 @@ const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY
 
 const routes = {
-    getMoviesDB: async (req, res)=>{
-        console.log(req);
-        console.log(res);
-        console.log("Tengo que hacer un GET the todas las peliculas contra MongoDB");
-    },
     getMovies: async (req, res)=>{
         let titleQ = req.query.s
         let search = [];
@@ -42,7 +37,7 @@ const routes = {
             } else {
                 if(result){
                     try {
-                        const data = await Film.find({title:titleQ});
+                        const data = await Film.find();
                         console.log("base de datos");
                         res.status(200).json(data); 
                     } catch (err) {
