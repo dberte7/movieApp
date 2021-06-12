@@ -7,12 +7,11 @@ html(lang="en")
         title Document
     body 
     h2 Peliculas
-    form(action='/createmovie' method='POST')
+    form(action='/movies' method='GET')
         img(src='', alt="") 
         input(type='text' placeholder='Titulo')
         input(type='text' placeholder='Año')
         input(type='text' placeholder='Director')
         input(type='text' placeholder='Genero')
         input(type='text' placeholder='Duracion')
-    form(method="POST" action="")
         input(type="submit" value="Crear")

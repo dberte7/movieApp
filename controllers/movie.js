@@ -15,26 +15,26 @@ const routes = {
      // getMovies:,
     searchTitle: async(req, res) => {
         let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apiKey}&`)
-        console.log(data);
         res.status(200).json(data)
     },
     myMovies: (req, res) => {
         res.status(200).render('admin')
     },
-    createMovies:  (req, res) => {
+    createMovie:  (req, res) => {
         res.status(200).render('create')
     },
-    createMovie: async (req, res) => {
+    postMovie: (req, res) => {
+        // res.render('create')
         res.redirect('/movies')
         // res.status(200).json({message: 'Se ha guardado'})
     },
-    editMovie: (req, res) =>{
-        let id = req.params.id
-        res.status(200).json({message: `Se ha actualizado: ${id}`})
-    },
-    deleteMovie: (req, res) =>{
-        res.status(200).json({message: 'Se ha borrado'})
-    }
+    // editMovie: (req, res) =>{
+    //     let id = req.params.id
+    //     res.status(200).json({message: `Se ha actualizado: ${id}`})
+    // },
+    // deleteMovie: (req, res) =>{
+    //     res.status(200).json({message: 'Se ha borrado'})
+    // }
 }
 
 module.exports = routes;

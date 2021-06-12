@@ -10,9 +10,9 @@ router.get('/dashboard', movie.dashboard)
 // router.get('/search', movie.getMovies)
 router.get('/search/:title', movie.searchTitle)
 router.get('/movies', movie.myMovies)
-router.get('/createmovie', movie.createMovies)
-router.post('/createmovie', movie.createMovie)
-router.put('/editmovie/:id', movie.editMovie)
-router.delete('/removemovie', movie.deleteMovie)
+router.get('/createmovie', movie.createMovie)
+router.post('/createmovie', movie.postMovie)
+// router.put('/editmovie/:id', movie.editMovie)
+// router.delete('/removemovie', movie.deleteMovie)
 
 module.exports = router;
