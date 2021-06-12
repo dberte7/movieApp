@@ -2,10 +2,13 @@
 const express = require("express");
 
 //require .env
-dotenv = require('dotenv').config();
+require('dotenv').config();
 
 // require rutas
 const router = require('./routes/movie')
+const routerApi = require('./routes/movieApi')
+
+require('./utils/db')
 
 // declaracion de express
 const app = express();
@@ -20,6 +23,9 @@ app.use(express.json());
 
 // para añadir acceso a ficheros en carpeta public
 app.use("/public", express.static("public"));
+
+
+app.use('/api',routerApi); // rutas para API
 
 // para asignar rutas principales
 app.use("/", router);
