@@ -10,15 +10,28 @@ const routes = {
     // login:,
     // logout:,
     dashboard:(req, res) => {
-        res.status(200).send('dashboard')
+        res.status(200).render('dashboard')
     },
-     // getMovies:,
-    searchTitle: async(req, res) => {
+     getMovies: async (req,res) => {
+        res.render('search')
+
+     },
+
+     film:async(req, res) => {
+        console.log(req.body.title);
+        let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.body.title}&apikey=${apikey}&`)
+        console.log(data);
+        res.status(200).render('film', {data})
+     },
+
+    searchByTitle: async(req, res) => {
         let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apiKey}&`)
         console.log(data);
-        res.status(200).json(data)
+        res.status(200).render('film', {data})
     },
-    // myMovies:,
+    myMovies:async(req, res) => {
+        res.render('movies')
+    },
     createMovie: async (req, res) => {
         res.status(200).json({message: 'Se ha guardado'})
     },
@@ -32,17 +45,4 @@ const routes = {
 }
 
 module.exports = routes;
-/* films:async(req, res) => {
-    console.log(req.body.title);
-    let data = await filmData.getfilm(`http://www.omdbapi.com/?t=${req.body.title}&apikey=${apikey}&`)
-    console.log(data);
-    res.status(200).render('film', {data})
-},
-searchFilm:async(req, res) => { //ALEJANDRO
-    let data = await filmData.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apikey}&`)
-    console.log(data);
-    res.status(200).render('film', {data})
-},
-postFilm:async(req, res) => {
-    res.redirect(`/film/${req.body.title2}`)
-}, */
+

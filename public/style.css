@@ -1,0 +1,18 @@
+#dashboard {
+    display: flex;
+    flex-direction: column;
+    background-color: lavender;
+    align-items: center;
+}
+#form1 {
+    width: fit-content;
+    padding: 20px;
+}
+
+#form{
+background-color: red;
+}
+
+#dashboard button movies{
+    background-color: black;
+    }

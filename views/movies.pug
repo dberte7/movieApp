@@ -1,8 +1,19 @@
-doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
-    body 
+    body
+        h2 movies
+        if Response == "True"
+            h1 #{Title} 
+            div.description
+                img(src=Poster, alt="portada")
+                div.description
+                    p Título: #{film.Title}
+                    p Director: #{film.director}
+                    p Género: #{film.genre}
+                    p Duración: #{film.Length}
+        else
+            p El título introducido no existe

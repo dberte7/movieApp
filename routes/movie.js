@@ -7,11 +7,11 @@ router.get('/', movie.home)
 // router.post('/login', movie.login)
 // router.post('/logout', movie.logout)
 router.get('/dashboard', movie.dashboard)
-// router.get('/search', movie.getMovies)
-router.get('/search/:title', movie.searchTitle)
-// router.get('/movies', movie.myMovies)
+router.get('/search', movie.getMovies)
+// router.get('/search/:title', movie.searchTitle)
+router.get('/movies', movie.myMovies)
 router.post('/createmovie', movie.createMovie)
 router.put('/editmovie/:id', movie.editMovie)
 router.delete('/removemovie', movie.deleteMovie)
 
-module.exports = router;
+module.exports = router
