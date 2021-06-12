@@ -20,11 +20,11 @@ const routes = {
                         res.status(500).json({ message: err.message });
                     }
                 } else {
+                    let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
                     if (data.Response === false){
                         res.status(500).json({ message: `${data.Error}`});
                     } else {
                     try {
-                        let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
                         for (let index = 0; index < data.Search.length; index++) {
                             let id = data.Search[index].imdbID;
                             let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
