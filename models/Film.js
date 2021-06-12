@@ -14,7 +14,7 @@ const filmSchema = new Schema({
                 return text.indexOf('https://') === 0;
             },
         required: true,
-        default: "./public/default-movie.png"
+        default: "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-696x1024.jpg"
         }
         },
     year: {

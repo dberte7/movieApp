@@ -47,6 +47,14 @@ const routes = {
             res.status(500).json({ message: err.message });
         }
     },
+    myMovies:async (req, res) =>{
+        try {
+            const data = await Film.find({fav:"true"})
+            res.status(200).json(data);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
     createMovie: async (req, res) => {
         res.status(200).json({message: 'Se ha guardado'})
     },
