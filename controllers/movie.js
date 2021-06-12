@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-const film = require('../utils/movies');
-const apiKey = process.env.API_KEY;
-=======
 const Film = require('../models/Film');
 const movies = require('../utils/movies');
 const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
->>>>>>> develop
 
 const routes = {
     home:(req, res) => {
@@ -58,13 +53,6 @@ const routes = {
         
     },
     searchTitle: async(req, res) => {
-<<<<<<< HEAD
-        let data = await film.getfilm(`http://www.omdbapi.com/?t=${req.params.title}&apikey=${apiKey}&`)
-        res.status(200).json(data)
-    },
-    myMovies: (req, res) => {
-        res.status(200).render('admin')
-=======
         let titleQ = req.params.title
         let search = [];
         Film.exists({ searchKeyword: titleQ.toLowerCase() }, async (err,result)=>{
@@ -123,7 +111,6 @@ const routes = {
     },
     createMovie: async (req, res) => {
         res.status(200).json({message: 'Se ha guardado'})
->>>>>>> develop
     },
     createMovie:  (req, res) => {
         res.status(200).render('create')

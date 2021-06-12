@@ -10,16 +10,9 @@ router.get('/dashboard', movie.dashboard)
 router.get('/search', movie.getMovies)
 router.get('/search/:title', movie.searchTitle)
 router.get('/movies', movie.myMovies)
-<<<<<<< HEAD
-router.get('/createmovie', movie.createMovie)
-router.post('/createmovie', movie.postMovie)
-// router.put('/editmovie/:id', movie.editMovie)
-// router.delete('/removemovie', movie.deleteMovie)
-=======
 router.get('/adminTemp', movie.getAllMovies)
 router.post('/createmovie', movie.createMovie)
 router.put('/editmovie/:id', movie.editMovie)
 router.delete('/removemovie', movie.deleteMovie)
->>>>>>> develop
 
 module.exports = router;
