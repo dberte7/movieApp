@@ -1,9 +1,10 @@
 const Film = require('../models/Film');
 
 const moviesToDB = {
-    arrayToDB: async (data) => {
+    arrayToDB: async (data, searchTitle) => {
         let movie = {};
-
+        let keyword = searchTitle;
+        
         if (data.Poster == "N/A") {
             movie = {
                 title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
@@ -15,7 +16,8 @@ const moviesToDB = {
                 plot: data.Plot,
                 actors: data.Actors,
                 imdbRating: data.imdbRating,
-                fav: false
+                fav: false,
+                searchKeyword: keyword.toLowerCase()
             }
         } else {
             movie = {
@@ -28,7 +30,8 @@ const moviesToDB = {
                 plot: data.Plot,
                 actors: data.Actors,
                 imdbRating: data.imdbRating,
-                fav: false
+                fav: false,
+                searchKeyword: keyword.toLowerCase()
                 }
             }
             const film = new Film(movie);

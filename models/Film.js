@@ -45,6 +45,10 @@ const filmSchema = new Schema({
     reviews: {
         type: String
         },
+    searchKeyword: {
+        type: String,
+        required: true
+        },
     fav: {
         type: Boolean,
         default: false
