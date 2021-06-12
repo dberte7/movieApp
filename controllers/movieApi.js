@@ -13,14 +13,16 @@ const routes = {
             } else {
                 if(result){
                     try {
-                        const data = await Film.find({searchKeyword:titleQ.toLowerCase()});
+                        const data = await Film.find({ searchKeyword:titleQ.toLowerCase() });
                         console.log("base de datos");
                         res.status(200).json(data); 
                     } catch (err) {
                         res.status(500).json({ message: err.message });
                     }
                 } else {
-                    // corregir mensaje error not found
+                    if (data.Response === false){
+                        res.status(500).json({ message: `${data.Error}`});
+                    } else {
                     try {
                         let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
                         for (let index = 0; index < data.Search.length; index++) {
@@ -34,6 +36,7 @@ const routes = {
                         res.status(500).json({ message: err.message });
                     }
                 }
+                }
                 
             }
         })
@@ -41,13 +44,13 @@ const routes = {
     },
     searchTitle: async (req, res) => {
         let titleQ = req.params.title;
-        Film.exists({ title: titleQ }, async (err,result)=>{
+        Film.exists({ searchKeyword: titleQ.toLowerCase() }, async (err,result)=>{
             if(err){
                 console.log(error);
             } else {
                 if(result){
                     try {
-                        const data = await Film.find({searchKeyword:titleQ.toLowerCase()});
+                        const data = await Film.find({ searchKeyword:titleQ.toLowerCase() });
                         console.log("base de datos");
                         res.status(200).json(data); 
                     } catch (err) {
