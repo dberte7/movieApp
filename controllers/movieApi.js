@@ -20,7 +20,7 @@ const routes = {
                         res.status(500).json({ message: err.message });
                     }
                 } else {
-                    if (data.Response === false){
+                    if (false){
                         res.status(500).json({ message: `${data.Error}`});
                     } else {
                     try {
