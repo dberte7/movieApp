@@ -15,7 +15,7 @@ const app = express();
 
 // motor de vistas 
 app.set("view engine", "pug");
-app.set("views", "./views");
+app.set("views", "./views/pages");
 
 // uses para JSON
 app.use(express.urlencoded({ extended: true }));
