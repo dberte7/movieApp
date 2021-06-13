@@ -85,14 +85,6 @@ const routes = {
             }
         })
     },
-    getAllMovies: async (req, res) => {
-        try {
-            const data = await Film.find();
-            res.status(200).json(data);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
     myMovies:async (req, res) =>{
         try {
             const data = await Film.find({fav:"true"})
@@ -100,33 +92,7 @@ const routes = {
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
-    },
-    myMovies:async (req, res) =>{
-        try {
-            const data = await Film.find({fav:"true"})
-            res.status(200).json(data);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
-    createMovie: async (req, res) => {
-        res.status(200).json({message: 'Se ha guardado'})
-    },
-    createMovie:  (req, res) => {
-        res.status(200).render('create')
-    },
-    postMovie: (req, res) => {
-        // res.render('create')
-        res.redirect('/movies')
-        // res.status(200).json({message: 'Se ha guardado'})
-    },
-    // editMovie: (req, res) =>{
-    //     let id = req.params.id
-    //     res.status(200).json({message: `Se ha actualizado: ${id}`})
-    // },
-    // deleteMovie: (req, res) =>{
-    //     res.status(200).json({message: 'Se ha borrado'})
-    // }
+    }
 }
 
 module.exports = routes;

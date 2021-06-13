@@ -7,6 +7,7 @@ require('dotenv').config();
 // require rutas
 const router = require('./routes/movie')
 const routerApi = require('./routes/movieApi')
+const routerAdmin = require('./routes/admin')
 
 require('./utils/db')
 
@@ -24,8 +25,9 @@ app.use(express.json());
 // para añadir acceso a ficheros en carpeta public
 app.use("/public", express.static("public"));
 
+app.use('/admin', routerAdmin); // rutas para admin
 
-app.use('/api',routerApi); // rutas para API
+app.use('/api', routerApi); // rutas para API
 
 // para asignar rutas principales
 app.use("/", router);
