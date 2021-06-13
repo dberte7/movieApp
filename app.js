@@ -1,7 +1,7 @@
 
 
 
-const mongoose = require("mongoose");
+
 
 // require express 
 const express = require("express");
@@ -18,15 +18,6 @@ require('./utils/db')
 // declaracion de express
 const app = express();
 //mongo
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
-const db = mongoose.connection;
-db.on("error", error => console.log(error));
-db.once("open", () => console.log("connection to db established"));
-
-app.use(express.json());
-
-const usersRouter = require("./routes/movie");
-app.use("/movie", usersRouter);
 
 // motor de vistas 
 app.set("view engine", "pug");

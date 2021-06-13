@@ -17,8 +17,8 @@ router.get('/search/:title', movie.searchTitle)
 router.get('/movies', movie.myMovies)
 router.get('/adminTemp', movie.getAllMovies)
 router.post('/createmovie', movie.createMovie)
-router.put('/editmovie/:id', movie.editMovie)
-router.delete('/removemovie', movie.deleteMovie)
+/* router.put('/editmovie/:id', movie.editMovie)
+router.delete('/removemovie', movie.deleteMovie) */
 
 
 module.exports = router;
