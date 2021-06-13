@@ -5,18 +5,52 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
-    body 
-        h1 Peliculas 
-        form(method="GET" action="/admin/createmovie")
-            input(type="submit" value="Crear")
-        h3 Lista
-        p Titulo
-        img(src='', alt="") 
-        p Año 
-        p Genero
-        p Duración 
-        form(method="POST" action="/editmovie/:id")
-            input(type="submit" value="Editar")
-        br
-        form(method="POST" action="/removemovie")
-            input(type="submit" value="Eliminar")
+    body    
+        if movies
+            main
+                h1 Peliculas
+                form(method="POST" action="/createMovie")
+                    input(type="submit" value="Crear") 
+                if data 
+                    each film in data 
+                        div
+                            h2 #{film.title} 
+                            p Director: #{film.director} 
+                            p Writer: #{film.writer}
+                            p Year: #{film.year} 
+                            p Plot: devInProgress
+                            p Genre: #{film.genre}
+                            img(src=film.image, alt="poster")
+                            form(method="POST" action="/editmovie")
+                                input(type="submit" value="Editar")
+                            form(method="POST" action="/removemovie")
+                                input(type="submit" value="Eliminar")
+        if create 
+            main 
+                h2 Peliculas
+                form(action='/movies' method='POST')
+                    input(type='text' placeholder='Titulo')
+                    input(type='text' placeholder='Poster')
+                    input(type='text' placeholder='Año')
+                    input(type='text' placeholder='Director')
+                    input(type='text' placeholder='Genero')
+                    input(type='text' placeholder='Duración')
+                    input(type="submit" value="Crear")
+        if edit 
+            main 
+                h2 Peliculas
+                form(action='/movies' method='POST')
+                    input(type='text' placeholder='Titulo')
+                    input(type='text' placeholder='Poster')
+                    input(type='text' placeholder='Año')
+                    input(type='text' placeholder='Director')
+                    input(type='text' placeholder='Genero')
+                    input(type='text' placeholder='Duración')
+                    input(type="submit" value="Editar")
+        if remove 
+            main 
+                h2 Se va a borrar la pelicula
+                form(action='/movies' method='POST')
+                    input(type="submit" value="Cancelar")
+                form(action='/movies' method='POST')
+                    input(type="submit" value="Confirmar")
