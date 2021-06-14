@@ -4,5 +4,74 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="../public/style.css")
         title Document
-    body 
+    body
+        if signIn
+            main
+                form(action="/movies", method="POST" id="singInForm")
+                    input(type="text" id="title" placeholder="Email")
+                    input(type="text" id="title" placeholder="Passowrd")
+                    input(type="submit", value="Sign In")
+                form(action="/dashboard", method="POST")
+                    input(type="submit", value="dashTemp")
+                form(action="#", method="POST" id="singInForm")
+                    input(type="submit", value="Google")
+                form(action="/signup", method="POST" id="singInForm")
+                    input(type="submit", value="Sign Up")
+        if dashboard
+            main 
+                form(action='/search', method="POST" id="dashForm")
+                    input(type="submit", value="Search")
+                form(action='/movies', method="POST" id="form")
+                    input(type="submit", value="Movies")
+        if searchPage
+            main 
+                form(action="/search", method="GET" id="searchForm")
+                    input(type="text" id="title" name="s")
+                    input(type="submit", value="search")
+                if search
+                    each film in search
+                        div
+                            h2 #{film.Title} 
+                            p Director: #{film.Director} 
+                            p Writer: #{film.Writer} 
+                            p Plot: #{film.Plot} 
+                            img(src=film.Poster, alt="poster")
+                            form(action=`/search/${film.Title}`, method="GET" id="form")
+                                input(type="submit" value="Details")
+        if movies
+            main 
+                if data 
+                    each film in data 
+                        div
+                            h2 #{film.title} 
+                            p Director: #{film.director} 
+                            p Writer: #{film.writer}
+                            p Year: #{film.year} 
+                            p Plot: devInProgress
+                            p Genre: #{film.genre}
+                            img(src=film.image, alt="poster")
+        if detail 
+            main 
+                if data 
+                    each film in data 
+                        div
+                            h2 #{film.title} 
+                            p Director: #{film.director} 
+                            p Writer: #{film.writer}
+                            p Year: #{film.year} 
+                            p Plot: devInProgress
+                            p Genre: #{film.genre}
+                            img(src=film.image, alt="poster")
+                if search      
+                    each film in search
+                        div
+                            h2 #{film.Title} 
+                            p Director: #{film.Director} 
+                            p Writer: #{film.Writer} 
+                            p Year: #{film.Year}
+                            p Plot: #{film.Plot}
+                            p Genre: #{film.Genre}
+                            p Runtime: #{film.Runtime}
+                            img(src=film.Poster, alt="poster")
