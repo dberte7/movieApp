@@ -1,5 +1,5 @@
 // require express 
-const express = require("express");
+const express = require('express');
 
 //require .env
 require('dotenv').config();
@@ -8,10 +8,12 @@ require('dotenv').config();
 const router = require('./routes/movie')
 const routerApi = require('./routes/movieApi')
 
+
 require('./utils/db')
 
 // declaracion de express
 const app = express();
+
 
 // motor de vistas 
 app.set("view engine", "pug");
@@ -20,6 +22,7 @@ app.set("views", "./views");
 // uses para JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 // para añadir acceso a ficheros en carpeta public
 app.use("/public", express.static("public"));

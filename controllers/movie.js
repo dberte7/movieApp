@@ -1,4 +1,5 @@
 const Film = require('../models/Film');
+const Users = require('../models/Users');
 const movies = require('../utils/movies');
 const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
@@ -9,7 +10,19 @@ let admin = true;
 
 const routes = {
     signIn:(req, res) => {
-        res.status(200).render('movies', {signIn: true})
+        res.status(200).render('movies', {signIn: true,});
+    },
+    postLogin: (req, res) =>{
+        // req.session.isLoggeIn = true;
+        // req.session.user = user;
+    },
+    postlogout: (req, res) =>{
+        // req.session.destroy(()=>{
+        //     res.redirect('/')
+        // });
+    },
+    postSignup: (req, res)=>{
+        
     },
     dashboard:(req, res) => {
         res.status(200).render('movies', {dashboard: true})
