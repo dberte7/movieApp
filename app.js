@@ -16,7 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // para añadir acceso a ficheros en carpeta public
 app.use("/public", express.static("public"));
-app.use('/api',routerApi); // rutas para API
+
+app.use('/api', routerApi); // rutas para API
+
 // para asignar rutas principales
 app.use("/", router);
 // error 404 y 500

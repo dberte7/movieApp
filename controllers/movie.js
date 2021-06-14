@@ -1,9 +1,10 @@
-const Film = require('../models/Film');
-const movies = require('../utils/movies');
-const getMoviesToDB = require('../utils/getMoviesToDB');
+const Film = require("../models/Film");
+const movies = require("../utils/movies");
+const getMoviesToDB = require("../utils/getMoviesToDB");
 const apikey = process.env.API_KEY;
 //Variable user temporal
 let user = true;
+let admin = false;
 const routes = {
     signIn:(req, res) => {
         res.status(200).render('movies', {signIn: true})
@@ -111,6 +112,5 @@ Film.exists({ title: titleQ}, async (err,result)=>{
         }
     }
 }
-
 
 module.exports = routes;
