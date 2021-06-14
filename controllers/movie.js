@@ -4,8 +4,8 @@ const getMoviesToDB = require("../utils/getMoviesToDB");
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = true;
-let admin = false;
+let user = false;
+let admin = true;
 
 const routes = {
   signIn: (req, res) => {
@@ -99,12 +99,21 @@ const routes = {
       try {
         const data = await Film.find();
         //res.status(200).json(data);
-        res.status(200).render("movies", { movies: true, data: data });
+        res.status(200).render("admin", { movies: true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
     }
-  },
+    },
+    postMovie: (req, res) => {
+    res.status(200).render('admin', {create: true})
+    },
+    editMovie: (req, res) => {
+        res.status(200).render('admin', {edit: true})
+    },
+    deleteMovie: (req, res) => {
+        res.status(200).render('admin', {remove: true})
+    }
 };
 
 module.exports = routes;
