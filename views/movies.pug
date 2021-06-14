@@ -35,8 +35,10 @@ html(lang="en")
                         div
                             h2 #{film.Title} 
                             p Director: #{film.Director} 
-                            p Writer: #{film.Writer} 
+                            p year: #{film.Year} 
                             p Plot: #{film.Plot} 
+                            p Genre: #{film.Genre}
+                            p Runtime: #{film.Runtime}
                             img(src=film.Poster, alt="poster")
                             form(action=`/search/${film.Title}`, method="GET" id="form")
                                 input(type="submit" value="Details")
@@ -51,6 +53,7 @@ html(lang="en")
                             p Year: #{film.year} 
                             p Plot: devInProgress
                             p Genre: #{film.genre}
+                            p Runtime: #{film.runtime}
                             img(src=film.image, alt="poster")
         if detail 
             main 
@@ -63,6 +66,7 @@ html(lang="en")
                             p Year: #{film.year} 
                             p Plot: devInProgress
                             p Genre: #{film.genre}
+                            p Runtime: #{film.runtime}
                             img(src=film.image, alt="poster")
                 if search      
                     each film in search
