@@ -1,7 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+autoIncrement = require('mongoose-auto-increment');
+//const db = require('../utils/db')
+
+const connection = mongoose.createConnection(process.env.DATABASE_URL);
+
+autoIncrement.initialize(connection);
 
 const filmSchema = new Schema({
+    movieId: { 
+        type: Number
+    },
     title: {
         type: String,
         required: true,
@@ -59,6 +68,10 @@ const filmSchema = new Schema({
         default: new Date()
         }
 });
+
+
+//filmSchema.plugin(autoIncrement.plugin, 'Film');
+filmSchema.plugin(autoIncrement.plugin, { model: 'Film', field: 'movieId', startAt: 100 });
 
 const Film = mongoose.model("Film", filmSchema);
 module.exports = Film;
