@@ -67,6 +67,7 @@ html(lang="en")
                             img(src=film.image, alt="poster")
                             P Add to myMovies
                             input#check(type="checkbox", name=`${film.title}`)
+                            script(src="../public/boton.js")
                 if search      
                     each film in search
                         div
