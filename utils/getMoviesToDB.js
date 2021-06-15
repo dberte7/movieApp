@@ -34,14 +34,23 @@ const moviesToDB = {
                 searchKeyword: keyword.toLowerCase()
                 }
             }
-            const film = new Film(movie);
-            try {
-                const newFilm = await film.save();
-                console.log(`Saved on DB: ${film.title}`)
-            } catch (err) {
-                console.log(`menssage: ${err.message}`)
-            }
+            Film.exists({ title: searchTitle }, async (err, result) => {
+                if (err) {
+                    console.log(error);
+                } else {
+                    if (!result){
+                        const film =  new Film(movie);
+                        try {
+                            const newFilm = await film.save();
+                            //console.log(`Saved on DB: ${film.title}`)
+                        } catch (err) {
+                            console.log(`menssage: ${err.message}`)
+                        }
+                    } 
+                }
+            });
     }
 } 
 
 module.exports = moviesToDB;
+

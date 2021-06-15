@@ -33,7 +33,7 @@ const routes = {
               `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`
             );
             search.push(data2);
-            //getMoviesToDB.arrayToDB(data2, titleQ);
+            getMoviesToDB.arrayToDB(data2, titleQ);
           }
         }
       } catch (err) {

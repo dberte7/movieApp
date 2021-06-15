@@ -19,6 +19,7 @@ html(lang="en")
                     input(type="submit", value="Google")
                 form(action="/signup", method="POST" id="singInForm")
                     input(type="submit", value="Sign Up")
+                    
         if dashboard
             main 
                 form(action='/search', method="POST" id="dashForm")
@@ -64,6 +65,8 @@ html(lang="en")
                             p Plot: devInProgress
                             p Genre: #{film.genre}
                             img(src=film.image, alt="poster")
+                            P Add to myMovies
+                            input#check(type="checkbox", name=`${film.title}`)
                 if search      
                     each film in search
                         div

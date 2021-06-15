@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 autoIncrement = require('mongoose-auto-increment');
-//const db = require('../utils/db')
 
-const connection = mongoose.createConnection(process.env.DATABASE_URL);
+const connection = mongoose.createConnection(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 autoIncrement.initialize(connection);
 
