@@ -7,6 +7,8 @@ const apikey = process.env.API_KEY;
 let user = false;
 let admin = true;
 
+let data3;
+
 const routes = {
   signIn: (req, res) => {
     res.status(200).render("movies", { signIn: true });
@@ -53,39 +55,14 @@ const routes = {
       res.status(500).json({ message: err.message });
     }
         },
-  getAllMovies: async (req, res) => {
-    try {
-      const data = await Film.find();
-      res.status(200).json(data);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
-  myMovies: async (req, res) => {
-    if (user) {
-      try {
-        const data = await Film.find({ fav: "true" });
-        //res.status(200).json(data);
-        res.status(200).render("movies", { movies: true, data: data });
-      } catch (err) {
-        res.status(500).json({ message: err.message });
-      }
-    } else if (admin) {
-      try {
-        const data = await Film.find();
-        //res.status(200).json(data);
-        res.status(200).render("admin", { movies: true, data: data });
-      } catch (err) {
-        res.status(500).json({ message: err.message });
-      }
-    }
-    },
     postMovie: (req, res) => {
       const newMovie = req.body
-      if (!newMovie.Title) {
+      if (!newMovie.Create) {
         res.status(200).render('admin', {create: true})
-      } else if (newMovie.Title) {
-        console.log(newMovie);
+      } else if (newMovie.Create) {
+        data3 = newMovie;
+        getMoviesToDB.arrayToDB(newMovie);
+        
       }
     },
     editMovie: (req, res) => {
@@ -93,7 +70,24 @@ const routes = {
     },
     deleteMovie: (req, res) => {
       res.status(200).render('admin', {remove: true})
-    }
+    },
+    myMovies: async (req, res) => {
+      if (user) {
+        try {
+          const data = await Film.find({ fav: "true" });
+          res.status(200).render("movies", { movies: true, data: data });
+        } catch (err) {
+          res.status(500).json({ message: err.message });
+        }
+      } else if (admin) {
+        try {
+          const data = await Film.find();
+          await res.status(200).render("admin", { movies: true, data: data, data3: data3 });
+        } catch (err) {
+          res.status(500).json({ message: err.message });
+        }
+      }
+      },
 };
 
 module.exports = routes;

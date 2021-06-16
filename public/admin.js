@@ -1,7 +1,7 @@
-const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = "http://localhost:3000/"
 
 document.getElementById('create').addEventListener("click", async (e) => { 
-    e.preventDefault() 
+    //e.preventDefault();
 
     const form = document.getElementById("createForm").elements
     const data = {}
@@ -22,7 +22,6 @@ const postCreateMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-    console.log(options);
 
     let response = await fetch(`${BASE_URL}createMovie/`, options)
     let data = await response.json()

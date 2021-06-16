@@ -10,38 +10,37 @@ const filmSchema = new Schema({
     movieId: { 
         type: Number
     },
-    title: {
+    Title: {
         type: String,
         required: true,
         unique:true
         },
-    image: {
+    Poster: {
         type: String,
         validate: {
             validator: text => {
                 return text.indexOf('https://') === 0;
             },
-        required: true,
         default: "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-696x1024.jpg"
         }
         },
-    year: {
+    Year: {
         type: String,
         required: true,
         },
-    director: {
+    Director: {
         type: String,
         required: true
         },
-    genre: {
+    Genre: {
         type: String,
         required: true
         },
-    runtime: {
+    Runtime: {
         type: String,
         required: true
         },
-    registerDate: {
+    RegisterDate: {
         type: Date,
         required: true,
         default: new Date()

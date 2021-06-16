@@ -14,16 +14,27 @@ html(lang="en")
                 if data 
                     each film in data 
                         div
-                            h2 #{film.title}
-                            img(src=film.image, alt="poster")
-                            p Year: #{film.year} 
-                            p Director: #{film.director} 
-                            p Genre: #{film.genre}
-                            p Runtime: #{film.runtime}
+                            h2 #{film.Title}
+                            img(src=film.Poster, alt="poster")
+                            p Year: #{film.Year} 
+                            p Director: #{film.Director} 
+                            p Genre: #{film.Genre}
+                            p Runtime: #{film.Runtime}
                             form(method="POST" action="/editmovie")
                                 input(type="submit" value="Editar")
                             form(method="POST" action="/removemovie")
                                 input(type="submit" value="Eliminar")
+                if data3  
+                    h2 #{data3.Title}
+                    img(src=data3.Poster, alt="poster")
+                    p Year: #{data3.Year} 
+                    p Director: #{data3.Director} 
+                    p Genre: #{data3.Genre}
+                    p Runtime: #{data3.Runtime}
+                    form(method="POST" action="/editmovie")
+                        input(type="submit" value="Editar")
+                    form(method="POST" action="/removemovie")
+                        input(type="submit" value="Eliminar")
         if create 
             main 
                 h2 Peliculas

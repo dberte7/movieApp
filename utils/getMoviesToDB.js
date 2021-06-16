@@ -1,11 +1,8 @@
 const Film = require('../models/Film');
 
 const moviesToDB = {
-    arrayToDB: async (data) => {
-
-        console.log(data);
-    
-            Film.exists({ title: searchTitle }, async (err, result) => {
+    arrayToDB: async (movie) => {
+            Film.exists({ Title: movie.Title }, async (err, result) => {
                 if (err) {
                     console.log(error);
                 } else {
@@ -13,7 +10,7 @@ const moviesToDB = {
                         const film =  new Film(movie);
                         try {
                             const newFilm = await film.save();
-                            //console.log(`Saved on DB: ${film.title}`)
+                            //console.log(`Saved on DB: ${film.Title}`)
                         } catch (err) {
                             console.log(`menssage: ${err.message}`)
                         }
@@ -23,7 +20,7 @@ const moviesToDB = {
                 }
             });
     }
-} 
+}; 
 
 module.exports = moviesToDB;
 
