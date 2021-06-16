@@ -3,8 +3,8 @@ const movies = require("../utils/movies");
 const getMoviesToDB = require("../utils/getMoviesToDB");
 const apikey = process.env.API_KEY;
 //Variable user temporal
-let user = false;
-let admin = true;
+let user = true;
+let admin = false;
 const routes = {
   signIn: (req, res) => {
     res.status(200).render("movies", { signIn: true });
