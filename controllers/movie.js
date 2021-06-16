@@ -1,6 +1,6 @@
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
-const getMoviesToDB = require("../utils/getMoviesToDB");
+const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
@@ -81,12 +81,11 @@ const routes = {
     }
     },
     postMovie: (req, res) => {
-      if (req.body==={}) {
+      const newMovie = req.body
+      if (!newMovie.Title) {
         res.status(200).render('admin', {create: true})
-      } else {
-        console.log(req.body);
-        console.log("busca en la bd");
-        res.status(200).render('admin', {create: true})
+      } else if (newMovie.Title) {
+        console.log(newMovie);
       }
     },
     editMovie: (req, res) => {

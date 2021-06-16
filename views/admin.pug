@@ -34,7 +34,8 @@ html(lang="en")
                     input(type='text' name='Director' placeholder='Director')
                     input(type='text' name='Genre' placeholder='Genre')
                     input(type='text' name='Runtime' placeholder='Runtime')
-                    input(type="submit" value="Create" id='create')
+                    input(type="submit" name='Create' value="Create" id='create')
+            script(src="../public/admin.js")
         if edit 
             main 
                 h2 Peliculas
@@ -53,4 +54,3 @@ html(lang="en")
                     input(type="submit" value="Cancelar")
                 form(action='/movies' method='POST')
                     input(type="submit" value="Confirmar")
-        script(src="../public/admin.js") 

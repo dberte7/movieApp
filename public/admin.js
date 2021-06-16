@@ -1,4 +1,4 @@
-console.log("Admin");
+const BASE_URL = 'http://localhost:3000/'
 
 document.getElementById('create').addEventListener("click", async (e) => { 
     e.preventDefault() 
@@ -9,7 +9,24 @@ document.getElementById('create').addEventListener("click", async (e) => {
         data[input.name] = input.value
     }
 
-    console.log(form);
-    console.log(data);
+    await postCreateMovie(data)
 
 });
+
+const postCreateMovie = async (moviInfo) => {
+
+    let options = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: JSON.stringify(moviInfo)
+    }
+    console.log(options);
+
+    let response = await fetch(`${BASE_URL}createMovie/`, options)
+    let data = await response.json()
+    console.log(data);
+    return data;
+
+}
