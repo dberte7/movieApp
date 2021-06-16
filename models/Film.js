@@ -41,26 +41,6 @@ const filmSchema = new Schema({
         type: String,
         required: true
         },
-    storyLine: {
-        type: String
-        },
-    actors: {
-        type: String
-        },
-    imdbRating: {
-        type: String
-        },
-    reviews: {
-        type: String
-        },
-    searchKeyword: {
-        type: String,
-        required: true
-        },
-    fav: {
-        type: Boolean,
-        default: false
-        },
     registerDate: {
         type: Date,
         required: true,

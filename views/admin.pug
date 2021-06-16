@@ -9,18 +9,17 @@ html(lang="en")
         if movies
             main
                 h1 Peliculas
-                form(method="POST" action="/createMovie")
+                form(action="/createMovie" method="POST")
                     input(type="submit" value="Crear") 
                 if data 
                     each film in data 
                         div
-                            h2 #{film.title} 
-                            p Director: #{film.director} 
-                            p Writer: #{film.writer}
-                            p Year: #{film.year} 
-                            p Plot: devInProgress
-                            p Genre: #{film.genre}
+                            h2 #{film.title}
                             img(src=film.image, alt="poster")
+                            p Year: #{film.year} 
+                            p Director: #{film.director} 
+                            p Genre: #{film.genre}
+                            p Runtime: #{film.runtime}
                             form(method="POST" action="/editmovie")
                                 input(type="submit" value="Editar")
                             form(method="POST" action="/removemovie")
@@ -28,24 +27,24 @@ html(lang="en")
         if create 
             main 
                 h2 Peliculas
-                form(action='/movies' method='POST')
-                    input(type='text' placeholder='Titulo')
-                    input(type='text' placeholder='Poster')
-                    input(type='text' placeholder='Año')
-                    input(type='text' placeholder='Director')
-                    input(type='text' placeholder='Genero')
-                    input(type='text' placeholder='Duración')
-                    input(type="submit" value="Crear")
+                form(action='/movies' method='POST' id='createForm')
+                    input(type='text' name='Title' placeholder='Title')
+                    input(type='text' name='Poster' placeholder='Poster')
+                    input(type='text' name='Year' placeholder='Year')
+                    input(type='text' name='Director' placeholder='Director')
+                    input(type='text' name='Genre' placeholder='Genre')
+                    input(type='text' name='Runtime' placeholder='Runtime')
+                    input(type="submit" value="Create" id='create')
         if edit 
             main 
                 h2 Peliculas
                 form(action='/movies' method='POST')
-                    input(type='text' placeholder='Titulo')
+                    input(type='text' placeholder='Title')
                     input(type='text' placeholder='Poster')
-                    input(type='text' placeholder='Año')
+                    input(type='text' placeholder='Year')
                     input(type='text' placeholder='Director')
-                    input(type='text' placeholder='Genero')
-                    input(type='text' placeholder='Duración')
+                    input(type='text' placeholder='Genre')
+                    input(type='text' placeholder='Runtime')
                     input(type="submit" value="Editar")
         if remove 
             main 
@@ -54,3 +53,4 @@ html(lang="en")
                     input(type="submit" value="Cancelar")
                 form(action='/movies' method='POST')
                     input(type="submit" value="Confirmar")
+        script(src="../public/admin.js") 

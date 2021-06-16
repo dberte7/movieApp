@@ -1,37 +1,26 @@
 const Film = require('../models/Film');
 
 const moviesToDB = {
-    arrayToDB: async (data, searchTitle) => {
+    arrayToDB: async (data) => {
         let movie = {};
-        let keyword = searchTitle;
         
         if (data.Poster == "N/A") {
             movie = {
-                title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                title: data.Title,
                 image: "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-696x1024.jpg",
                 year: data.Year,
                 director: data.Director,
                 genre: data.Genre,
                 runtime: data.Runtime,
-                plot: data.Plot,
-                actors: data.Actors,
-                imdbRating: data.imdbRating,
-                fav: false,
-                searchKeyword: keyword.toLowerCase()
             }
         } else {
             movie = {
-                title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                title: data.Title,
                 image: data.Poster,
                 year: data.Year,
                 director: data.Director,
                 genre: data.Genre,
                 runtime: data.Runtime,
-                plot: data.Plot,
-                actors: data.Actors,
-                imdbRating: data.imdbRating,
-                fav: false,
-                searchKeyword: keyword.toLowerCase()
                 }
             }
             Film.exists({ title: searchTitle }, async (err, result) => {
@@ -46,7 +35,9 @@ const moviesToDB = {
                         } catch (err) {
                             console.log(`menssage: ${err.message}`)
                         }
-                    } 
+                    } else {
+                        console.log("Already in db");
+                    }
                 }
             });
     }
