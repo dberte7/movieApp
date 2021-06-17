@@ -34,6 +34,7 @@ html(lang="en")
                     input(type="submit", value="Google")
                 form(action="/signup", method="POST" id="singInForm")
                     input(type="submit", value="Sign Up")
+                    
         if dashboard
             main 
                 form(action='/search', method="POST" id="dashForm")
@@ -49,48 +50,34 @@ html(lang="en")
                     each film in search
                         div
                             h2 #{film.Title} 
-                            p Director: #{film.Director} 
-                            p year: #{film.Year} 
-                            p Plot: #{film.Plot} 
+                            img(src=film.Poster, alt="poster")
+                            p Director: #{film.Director}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}
-                            img(src=film.Poster, alt="poster")
-                            form(action=`/search/${film.Title}`, method="GET" id="form")
+                            form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
         if movies
             main 
                 if data 
                     each film in data 
                         div
-                            h2 #{film.title} 
-                            p Director: #{film.director} 
-                            p Writer: #{film.writer}
+                            h2 #{film.title}
+                            img(src=film.image, alt="poster")
                             p Year: #{film.year} 
-                            p Plot: devInProgress
+                            p Director: #{film.director} 
                             p Genre: #{film.genre}
                             p Runtime: #{film.runtime}
-                            img(src=film.image, alt="poster")
         if detail 
-            main 
-                if data 
-                    each film in data 
-                        div
-                            h2 #{film.title} 
-                            p Director: #{film.director} 
-                            p Writer: #{film.writer}
-                            p Year: #{film.year} 
-                            p Plot: devInProgress
-                            p Genre: #{film.genre}
-                            p Runtime: #{film.runtime}
-                            img(src=film.image, alt="poster")
-                if search      
-                    each film in search
-                        div
-                            h2 #{film.Title} 
-                            p Director: #{film.Director} 
-                            p Writer: #{film.Writer} 
-                            p Year: #{film.Year}
-                            p Plot: #{film.Plot}
-                            p Genre: #{film.Genre}
-                            p Runtime: #{film.Runtime}
-                            img(src=film.Poster, alt="poster")
+            main
+                if data      
+                    div
+                        h2 #{data.Title}
+                        img(src=data.Poster, alt="poster")
+                        p Year: #{data.Year}
+                        p Director: #{data.Director} 
+                        p Genre: #{data.Genre}
+                        p Runtime: #{data.Runtime}
+                        p Add to favorites
+                        input#check(type="checkbox", name=`${data.imdbID}`)
+                        script(src="../public/js/fav.js")
+
