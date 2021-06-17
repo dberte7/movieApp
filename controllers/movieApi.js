@@ -7,68 +7,36 @@ const routes = {
     getMovies: async (req, res)=>{
         let titleQ = req.query.s
         let search = [];
-        Film.exists({ searchKeyword: titleQ.toLowerCase() }, async (err,result)=>{
-            if(err){
-                console.log(error);
+        try { // primero fech luego bd
+            let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+            if (data.Response === false) {
+              // comprobar en la base de datos y si no hay resultados dar error.
+            res.status(500).json({ message: `${data.Error}` });
             } else {
-                if(result){
-                    try {
-                        const data = await Film.find({ searchKeyword:titleQ.toLowerCase() });
-                        console.log("base de datos");
-                        res.status(200).json(data); 
-                    } catch (err) {
-                        res.status(500).json({ message: err.message });
-                    }
-                } else {
-                    if (false){
-                        res.status(500).json({ message: `${data.Error}`});
-                    } else {
-                    try {
-                        let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
-                        for (let index = 0; index < data.Search.length; index++) {
-                            let id = data.Search[index].imdbID;
-                            let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-                            search.push(data2);
-                            getMoviesToDB.arrayToDB(data2, titleQ);
-                        }
-                        res.status(200).json(search);
-                    } catch (err) {
-                        res.status(500).json({ message: err.message });
-                    }
-                }
-                }
-                
+                for (let index = 0; index < data.Search.length; index++) {
+                let id = data.Search[index].imdbID;
+                let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+                search.push(data2);
             }
-        })
-        
+              // comprobar en la base de datos
+            }
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+        res.status(200).json(search);        
     },
     searchTitle: async (req, res) => {
         let titleQ = req.params.title;
-        Film.exists({ searchKeyword: titleQ.toLowerCase() }, async (err,result)=>{
-            if(err){
-                console.log(error);
-            } else {
-                if(result){
-                    try {
-                        const data = await Film.find({ searchKeyword:titleQ.toLowerCase() });
-                        console.log("base de datos");
-                        res.status(200).json(data); 
-                    } catch (err) {
-                        res.status(500).json({ message: err.message });
-                    }
-                } else {
                     try {
                         let data = await movies.getfilm(`http://www.omdbapi.com/?t=${titleQ}&apikey=${apikey}&`);
-                        getMoviesToDB.arrayToDB(data, titleQ)
                         res.status(200).json(data);
                     } catch (err) {
                         res.status(500).json({ message: err.message });
                     }
-                }
-                
-            }
-        })
     },
+    fav: async (req, res) => {
+        console.log(req.body);
+    }
 }
 
 module.exports = routes;
