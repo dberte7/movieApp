@@ -9,16 +9,16 @@ let admin = false;
 
 const routes = {
   signIn: (req, res) => {
-    res.status(200).render("movies", { signIn: true });
+    res.status(200).render("movies", { signIn: true, title:true});
   },
   dashboard: (req, res) => {
-    res.status(200).render("movies", { dashboard: true });
+    res.status(200).render("movies", { dashboard: true, title:true });
   },
   getMovies: async (req, res) => {
     let titleQ = req.query.s;
     let search = [];
     if (titleQ === undefined) {
-      res.status(200).render("movies", { searchPage: true, burger: true });
+      res.status(200).render("movies", { searchPage: true, burger: true, title:true });
     } else {
       try {
         let data = await movies.getfilm(
@@ -38,7 +38,7 @@ const routes = {
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-        res.status(200).render("movies", { searchPage: true, burger: true, search: search });
+        res.status(200).render("movies", { searchPage: true, burger: true, title:true, search: search });
     }
   },
   searchTitle: async (req, res) => {
@@ -52,7 +52,7 @@ const routes = {
           try {
             const data = await Film.find({ title: titleQ });
             console.log("base de datos");
-            res.status(200).render("movies", { detail: true, burger: true, data: data });
+            res.status(200).render("movies", { detail: true, burger: true, title:true, data: data });
           } catch (err) {
             res.status(500).json({ message: err.message });
           }
@@ -69,7 +69,7 @@ const routes = {
               search.push(data2);
               getMoviesToDB.arrayToDB(data2, titleQ);
             }
-            res.status(200).render("movies", { detail: true, burger: true, search: search });
+            res.status(200).render("movies", { detail: true, burger: true, title:true, search: search });
           } catch (err) {
             res.status(500).json({ message: err.message });
           }
@@ -89,14 +89,14 @@ const routes = {
     if (user) {
       try {
         const data = await Film.find({ fav: "true" });
-        res.status(200).render("movies", { movies: true, burger: true, data: data });
+        res.status(200).render("movies", { movies: true, burger: true, title:true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
     } else if (admin) {
       try {
         const data = await Film.find();
-        res.status(200).render("admin", { movies: true, data: data });
+        res.status(200).render("admin", { movies: true, title:true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }

@@ -5,6 +5,18 @@
   }
 
 /* ---- GENERAL STYLES ---- */
+
+.general{
+
+    background-color: var(--black);
+    margin: 0;
+}
+h1{
+
+    color: white ;
+    margin-top: 0;
+    text-align: center;
+}
 body{
   background-size: cover;
   background-position: center;
@@ -52,6 +64,9 @@ input[type="Sign UP"]{
 /* ---- MOVIES STYLES ---- */
 /* ---- GENERAL STYLES ---- */
 /* ---- GENERAL STYLES ---- */
+
+
+/* CSS BURGER MENU*/
 body{margin:0;padding:0;}
 .hamburger{
 	position:fixed;
