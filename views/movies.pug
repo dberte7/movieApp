@@ -7,6 +7,21 @@ html(lang="en")
         link(rel="stylesheet", href="../public/css/style.css")
         title Document
     body
+        if burger 
+            header 
+                div.hamburger
+                    div._layer.-top
+                    div._layer.-mid
+                    div._layer.-bottom
+                nav.menuppal
+                    ul 
+                        li 
+                            a(href='/search') Search
+                        li
+                            a(href='/movies') Movies
+                        li 
+                            a(href='/logout') Logout
+            script(src="../public/js/burger.js") 
         if signIn
             main
                 form(action="/movies", method="POST")
