@@ -4,8 +4,8 @@ const getMoviesToDB = require("../utils/getMoviesToDB");
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = false;
-let admin = true;
+let user = true;
+let admin = false;
 
 const routes = {
   signIn: (req, res) => {
@@ -18,7 +18,7 @@ const routes = {
     let titleQ = req.query.s;
     let search = [];
     if (titleQ === undefined) {
-      res.status(200).render("movies", { searchPage: true });
+      res.status(200).render("movies", { searchPage: true, burger: true });
     } else {
       try {
         let data = await movies.getfilm(
@@ -33,13 +33,12 @@ const routes = {
               `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`
             );
             search.push(data2);
-            //getMoviesToDB.arrayToDB(data2, titleQ);
           }
         }
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-      res.status(200).render("movies", { searchPage: true, search: search });
+        res.status(200).render("movies", { searchPage: true, burger: true, search: search });
     }
   },
   searchTitle: async (req, res) => {
@@ -53,7 +52,7 @@ const routes = {
           try {
             const data = await Film.find({ title: titleQ });
             console.log("base de datos");
-            res.status(200).render("movies", { detail: true, data: data });
+            res.status(200).render("movies", { detail: true, burger: true, data: data });
           } catch (err) {
             res.status(500).json({ message: err.message });
           }
@@ -70,7 +69,7 @@ const routes = {
               search.push(data2);
               getMoviesToDB.arrayToDB(data2, titleQ);
             }
-            res.status(200).render("movies", { detail: true, search: search });
+            res.status(200).render("movies", { detail: true, burger: true, search: search });
           } catch (err) {
             res.status(500).json({ message: err.message });
           }
@@ -90,30 +89,28 @@ const routes = {
     if (user) {
       try {
         const data = await Film.find({ fav: "true" });
-        //res.status(200).json(data);
-        res.status(200).render("movies", { movies: true, data: data });
+        res.status(200).render("movies", { movies: true, burger: true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
     } else if (admin) {
       try {
         const data = await Film.find();
-        //res.status(200).json(data);
         res.status(200).render("admin", { movies: true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
     }
-    },
-    postMovie: (req, res) => {
+  },
+  postMovie: (req, res) => {
     res.status(200).render('admin', {create: true})
-    },
-    editMovie: (req, res) => {
-        res.status(200).render('admin', {edit: true})
-    },
-    deleteMovie: (req, res) => {
-        res.status(200).render('admin', {remove: true})
-    }
+  },
+  editMovie: (req, res) => {
+    res.status(200).render('admin', {edit: true})
+  },
+  deleteMovie: (req, res) => {
+    res.status(200).render('admin', {remove: true})
+  }
 };
 
 module.exports = routes;
