@@ -11,6 +11,8 @@ router.get('/movies', movie.myMovies)
 router.post('/movies', movie.myMovies) // falta get para que pinte 
 router.post('/createMovie', movie.postMovie)
 router.post('/editMovie', movie.editMovie)
-router.post('/removeMovie', movie.deleteMovie)
+router.put('/editMovie/:id', movie.putMovie)
+router.post('/removeMovie', movie.deleteMovScreen)
+router.delete('/removeMovie', movie.deleteMovie)
 
 module.exports = router;
