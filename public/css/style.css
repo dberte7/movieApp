@@ -1,0 +1,54 @@
+:root {
+    --red:#F24726;
+    --black: #000;
+    --grey:rgb(207, 206, 206);
+  }
+
+/* ---- GENERAL STYLES ---- */
+body{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"] {
+    margin: 10px;
+    border-radius: 6px;
+    border:1px solid var(--grey);
+    color: var(--black);
+    width: 100px;
+}
+
+::placeholder {
+    color: var(--black);
+  }
+
+  #singIn{
+      background-color: var(--black);
+  }
+
+input[type="Sign In"]{
+
+    background-color:var(--black);
+}
+
+input[type="Sign UP"]{
+
+    background-color:var(--red);
+}
+
+
+
+
+/* ---- SIGN UP STYLES ---- */
+/* ---- dashboard STYLES ---- */
+
+
+/* ---- SEARCH STYLES ---- */
+/* ----SEARCH TITLE STYLES ---- */
+/* ---- MOVIES STYLES ---- */
+/* ---- GENERAL STYLES ---- */
+/* ---- GENERAL STYLES ---- */

@@ -4,29 +4,31 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="../public/style.css")
+        link(rel="stylesheet", href="../public/css/style.css")
         title Document
     body
         if signIn
             main
-                form(action="/movies", method="POST" id="singInForm")
-                    input(type="text" id="title" placeholder="Email")
-                    input(type="text" id="title" placeholder="Passowrd")
-                    input(type="submit", value="Sign In")
+                form(action="/movies", method="POST")
+                <div class=authentication>
+                    input(type="text" name="email" placeholder="Email")
+                    input(type="text" name="pwd" placeholder="Password")
+                    input(type="submit", value="Sign In" id= "signIn")
+                <div>
                 form(action="/dashboard", method="POST")
                     input(type="submit", value="dashTemp")
                 form(action="#", method="POST" id="singInForm")
-                    input(type="submit", value="Google")
+                    input.primaryButton(type="submit", value="Google")
                 form(action="/signup", method="POST" id="singInForm")
                     input(type="submit", value="Sign Up")
         if dashboard
-            main 
+            main
                 form(action='/search', method="POST" id="dashForm")
                     input(type="submit", value="Search")
                 form(action='/movies', method="POST" id="form")
                     input(type="submit", value="Movies")
         if searchPage
-            main 
+            main (class=search)
                 form(action="/search", method="GET" id="searchForm")
                     input(type="text" id="title" name="s")
                     input(type="submit", value="search")
