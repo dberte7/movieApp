@@ -4,8 +4,8 @@ const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = true;
-let admin = false;
+let user = false;
+let admin = true;
 
 let data3;
 

@@ -36,12 +36,12 @@ html(lang="en")
                     p Genre: #{data3.Genre}
                     p Runtime: #{data3.Runtime}
                     form(method="POST" action="/editMovie")
-                        input(type='hidden' name='_id' value=`${film._id}`)
+                        input(type='hidden' name='_id' value=`${data3._id}`)
                         input(type="submit" value="Edit") 
                     form(method="POST" action="/removeMovie")
-                        input(type='hidden' name='_id' value=`${film._id}`)
-                        input(type='hidden' name='Title' value=`${film.Title}`)
-                        input(type='hidden' name='Poster' value=`${film.Poster}`)
+                        input(type='hidden' name='_id' value=`${data3._id}`)
+                        input(type='hidden' name='Title' value=`${data3.Title}`)
+                        input(type='hidden' name='Poster' value=`${data3.Poster}`)
                         input(type="submit" value="Delete") 
         if create 
             main 

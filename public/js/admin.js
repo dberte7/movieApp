@@ -22,7 +22,6 @@ const postCreateMovie = async (moviInfo) => {
 
     let response = await fetch(`${BASE_URL}createMovie/`, options)
     let data = await response.json()
-    console.log(data);
     return data;
 
 }
