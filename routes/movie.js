@@ -9,6 +9,7 @@ router.get('/search/:title', movie.searchTitle)
 router.post('/movies', movie.myMovies)
 router.post('/createMovie', movie.postMovie)
 router.post('/editMovie', movie.editMovie)
+router.put('/editMovie/:id', movie.putMovie)
 router.post('/removeMovie', movie.deleteMovie)
 
 module.exports = router;
