@@ -1,64 +1,55 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+autoIncrement = require('mongoose-auto-increment');
+
+const connection = mongoose.createConnection(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+
+autoIncrement.initialize(connection);
 
 const filmSchema = new Schema({
-    title: {
+    movieId: { 
+        type: Number
+    },
+    Title: {
         type: String,
         required: true,
         unique:true
         },
-    image: {
+    Poster: {
         type: String,
         validate: {
             validator: text => {
                 return text.indexOf('https://') === 0;
             },
-        required: true,
         default: "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-696x1024.jpg"
         }
         },
-    year: {
+    Year: {
         type: String,
         required: true,
         },
-    director: {
+    Director: {
         type: String,
         required: true
         },
-    genre: {
+    Genre: {
         type: String,
         required: true
         },
-    runtime: {
+    Runtime: {
         type: String,
         required: true
         },
-    storyLine: {
-        type: String
-        },
-    actors: {
-        type: String
-        },
-    imdbRating: {
-        type: String
-        },
-    reviews: {
-        type: String
-        },
-    searchKeyword: {
-        type: String,
-        required: true
-        },
-    fav: {
-        type: Boolean,
-        default: false
-        },
-    registerDate: {
+    RegisterDate: {
         type: Date,
         required: true,
         default: new Date()
         }
 });
+
+
+//filmSchema.plugin(autoIncrement.plugin, 'Film');
+filmSchema.plugin(autoIncrement.plugin, { model: 'Film', field: 'movieId', startAt: 100 });
 
 const Film = mongoose.model("Film", filmSchema);
 module.exports = Film;
