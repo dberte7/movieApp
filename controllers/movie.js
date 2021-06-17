@@ -54,70 +54,69 @@ const routes = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-        },
-    postMovie: (req, res) => {
-      const newMovie = req.body
-      if (!newMovie.Create) {
-        res.status(200).render('admin', {create: true})
-      } else if (newMovie.Create) {
-        data3 = newMovie;
-        getMoviesToDB.arrayToDB(newMovie);
-      }
-    },
-    editMovie: async (req, res) => {
-      let id = req.body
-      try {
-
-        const data = await Film.find({_id:id});
-        await res.status(200).render("admin", { edit: true, data: data });
-      } catch (err) {
-        res.status(500).json({ message: err.message });
-      }
-    },
-    putMovie: async (req, res) => {
-      const editMovie = req.body
-      try{
-        const data = await Film.findByIdAndUpdate({_id:editMovie._id}, editMovie, (err, result) => {
-          if(err){
-              console.log(err);
-          }
-          else{
-              console.log(result);
-          }
+  },
+  postMovie: (req, res) => {
+    const newMovie = req.body
+    if (!newMovie.Create) {
+      res.status(200).render('admin', {create: true})
+    } else if (newMovie.Create) {
+      data3 = newMovie;
+      getMoviesToDB.arrayToDB(newMovie);
+    }
+  },
+  editMovie: async (req, res) => {
+    let id = req.body
+    try {
+      const data = await Film.find({_id:id});
+      await res.status(200).render("admin", { edit: true, data: data });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+  putMovie: async (req, res) => {
+    const editMovie = req.body
+    try{
+      const data = await Film.findByIdAndUpdate({_id:editMovie._id}, editMovie, (err, result) => {
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        }
       })
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+  deleteMovScreen: async (req, res) => {
+    const deleteMov = req.body
+    res.status(200).render('admin', { remove: true, deleteMov: deleteMov })
+  },
+  deleteMovie: async (req, res) => {
+    const deleteMov = req.body;
+    try {
+      const data = await Film.findOneAndRemove({ _id: deleteMov._id })
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+  myMovies: async (req, res) => {
+    if (user) {
+      try {
+        const data = await Film.find({ fav: "true" });
+        res.status(200).render("movies", { movies: true, burger: true, data: data });
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-    },
-    deleteMovScreen: async (req, res) => {
-      const deleteMov = req.body
-      res.status(200).render('admin', { remove: true, deleteMov: deleteMov })
-    },
-    deleteMovie: async (req, res) => {
-      const deleteMov = req.body;
-        try {
-          const data = await Film.findOneAndRemove({ _id: deleteMov._id })
-        } catch (err) {
-          res.status(500).json({ message: err.message });
-        }
-    },
-    myMovies: async (req, res) => {
-      if (user) {
-        try {
-          const data = await Film.find({ fav: "true" });
-          res.status(200).render("movies", { movies: true, burger: true, data: data });
-        } catch (err) {
-          res.status(500).json({ message: err.message });
-        }
-      } else if (admin) {
-        try {
-          const data = await Film.find();
-          await res.status(200).render("admin", { movies: true, data: data, data3: data3 });
-        } catch (err) {
-          res.status(500).json({ message: err.message });
-        }
+    } else if (admin) {
+      try {
+        const data = await Film.find();
+        await res.status(200).render("admin", { movies: true, data: data, data3: data3 });
+      } catch (err) {
+        res.status(500).json({ message: err.message });
       }
-      },
+    }
+  },
 };
 
 module.exports = routes;

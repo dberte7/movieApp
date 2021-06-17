@@ -10,7 +10,6 @@ document.getElementById('confirm').addEventListener("click", async (e) => {
 });
 
 const deleteMovie = async (moviInfo) => {
-
     let options = {
         method: "DELETE",
         headers: {
@@ -18,13 +17,9 @@ const deleteMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-
     let response = await fetch(`${BASE_URL}removeMovie/`, options)
     let data = await response.json()
     console.log(data);
     return data;
-
-}
-
-
+};
 // input(type='hidden' name='delete' value="true")
