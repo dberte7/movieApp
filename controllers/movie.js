@@ -4,8 +4,8 @@ const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = false;
-let admin = true;
+let user = true;
+let admin = false;
 
 let data3;
 
@@ -20,7 +20,7 @@ const routes = {
     let titleQ = req.query.s;
     let search = [];
     if (titleQ === undefined) {
-      res.status(200).render("movies", { searchPage: true });
+      res.status(200).render("movies", { searchPage: true, burger: true });
     } else {
       try { // primero fech luego bd
         let data = await movies.getfilm(
@@ -42,7 +42,7 @@ const routes = {
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-      res.status(200).render("movies", { searchPage: true, search: search });
+        res.status(200).render("movies", { searchPage: true, burger: true, search: search });
     }
   },
   searchTitle: async (req, res) => {
@@ -67,6 +67,7 @@ const routes = {
     editMovie: async (req, res) => {
       let id = req.body
       try {
+
         const data = await Film.find({_id:id});
         await res.status(200).render("admin", { edit: true, data: data });
       } catch (err) {

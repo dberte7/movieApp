@@ -4,9 +4,24 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="../public/style.css")
+        link(rel="stylesheet", href="../public/css/style.css")
         title Document
     body
+        if burger 
+            header 
+                div.hamburger
+                    div._layer.-top
+                    div._layer.-mid
+                    div._layer.-bottom
+                nav.menuppal
+                    ul 
+                        li 
+                            a(href='/search') Search
+                        li
+                            a(href='/movies') Movies
+                        li 
+                            a(href='/logout') Logout
+            script(src="../public/js/burger.js") 
         if signIn
             main
                 form(action="/movies", method="POST" id="singInForm")
@@ -53,7 +68,7 @@ html(lang="en")
                             p Genre: #{film.genre}
                             p Runtime: #{film.runtime}
         if detail 
-            main 
+            main
                 if data      
                     div
                         h2 #{data.Title}
@@ -65,3 +80,4 @@ html(lang="en")
                         p Add to favorites
                         input#check(type="checkbox", name=`${data.imdbID}`)
                         script(src="../public/js/boton.js")
+
