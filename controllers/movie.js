@@ -50,7 +50,7 @@ const routes = {
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        res.status(200).render("movies", { detail: true, data: data });
+        res.status(200).render("movies", { detail: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -105,7 +105,7 @@ const routes = {
       if (user) {
         try {
           const data = await Film.find({ fav: "true" });
-          res.status(200).render("movies", { movies: true, data: data });
+          res.status(200).render("movies", { movies: true, burger: true, data: data });
         } catch (err) {
           res.status(500).json({ message: err.message });
         }
