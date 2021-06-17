@@ -10,6 +10,7 @@ router.post('/movies', movie.myMovies)
 router.post('/createMovie', movie.postMovie)
 router.post('/editMovie', movie.editMovie)
 router.put('/editMovie/:id', movie.putMovie)
-router.post('/removeMovie', movie.deleteMovie)
+router.post('/removeMovie', movie.deleteMovScreen)
+router.delete('/removeMovie', movie.deleteMovie)
 
 module.exports = router;

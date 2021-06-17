@@ -25,6 +25,8 @@ html(lang="en")
                                 input(type="submit" value="Edit") 
                             form(method="POST" action="/removeMovie")
                                 input(type='hidden' name='_id' value=`${film._id}`)
+                                input(type='hidden' name='Title' value=`${film.Title}`)
+                                input(type='hidden' name='Poster' value=`${film.Poster}`)
                                 input(type="submit" value="Delete") 
                 if data3  
                     h2 #{data3.Title}
@@ -34,9 +36,13 @@ html(lang="en")
                     p Genre: #{data3.Genre}
                     p Runtime: #{data3.Runtime}
                     form(method="POST" action="/editMovie")
-                        input(type="submit" value="Editar")
+                        input(type='hidden' name='_id' value=`${film._id}`)
+                        input(type="submit" value="Edit") 
                     form(method="POST" action="/removeMovie")
-                        input(type="submit" value="Eliminar")
+                        input(type='hidden' name='_id' value=`${film._id}`)
+                        input(type='hidden' name='Title' value=`${film.Title}`)
+                        input(type='hidden' name='Poster' value=`${film.Poster}`)
+                        input(type="submit" value="Delete") 
         if create 
             main 
                 h2 Peliculas
@@ -66,8 +72,13 @@ html(lang="en")
                 script(src="../public/edit.js")
         if remove 
             main 
-                h2 Se va a borrar la pelicula
+                h1 Delete Is Coming! 
+            if deleteMov
+                h2 #{deleteMov.Title}
+                img(src=deleteMov.Poster, alt="poster")
                 form(action='/movies' method='POST')
                     input(type="submit" value="Cancelar")
-                form(action='/movies' method='POST')
-                    input(type="submit" value="Confirmar")
+                form(action='/movies' method='POST' id="confirmForm")
+                    input(type='hidden' name='_id' value=`${deleteMov._id}`)
+                    input(type="submit" name='confirm' value="Confirm" id="confirm")
+            script(src="../public/remove.js")

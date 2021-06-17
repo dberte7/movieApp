@@ -88,8 +88,17 @@ const routes = {
         res.status(500).json({ message: err.message });
       }
     },
-    deleteMovie: (req, res) => {
-      res.status(200).render('admin', {remove: true})
+    deleteMovScreen: async (req, res) => {
+      const deleteMov = req.body
+      res.status(200).render('admin', { remove: true, deleteMov: deleteMov })
+    },
+    deleteMovie: async (req, res) => {
+      const deleteMov = req.body;
+        try {
+          const data = await Film.findOneAndRemove({ _id: deleteMov._id })
+        } catch (err) {
+          res.status(500).json({ message: err.message });
+        }
     },
     myMovies: async (req, res) => {
       if (user) {
