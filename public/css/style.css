@@ -31,31 +31,20 @@ input[type="submit"] {
     border-radius: 6px;
     border:1px solid var(--grey);
     color: var(--black);
-    width: 100px;
+    width: 50%;
 }
 
 ::placeholder {
     color: var(--black);
   }
 
-  #singIn{
-      background-color: var(--black);
-  }
-
-input[type="Sign In"]{
-
-    background-color:var(--black);
-}
-
-input[type="Sign UP"]{
-
-    background-color:var(--red);
-}
-
-
-
 
 /* ---- SIGN UP STYLES ---- */
+#authentication input{
+
+    display: flex;
+    width: 50%;
+}
 /* ---- dashboard STYLES ---- */
 
 
