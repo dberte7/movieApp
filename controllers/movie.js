@@ -38,7 +38,7 @@ const routes = {
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-        res.status(200).render("movies", { searchPage: true, search: search });
+        res.status(200).render("movies", { searchPage: true, burger: true, search: search });
     }
   },
   searchTitle: async (req, res) => {
