@@ -62,11 +62,23 @@ const routes = {
       } else if (newMovie.Create) {
         data3 = newMovie;
         getMoviesToDB.arrayToDB(newMovie);
-        
       }
     },
-    editMovie: (req, res) => {
-      res.status(200).render('admin', {edit: true})
+    editMovie: async (req, res) => {
+      const editMovie = req.body
+      if (editMovie.Title) {
+        console.log("Ya estoy aqui");
+        console.log(editMovie);
+      } else {
+        let id = Object.keys(req.body)[0]
+      try {
+        const data = await Film.find({_id:id});
+        await res.status(200).render("admin", { edit: true, data: data });
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+      }
+      
     },
     deleteMovie: (req, res) => {
       res.status(200).render('admin', {remove: true})

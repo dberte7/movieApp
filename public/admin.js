@@ -2,15 +2,12 @@ const BASE_URL = "http://localhost:3000/"
 
 document.getElementById('create').addEventListener("click", async (e) => { 
     //e.preventDefault();
-
     const form = document.getElementById("createForm").elements
     const data = {}
     for(let input of form){
         data[input.name] = input.value
     }
-
     await postCreateMovie(data)
-
 });
 
 const postCreateMovie = async (moviInfo) => {
