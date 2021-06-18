@@ -22,5 +22,8 @@ const moviesToDB = {
     }
 }; 
 
+//moviesToDB.findDbId("Lucia y el sexo");
+//moviesToDB.findDbId("Tierra");
+
 module.exports = moviesToDB;
 

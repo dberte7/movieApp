@@ -4,8 +4,8 @@ const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = false;
-let admin = true;
+let user = true;
+let admin = false;
 
 let data3;
 
@@ -28,7 +28,8 @@ const routes = {
         );
         if (data.Response === false) {
           // comprobar en la base de datos y si no hay resultados dar error.
-          res.status(500).json({ message: `${data.Error}` });
+          //res.status(500).json({ message: `${data.Error}` });
+          console.log("busco en la bd");
         } else {
           for (let index = 0; index < data.Search.length; index++) {
             let id = data.Search[index].imdbID;
@@ -57,21 +58,20 @@ const routes = {
         },
     postMovie: (req, res) => {
       const newMovie = req.body
-      if (!newMovie.Create) {
-        res.status(200).render('admin', {create: true})
-      } else if (newMovie.Create) {
-        data3 = newMovie;
-        getMoviesToDB.arrayToDB(newMovie);
-      }
+        if (!newMovie.Create) {
+          res.status(200).render('admin', {create: true})
+        } else if (newMovie.Create) {
+          data3 = newMovie;
+          getMoviesToDB.arrayToDB(newMovie);
+        } 
     },
     editMovie: async (req, res) => {
-      let id = req.body
-      try {
-
-        const data = await Film.find({_id:id});
-        await res.status(200).render("admin", { edit: true, data: data });
+      let title = req.body
+        try {
+          const data = await Film.findOne({Title:title.Title});
+          await res.status(200).render("admin", { edit: true, data: data });
       } catch (err) {
-        res.status(500).json({ message: err.message });
+          res.status(500).json({ message: err.message });
       }
     },
     putMovie: async (req, res) => {
@@ -82,7 +82,7 @@ const routes = {
               console.log(err);
           }
           else{
-              console.log(result);
+            data3 = undefined;
           }
       })
       } catch (err) {
@@ -96,7 +96,8 @@ const routes = {
     deleteMovie: async (req, res) => {
       const deleteMov = req.body;
         try {
-          const data = await Film.findOneAndRemove({ _id: deleteMov._id })
+          const data = await Film.findOneAndRemove({ Title: deleteMov.Title })
+          data3 = undefined;
         } catch (err) {
           res.status(500).json({ message: err.message });
         }
@@ -112,7 +113,8 @@ const routes = {
       } else if (admin) {
         try {
           const data = await Film.find();
-          await res.status(200).render("admin", { movies: true, data: data, data3: data3 });
+          res.status(200).render("admin", { movies: true, data: data, data3: data3 })
+          data3 = undefined;
         } catch (err) {
           res.status(500).json({ message: err.message });
         }
