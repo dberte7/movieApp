@@ -1,24 +1,25 @@
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
-  //token
- var privateKey = '674764936526529';
+//token
+var privateKey = '674764936526529';
 
-
-
-//
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
+const rol = require('../utils/userOrAdmin');
 const apikey = process.env.API_KEY;
-//Variable user temporal
-let user = true;
-let admin = false;
+
 //Variable global
 let data3;
 let search = []; 
 
 const routes = {
+  signIn: (req, res) =>{
+    console.log("Test");
+    console.log(req.body);
+    rol.admin? res.redirect('/movies') : res.redirect('/dashboard')
+  },
   inicio: (req, res) => {
     res.status(200).render("movies", { signIn: true });
   },
@@ -28,18 +29,18 @@ const routes = {
   const {name,email,password} = req.body
   const hashedPassword = await bcrypt.hash(password, 10)
   const entry =[name,email,hashedPassword]
-  
     try {
       const data = await Users.createUser(entry)
-      res.status(201).json({ data, status:"usuario creado" });
+      console.log({ data, status:"usuario creado" });
+      res.redirect('/')
     } catch (err) {
-      res.status(400).json({ message: err.message });
+      console.log({ message: err.message });
     }
-},
-signUP: (req, res) => {
-  res.status(200).render("signUp", { signIn: true });
-  //res.status(200).render("singin", { dashboard: true });
-},
+  },
+  signUp: (req, res) => {
+    res.status(200).render("movies", { signUp: true });
+    //res.status(200).render("singin", { dashboard: true });
+  },
   dashboard: (req, res) => {
     res.status(200).render("movies", { dashboard: true });
   },
@@ -136,14 +137,14 @@ signUP: (req, res) => {
         }
     },
     myMovies: async (req, res) => {
-      if (user) {
+      if (!rol.admin) {
         try {
           const data = await Film.find({ fav: "true" });
           res.status(200).render("movies", { movies: true, burger: true, data: data });
         } catch (err) {
           res.status(500).json({ message: err.message });
         }
-      } else if (admin) {
+      } else if (rol.admin) {
         try {
           const data = await Film.find();
           res.status(200).render("admin", { movies: true, data: data, data3: data3 })
