@@ -6,6 +6,9 @@ html(lang="en")
         link(rel="stylesheet", href="../public/css/style.css")
         title Document
     body
+        if title
+            header.headerGen
+                h1#header MovieApp
         if burger 
             header 
                 div.hamburger
@@ -54,6 +57,7 @@ html(lang="en")
                             h2 #{film.Title} 
                             img(src=film.Poster, alt="poster")
                             p Director: #{film.Director}
+                            p Año: #{film.Year}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}
                             form(action=`/search/${film.imdbID}` method="GET" id="form")
@@ -63,6 +67,7 @@ html(lang="en")
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
+                        p Año: #{film.Year}
                         p Genre: #{dbSearch.Genre}
                         p Runtime: #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
