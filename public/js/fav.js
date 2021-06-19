@@ -7,7 +7,6 @@ document.getElementById('check').onclick = () => {
 }
 
 const postFavInfo = async (favBoolean,id) => {
-
     let options = {
         method: "POST",
         headers: {
@@ -18,10 +17,8 @@ const postFavInfo = async (favBoolean,id) => {
     console.log(favBoolean);
     console.log(id)
     console.log(options);
-
     let response = await fetch(`${BASE_URL}search/${id}`, options)
     let data = await response.json()
     console.log(data);
     return data;
-
-}
+};

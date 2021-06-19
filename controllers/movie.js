@@ -85,7 +85,8 @@ const routes = {
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        res.status(200).render("movies", { detail: true,title:true, burger: true, data: data });
+        // scrap(data.Title)
+        res.status(200).render("movies", { detail: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -107,7 +108,7 @@ const routes = {
       } catch (err) {
           res.status(500).json({ message: err.message });
       }
-    },
+  },
     putMovie: async (req, res) => {
       const editMovie = req.body
       try{
@@ -155,9 +156,5 @@ const routes = {
       }
       },
 };
+
 module.exports = routes;
-
-
-
-
-

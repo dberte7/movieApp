@@ -22,5 +22,4 @@ const deleteMovie = async (moviInfo) => {
     return data;
 }
 
-
 // input(type='hidden' name='delete' value="true")
