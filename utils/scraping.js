@@ -5,41 +5,25 @@ const scrap = async (titulo) => {
     headless: false
   });
   const page = await browser.newPage();
-    await page.goto(`https://www.sensacine.com/buscar/?q=${titulo}`);
-    await page.waitForSelector("#didomi-notice-agree-button")
-    await page.click("#didomi-notice-agree-button")
-    await page.waitForSelector("#content-layout > div.section-wrap.gd-2-cols.gd-gap-30.row-col-sticky > div > section.section.movies-results > ul > li:nth-child(1) > div > div.meta > h2 > a")
-    await page.click("#content-layout > div.section-wrap.gd-2-cols.gd-gap-30.row-col-sticky > div > section.section.movies-results > ul > li:nth-child(1) > div > div.meta > h2 > a")
-    const data = await page.evaluate(() => {
-        const review = document.querySelector("div.content-txt.review-card-content");
-        // console.log(review)
-        return review.innerText
-    }); 
-    console.log(data)
-    return data
-    // await page.waitForSelector('#content-layout > div.section-wrap.gd-2-cols.gd-gap-30.row-col-sticky > div > section.section.movies-results > ul > li:nth-child(1) > div > div.rating-holder.rating-holder-4 > div:nth-child(2) > div > a')
-    // await page.click('#content-layout > div.section-wrap.gd-2-cols.gd-gap-30.row-col-sticky > div > section.section.movies-results > ul > li:nth-child(1) > div > div.rating-holder.rating-holder-4 > div:nth-child(2) > div > a');
-    // const data = await page.evaluate(() => {
-    //     const review = document.querySelector("div.titlebar.titlebar-page > div.titlebar-title.titlebar-title-lg > a");
-    //     // console.log(review)
-    //     return {
-    //         review
-    //     }
-    // }); 
-    // return data.innerText
+  await page.goto(`https://www.filmaffinity.com/es/search.php?stext=${titulo}`);
+  await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv")
+  await page.click("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv")
+  await page.waitForSelector("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-info-container > div.mc-title > a")
+  await page.click("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-info-container > div.mc-title > a")
+  await page.waitForSelector("#mt-content-cell > div:nth-child(6) > div > div.margin-ntabs > ul > li:nth-child(2) > a")
+  await page.click("#mt-content-cell > div:nth-child(6) > div > div.margin-ntabs > ul > li:nth-child(2) > a")
+  await page.waitForSelector("#mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(1) > div.review-text1")
+  const data = await page.evaluate(() => {
+    const review = document.querySelector("div.review-text1");
+    // console.log(review)
+    return review.innerText
+  }); 
+  console.log(data)
+  return data
 }
-scrap("hulk")
+scrap("spiderman")
 
-module.exports = scrap;
+module.exports = scrap
 
-//   await page.waitForTimeout(1000).then(() => console.log('Waited a second!'));
-//   const data = await page.evaluate(() => {
-//     const link = document.querySelector("#content-layout > div.section-wrap.gd-2-cols.gd-gap-30.row-col-sticky > div > section.section.movies-results > ul > li:nth-child(1) > div > div.rating-holder.rating-holder-4 > div:nth-child(2) > div > a")
-//     const review = document.querySelector("div.content-txt.review-card-content").innerText;
-//     return {
-//       review
-//     }
-//   });  
-//   await browser.close();
-//   return data
-
+// #mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(1) > div.review-text1
+// #mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(2) > div.review-text1
