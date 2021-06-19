@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        if title
+            header.headerGen
+                h1#header MovieApp
+                    form(action="/signUp" method="POST" id="singInForm")
+                    input(name="name" type="text" id="name" placeholder="nombre")
+                    input(name="email" type="email" id="title" placeholder="email")
+                    input(name="password" type="password" autocomplete='current-password' id="password" placeholder="password")
+                    input(type="submit" )
