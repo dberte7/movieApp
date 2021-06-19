@@ -31,7 +31,7 @@ html(lang="en")
                     input(type="submit", value="dashTemp")
                 form(action="#", method="POST" id="singInForm")
                     input(type="submit", value="Google")
-                form(action="/signup", method="POST" id="singInForm")
+                form(action="/signUp", method="GET" id="singInForm")
                     input(type="submit", value="Sign Up")
                     
         if dashboard
@@ -55,6 +55,15 @@ html(lang="en")
                             p Runtime: #{film.Runtime}
                             form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
+                if dbSearch
+                    div
+                        h2 #{dbSearch.Title} 
+                        img(src=dbSearch.Poster, alt="poster")
+                        p Director: #{dbSearch.Director}
+                        p Genre: #{dbSearch.Genre}
+                        p Runtime: #{dbSearch.Runtime}
+                        form(action=`/search/${dbSearch.imdbID}`, method="GET" id="form")
+                            input(type="submit" value="Details")
         if movies
             main 
                 if data 

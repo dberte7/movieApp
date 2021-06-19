@@ -1,6 +1,7 @@
 const router = require('express').Router(); 
 const movie = require('../controllers/movie')
 
+router.get('/', movie.inicio)
 router.get('/signUp', movie.signUP)
 router.post('/signUp', movie.addUser)
 

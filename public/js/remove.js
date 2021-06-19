@@ -19,7 +19,7 @@ const deleteMovie = async (moviInfo) => {
     }
     let response = await fetch(`${BASE_URL}removeMovie/`, options)
     let data = await response.json()
-    console.log(data);
     return data;
-};
+}
+
 // input(type='hidden' name='delete' value="true")
