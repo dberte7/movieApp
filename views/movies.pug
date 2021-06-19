@@ -73,7 +73,7 @@ html(lang="en")
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
-                        p Año: #{film.Year}
+                        p Año: #{dbSearch.Year}
                         p Genre: #{dbSearch.Genre}
                         p Runtime: #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
