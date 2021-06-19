@@ -89,8 +89,8 @@ html(lang="en")
             if deleteMov
                 h2 #{deleteMov.Title}
                 img(src=deleteMov.Poster, alt="poster")
-                form(action='/movies' method='POST')
-                    input(type="submit" value="Cancelar")
+                a(href='/movies')
+                    button Cancelar
                 form(action='/movies' method='POST' id="confirmForm")
                     input(type='hidden' name='Title' value=`${deleteMov.Title}`)
                     input(type="submit" name='confirm' value="Confirm" id="confirm")
