@@ -4,8 +4,7 @@ var jwt = require('jsonwebtoken');
   //token
  var privateKey = '674764936526529';
 
-
-
+ 
 //
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
@@ -20,7 +19,7 @@ let search = [];
 
 const routes = {
   inicio: (req, res) => {
-    res.status(200).render("movies", { signIn: true });
+    res.status(200).render("movies", { signIn: true, title:true });
   },
   addUser: async (req, res) => { 
   //var token = jwt.signUP({ email: req.body.email }, privateKey, { algorithm: 'RS256'});
@@ -41,13 +40,13 @@ signUP: (req, res) => {
   //res.status(200).render("singin", { dashboard: true });
 },
   dashboard: (req, res) => {
-    res.status(200).render("movies", { dashboard: true });
+    res.status(200).render("movies", { dashboard: true, headerGen:true});
   },
   getMovies: async (req, res) => {
     let titleQ = req.query.s;
     
     if (titleQ === undefined) {
-      res.status(200).render("movies", { searchPage: true, burger: true });
+      res.status(200).render("movies", { searchPage: true, burger: true, title:true });
     } else {
       Film.exists({ Title: titleQ }, async (err, result) => {
         if (err) {
@@ -84,7 +83,7 @@ signUP: (req, res) => {
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        res.status(200).render("movies", { detail: true, burger: true, data: data });
+        res.status(200).render("movies", { detail: true,title:true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -139,7 +138,7 @@ signUP: (req, res) => {
       if (user) {
         try {
           const data = await Film.find({ fav: "true" });
-          res.status(200).render("movies", { movies: true, burger: true, data: data });
+          res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
         } catch (err) {
           res.status(500).json({ message: err.message });
         }

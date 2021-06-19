@@ -6,6 +6,9 @@ html(lang="en")
         link(rel="stylesheet", href="../public/css/style.css")
         title Document
     body
+        if title
+            header.headerGen
+                h1#header MovieApp
         if burger 
             header 
                 div.hamburger
@@ -22,27 +25,37 @@ html(lang="en")
                             a(href='/logout') Logout
             script(src="../public/js/burger.js") 
         if signIn
-            main
-                form(action="/movies", method="POST" id="singInForm")
-                    input(type="text" id="title" placeholder="Email")
-                    input(type="text" id="title" placeholder="Passowrd")
-                    input(type="submit", value="Sign In")
-                form(action="/dashboard", method="POST")
-                    input(type="submit", value="dashTemp")
-                form(action="#", method="POST" id="singInForm")
-                    input(type="submit", value="Google")
-                form(action="/signUp", method="GET" id="singInForm")
-                    input(type="submit", value="Sign Up")
+            if title
+                header.headerGen
+                    h1#header MovieApp
+                main
+                 div#authentication
+                    img(src="../public/img/logo.jpeg" alt="Imagen no carga")
+                    form(action="/movies", method="POST" id="singInForm")
+                        input(type="text" id="title" placeholder="Email")
+                        input(type="text" id="title" placeholder="Passowrd")
+                        input(type="submit", value="Sign In", class="signIn")
+                    form(action="/dashboard", method="POST")
+                        input(type="submit", value="dashTemp")
+                    form(action="#", method="POST" id="singInForm")
+                        input(type="submit", value="Sign in with Google", class="google")
+                    form(action="/signUp", method="GET" id="singInForm")
+                        input(type="submit", value="Sign Up", class="signUp")
                     
         if dashboard
-            main 
-                form(action='/search', method="POST" id="dashForm")
-                    input(type="submit", value="Search")
-                form(action='/movies', method="POST" id="form")
-                    input(type="submit", value="Movies")
+            header.header
+                h1#header MovieApp
+                input(type="submit",href=("#"), value="Salir" id="salir") 
+            main
+                div#dashboard
+                    img(src="../public/img/logo.jpeg" alt="Imagen no carga")
+                    form(action='/search', method="POST" id="dashForm")
+                        input(type="submit", value="Search" class="search")
+                    form(action='/movies', method="POST" id="form")
+                        input(type="submit", value="Movies" class="movies")
         if searchPage
-            main 
-                form(action="/search", method="GET" id="searchForm")
+            main
+                form(action="/search", method="GET")
                     input(type="text" id="title" name="s")
                     input(type="submit", value="search")
                 if search
@@ -51,8 +64,10 @@ html(lang="en")
                             h2 #{film.Title} 
                             img(src=film.Poster, alt="poster")
                             p Director: #{film.Director}
+                            p Año: #{film.Year}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}
+
                             form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
                 if dbSearch
@@ -60,6 +75,7 @@ html(lang="en")
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
+                        p Año: #{film.Year}
                         p Genre: #{dbSearch.Genre}
                         p Runtime: #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}`, method="GET" id="form")
