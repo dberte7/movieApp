@@ -4,14 +4,14 @@ const getMoviesToDB = require('../utils/getMoviesToDB');
 const apikey = process.env.API_KEY;
 
 //Variable user temporal
-let user = false;
-let admin = true;
+let user = true;
+let admin = false;
 
 let data3;
 
 const routes = {
   signIn: (req, res) => {
-    res.status(200).render("movies", { signIn: true, title:true});
+    res.status(200).render("movies", { signIn: true, headerGen: true, title:true});
   },
   dashboard: (req, res) => {
     res.status(200).render("movies", { dashboard: true, title:true });
@@ -20,7 +20,7 @@ const routes = {
     let titleQ = req.query.s;
     let search = [];
     if (titleQ === undefined) {
-      res.status(200).render("movies", { searchPage: true, burger: true, title:true });
+      res.status(200).render("movies", { searchPage: true,headerGen: true, burger: true, title:true });
     } else {
       try { // primero fech luego bd
         let data = await movies.getfilm(
@@ -42,7 +42,7 @@ const routes = {
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-        res.status(200).render("movies", { searchPage: true, burger: true, title:true, search: search });
+        res.status(200).render("movies", { searchPage: true,headerGen: true, burger: true, title:true, search: search });
     }
   },
   searchTitle: async (req, res) => {
@@ -50,7 +50,7 @@ const routes = {
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        res.status(200).render("movies", { detail: true, burger: true, data: data });
+        res.status(200).render("movies", { detail: true,headerGen: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -105,7 +105,7 @@ const routes = {
       if (user) {
         try {
           const data = await Film.find({ fav: "true" });
-          res.status(200).render("movies", { movies: true, burger: true, data: data });
+          res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
         } catch (err) {
           res.status(500).json({ message: err.message });
         }
