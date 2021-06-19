@@ -1,6 +1,7 @@
 const router = require('express').Router(); 
 const movie = require('../controllers/movie')
 
+router.get('/', movie.inicio)
 router.get('/signUp', movie.signUP)
 router.post('/signUp', movie.addUser)
 
@@ -10,7 +11,7 @@ router.get('/search', movie.getMovies)
 router.post('/search', movie.getMovies)
 router.get('/search/:title', movie.searchTitle)
 router.get('/movies', movie.myMovies)
-router.post('/movies', movie.myMovies) // falta get para que pinte 
+router.post('/movies', movie.myMovies) 
 router.post('/createMovie', movie.postMovie)
 router.post('/editMovie', movie.editMovie)
 router.put('/editMovie/:id', movie.putMovie)

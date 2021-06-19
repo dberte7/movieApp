@@ -22,15 +22,16 @@ app.use('/api', routerApi); // rutas para API
 // para asignar rutas principales
 app.use("/", router);
 // error 404 y 500
-app.use((req, res, next) =>{
-    console.log("error404");
-    return res.status(404).json({message: "Route does not exist"})
-});
-app.use((err, req, res, next) =>{
-    console.log("error500");
-    return res.status(500).json({message: `Server ${err}`})
-});
-// inicializacion del servidor
+// app.use((req, res, next) =>{
+//     console.log("error404");
+//     return res.status(404).json({message: "Route does not exist"})
+// });
+// app.use((err, req, res, next) =>{
+//     console.log("error500");
+//     return res.status(500).json({message: `Server ${err}`})
+// });
+
+// inicializacion del servidor 
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 });
