@@ -7,9 +7,8 @@ html(lang="en")
         title Document
     body
         if title
-            if headerGen 
-                header.headerGen
-                    h1#header MovieApp
+            header.headerGen
+                h1#header MovieApp
         if burger 
             header 
                 div.hamburger
@@ -26,9 +25,12 @@ html(lang="en")
                             a(href='/logout') Logout
             script(src="../public/js/burger.js") 
         if signIn
-            main
+            if title
+                header.headerGen
+                    h1#header MovieApp
+                main
                  div#authentication
-                    img(src="../public/css/img/logo.jpeg" alt="Imagen no carga")
+                    img(src="../public/img/logo.jpeg" alt="Imagen no carga")
                     form(action="/movies", method="POST" id="singInForm")
                         input(type="text" id="title" placeholder="Email")
                         input(type="text" id="title" placeholder="Passowrd")
@@ -43,17 +45,17 @@ html(lang="en")
         if dashboard
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("#"), value="Salir") 
+                input(type="submit",href=("#"), value="Salir" id="salir") 
             main
                 div#dashboard
-                    img(src="../public/css/img/logo.jpeg" alt="Imagen no carga")
+                    img(src="../public/img/logo.jpeg" alt="Imagen no carga")
                     form(action='/search', method="POST" id="dashForm")
                         input(type="submit", value="Search" class="search")
                     form(action='/movies', method="POST" id="form")
                         input(type="submit", value="Movies" class="movies")
         if searchPage
-            main 
-                form(action="/search", method="GET" id="searchForm")
+            main
+                form(action="/search", method="GET")
                     input(type="text" id="title" name="s")
                     input(type="submit", value="search")
                 if search
@@ -62,8 +64,10 @@ html(lang="en")
                             h2 #{film.Title} 
                             img(src=film.Poster, alt="poster")
                             p Director: #{film.Director}
+                            p Año: #{film.Year}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}
+
                             form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
                 if dbSearch
@@ -71,6 +75,7 @@ html(lang="en")
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
+                        p Año: #{film.Year}
                         p Genre: #{dbSearch.Genre}
                         p Runtime: #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}`, method="GET" id="form")
