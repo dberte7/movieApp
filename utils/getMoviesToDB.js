@@ -1,47 +1,71 @@
 const Film = require('../models/Film');
+const fetch = require('node-fetch');
 
 const moviesToDB = {
-    arrayToDB: async (data, searchTitle) => {
-        let movie = {};
-        let keyword = searchTitle;
-        
-        if (data.Poster == "N/A") {
-            movie = {
-                title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                image: "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-696x1024.jpg",
-                year: data.Year,
-                director: data.Director,
-                genre: data.Genre,
-                runtime: data.Runtime,
-                plot: data.Plot,
-                actors: data.Actors,
-                imdbRating: data.imdbRating,
-                fav: false,
-                searchKeyword: keyword.toLowerCase()
-            }
-        } else {
-            movie = {
-                title: data.Title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                image: data.Poster,
-                year: data.Year,
-                director: data.Director,
-                genre: data.Genre,
-                runtime: data.Runtime,
-                plot: data.Plot,
-                actors: data.Actors,
-                imdbRating: data.imdbRating,
-                fav: false,
-                searchKeyword: keyword.toLowerCase()
+    arrayToDB: async (movie) => {
+            Film.exists({ Title: movie.Title }, async (err, result) => {
+                if (err) {
+                    console.log(error);
+                } else {
+                    if (!result){
+                        const film =  new Film(movie);
+                        try {
+                            const newFilm = await film.save();
+                            //console.log(`Saved on DB: ${film.Title}`)
+                        } catch (err) {
+                            console.log(`menssage: ${err.message}`)
+                        }
+                    } else {
+                        console.log("Already in db");
+                    }
+                }
+            });
+    },
+    findDbId: async (titleQ) => {
+        Film.exists({ Title: titleQ }, async (err, result) => {
+            if (err) {
+                console.log(error);
+            } else {
+                if (result){
+                    try {
+                        const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
+
+                            //let id = "tt" + movie._id
+
+                            let dbSearch = {
+                                dbSearch: "true",
+                                Title: movie.Title,
+                                Year: movie.Year,
+                                Runtime: movie.Runtime,
+                                Genre: movie.Genre,
+                                Director: movie.director,
+                                Poster: movie.Poster,
+                                imdbID: movie._id,
+                            }
+                            
+                            let options = {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                    },
+                                body: JSON.stringify(dbSearch)
+                            }
+                        
+                            let response = await fetch("http://localhost:3000/search", options)
+                            let data = await response.json()
+                            return data;
+                        })
+                    } catch (err) {
+                        console.log(err);
+                        //res.status(500).json({ message: err.message });
+                    }
+                } else {
+                    console.log(`${result} not in db`);
                 }
             }
-            const film = new Film(movie);
-            try {
-                const newFilm = await film.save();
-                console.log(`Saved on DB: ${film.title}`)
-            } catch (err) {
-                console.log(`menssage: ${err.message}`)
-            }
-    }
-} 
+        })
+    },
+}; 
 
 module.exports = moviesToDB;
+

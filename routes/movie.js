@@ -1,17 +1,21 @@
 const router = require('express').Router(); 
-const movie = require('../controllers/movie');
+const movie = require('../controllers/movie')
 
-router.get('/', movie.signIn)
-router.post('/login', movie.postLogin)
-router.post('/signup', movie.postSignup)
-router.post('/logout',movie.postlogout)
+router.get('/', movie.inicio)
+router.get('/signUp', movie.signUP)
+router.post('/signUp', movie.addUser)
+
+router.get('/dashboard', movie.dashboard)
 router.post('/dashboard', movie.dashboard)
 router.get('/search', movie.getMovies)
 router.post('/search', movie.getMovies)
 router.get('/search/:title', movie.searchTitle)
-router.post('/movies', movie.myMovies)
+router.get('/movies', movie.myMovies)
+router.post('/movies', movie.myMovies) 
 router.post('/createMovie', movie.postMovie)
 router.post('/editMovie', movie.editMovie)
-router.post('/removeMovie', movie.deleteMovie)
+router.put('/editMovie/:id', movie.putMovie)
+router.post('/removeMovie', movie.deleteMovScreen)
+router.delete('/removeMovie', movie.deleteMovie)
 
 module.exports = router;
