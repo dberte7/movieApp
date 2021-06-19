@@ -21,6 +21,7 @@ const scrap = async (titulo) => {
   console.log(data)
   return data
 }
+
 scrap("spiderman")
 
 module.exports = scrap
