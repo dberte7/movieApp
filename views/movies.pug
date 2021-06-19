@@ -1,4 +1,3 @@
-doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
@@ -28,18 +27,19 @@ html(lang="en")
             script(src="../public/js/burger.js") 
         if signIn
             main
-                div#authentication
+                 div#authentication
                     img(src="../public/css/img/logo.jpeg" alt="Imagen no carga")
                     form(action="/movies", method="POST" id="singInForm")
                         input(type="text" id="title" placeholder="Email")
                         input(type="text" id="title" placeholder="Passowrd")
-                        input(type="submit", value="Sign In" class="signIn")
+                        input(type="submit", value="Sign In", class="signIn")
                     form(action="/dashboard", method="POST")
                         input(type="submit", value="dashTemp")
                     form(action="#", method="POST" id="singInForm")
-                        input(type="submit", value="Sign in with Google" class="google")
-                    form(action="/signup", method="POST" id="singInForm")
-                        input(type="submit", value="Sign Up", class="signUp")               
+                        input(type="submit", value="Sign in with Google", class="google")
+                    form(action="/signUp", method="GET" id="singInForm")
+                        input(type="submit", value="Sign Up", class="signUp")
+                    
         if dashboard
             header.header
                 h1#header MovieApp
@@ -66,6 +66,15 @@ html(lang="en")
                             p Runtime: #{film.Runtime}
                             form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
+                if dbSearch
+                    div
+                        h2 #{dbSearch.Title} 
+                        img(src=dbSearch.Poster, alt="poster")
+                        p Director: #{dbSearch.Director}
+                        p Genre: #{dbSearch.Genre}
+                        p Runtime: #{dbSearch.Runtime}
+                        form(action=`/search/${dbSearch.imdbID}`, method="GET" id="form")
+                            input(type="submit" value="Details")
         if movies
             main 
                 if data 
