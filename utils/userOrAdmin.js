@@ -1,5 +1,5 @@
 const rol = {
-    admin:true
+    admin:false
 }
 
 module.exports = rol

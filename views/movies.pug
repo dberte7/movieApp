@@ -26,6 +26,7 @@ html(lang="en")
             script(src="../public/js/burger.js") 
         if signIn
             main
+                img(src="../public/img/logo.jpeg" alt="logo")
                 form(action="/signIn" method="POST" id="singInForm")
                     input(name="email" type="email" placeholder="Email")
                     input(name="password" type="password" placeholder="Password")
@@ -34,6 +35,7 @@ html(lang="en")
                     button Sign Up
         if signUp
             main
+                img(src="../public/img/logo.jpeg" alt="logo")
                 form(action="/signUp" method="POST" id="singUpForm")
                     input(name="name" type="text" id="name" placeholder="Name")
                     input(name="email" type="email" id="email" placeholder="Email")
@@ -41,7 +43,11 @@ html(lang="en")
                     input(name="passwordConfirm" type="password" placeholder="Confirm Password")
                     input(type="submit" value="Sign Up")
         if dashboard
+            header.header
+                h1#header MovieApp
+                input(type="submit",href=("/logout"), value="Salir" id="salir")
             main
+                img(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
                     button.search Search
                 a(href='/movies')

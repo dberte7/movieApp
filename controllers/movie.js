@@ -38,7 +38,7 @@ const routes = {
     }
   },
   signUp: (req, res) => {
-    res.status(200).render("movies", { signUp: true });
+    res.status(200).render("movies", { signUp: true,title:true});
     //res.status(200).render("singin", { dashboard: true });
   },
   dashboard: (req, res) => {
