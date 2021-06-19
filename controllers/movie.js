@@ -19,6 +19,9 @@ let data3;
 let search = []; 
 
 const routes = {
+  inicio: (req, res) => {
+    res.status(200).render("movies", { signIn: true });
+  },
   addUser: async (req, res) => { 
   //var token = jwt.signUP({ email: req.body.email }, privateKey, { algorithm: 'RS256'});
   //console.log(token)
@@ -47,13 +50,11 @@ signUP: (req, res) => {
       res.status(200).render("movies", { searchPage: true, burger: true });
     } else {
       Film.exists({ Title: titleQ }, async (err, result) => {
-        console.log(result);
         if (err) {
             console.log(error);
         } else {
             if (!result){
               let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
-              console.log(data);
               for (let index = 0; index < data.Search.length; index++) {
                       let id = data.Search[index].imdbID;
                       let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
