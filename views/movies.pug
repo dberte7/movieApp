@@ -56,6 +56,15 @@ html(lang="en")
                             p Runtime: #{film.Runtime}
                             form(action=`/search/${film.imdbID}`, method="GET" id="form")
                                 input(type="submit" value="Details")
+                if dbSearch
+                    div
+                        h2 #{dbSearch.Title} 
+                        img(src=dbSearch.Poster, alt="poster")
+                        p Director: #{dbSearch.Director}
+                        p Genre: #{dbSearch.Genre}
+                        p Runtime: #{dbSearch.Runtime}
+                        form(action=`/search/${dbSearch.imdbID}`, method="GET" id="form")
+                            input(type="submit" value="Details")
         if movies
             main 
                 if data 
