@@ -79,7 +79,7 @@ signUP: (req, res) => {
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        // scrap(data.Title)
+        scrap(data.Title)
         res.status(200).render("movies", { detail: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -149,9 +149,5 @@ signUP: (req, res) => {
       }
       },
 };
+
 module.exports = routes;
-
-
-
-
-
