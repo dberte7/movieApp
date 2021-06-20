@@ -4,16 +4,24 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="../public/css/style.css")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
         title Document
     body    
         if movies
+            header.header
+                h1#header MovieApp
+                input(type="submit",href=("/logout"), value="Salir" id="salir")
             main
-                h1 Peliculas
+                h2 Mis Peliculas
                 form(action="/createMovie" method="POST")
-                    input(type="submit" value="Crear") 
+                    input.admin(type="submit" value="Crear") 
                 if data 
                     each film in data 
-                        div
+                        div.searchMovie
                             h2 #{film.Title}
                             img(src=film.Poster, alt="poster")
                             p Year: #{film.Year} 
@@ -22,11 +30,11 @@ html(lang="en")
                             p Runtime: #{film.Runtime}
                             form(method="POST" action="/editMovie")
                                 input(type='hidden' name='Title' value=`${film.Title}`)
-                                input(type="submit" value="Edit") 
+                                input.admin(type="submit" value="Edit") 
                             form(method="POST" action="/removeMovie")
                                 input(type='hidden' name='Title' value=`${film.Title}`)
                                 input(type='hidden' name='Poster' value=`${film.Poster}`)
-                                input(type="submit" value="Delete") 
+                                input.red(type="submit" value="Delete") 
                 if data3
                     h2 #{data3.Title}
                     img(src=data3.Poster, alt="poster")
