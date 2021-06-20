@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
 //token
 var privateKey = '674764936526529';
-
+const sc = require('../utils/scraping')
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
@@ -82,10 +82,12 @@ const routes = {
   },
   searchTitle: async (req, res) => {
     let id = req.params.title;
+    let review = req.body;
+    console.log(review)
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        scrap(data.Title)
+        sc.scrap(data.Title, id)
         res.status(200).render("movies", { detail: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
