@@ -26,13 +26,16 @@ html(lang="en")
             script(src="../public/js/burger.js") 
         if signIn
             main
-                img(src="../public/img/logo.jpeg" alt="logo")
-                form(action="/signIn" method="POST" id="singInForm")
-                    input(name="email" type="email" placeholder="Email")
-                    input(name="password" type="password" placeholder="Password")
-                    input(type="submit" value="Sign In")
-                a(href='/signUp')
-                    button Sign Up
+                div#authentication
+                        img(src="../public/img/logo.jpeg" alt="logo")
+                        form(action="/signIn" method="POST" id="singInForm")
+                            input(name="email" type="email" placeholder="Email")
+                            input(name="password" type="password" placeholder="Password")
+                            input(type="submit" value="Sign In" class="signIn")
+                        a(href='#')
+                            button.google Sign in with Google
+                        a(href='/signUp')
+                            button.signUp Sign Up
         if signUp
             main
                 img(src="../public/img/logo.jpeg" alt="logo")

@@ -63,6 +63,7 @@ form {
   flex-direction: column;
 }
 
+
 /* ---- SIGN IN STYLES ---- */
 /* 
 #authentication {
@@ -106,6 +107,19 @@ button{
 	color: var(--black);
 	width: 50%;
   margin-left: 25%;
+  }
+
+  .google {
+    background-color: var(--white);
+    color: var(--black);
+    text-align: center;
+  }
+  
+  .signUp {
+    background-color: var(--red);
+    color: var(--white);
+    text-align: center;
+    margin-top: 80px;
   }
 
 
