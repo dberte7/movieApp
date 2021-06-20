@@ -1,0 +1,17 @@
+{
+    email
+    contraseña
+}
+
+genero token jwt
+
+funcion para generar el token
+
+guardar el token en los cookies del usuario
+
+
+hacer las llamadas con el token 
+
+Authorization: Bearer <token>
+Bearer ey238047579213749bfcvb2w3e
+
