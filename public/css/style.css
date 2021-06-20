@@ -155,11 +155,15 @@ button{
 
 #salir{
  background-color: var(--black);
- width: 15%;
+ width: 60px;
  color: var(--white);
  position: fixed;
  top: 0;
  right: 0;
+}
+
+#salir:hover {
+  color: var(--red);
 }
 
 /* ---- SEARCH STYLES ---- */
@@ -190,12 +194,14 @@ button{
   background-color: var(--black);
   color: var(--white);
   text-align: center;
+  width: 15%;
 }
 
 .red {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
+  width: 20%;
 }
 
 /* ----SEARCH TITLE STYLES ---- */
@@ -302,7 +308,7 @@ body {
 }
 .menuppal ul li a:hover {
   text-decoration: none;
-  color: #333;
+  color: red;
 }
 
 /* @media screen and (min-width: 600px) {
