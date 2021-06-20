@@ -2,9 +2,10 @@ const router = require('express').Router();
 const movie = require('../controllers/movie')
 const checkAuth = require("../middleware/auth");
 
+
 router.get('/', movie.inicio)
 
-router.post('/signin', checkAuth, movie.signIn)
+router.post('/signIn', checkAuth, movie.signIn)
 
 router.get('/signUp', movie.signUp)
 router.post('/signUp', movie.addUser)
