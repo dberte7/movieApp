@@ -75,7 +75,7 @@ html(lang="en")
                             form(action=`/search/${film.imdbID}` method="GET" id="form")
                                 input.details(type="submit" value="Details")
                 if dbSearch
-                    div
+                    div.searchMovie
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
