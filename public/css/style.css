@@ -6,13 +6,28 @@
 }
 
 /* ---- GENERAL STYLES ---- */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+} */
+
+body{
+  background-color: ghostwhite;
 }
+
+h1, h2, h3 {
+  font-family: 'Staatliches', cursive;
+}
+
+p {
+  font-family: 'Quicksand', sans-serif;
+}
+
 .headerGen {
-  background-color: var(--black);
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   width: 50vp;
   background-size: cover;
@@ -25,7 +40,9 @@
 }
 
 .header {
-  background-color: var(--black);
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   width: 50vp;
   background-size: cover;
@@ -40,6 +57,10 @@ h1 {
   margin-top: 0;
   text-align: center;
 }
+
+h2 {
+  text-align: center;
+}
 #exit {
   display: none;
 }
@@ -49,7 +70,16 @@ img {
   width: 80vw;
   top: 5px;
   border-radius: 50%;
-  box-shadow: 1px 1px 15px var(--white);
+  box-shadow: 1px 1px 15px var(--black);
+  padding: 20px,40px;
+}
+
+.logos {
+  position: relative;
+  width: 80vw;
+  top: 5px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 15px var(--black);
   padding: 20px,40px;
   margin: 10%;
 }
@@ -106,19 +136,31 @@ button{
 	color: var(--black);
 	width: 50%;
   margin-left: 25%;
-  }
-  .google {
-    background-color: var(--white);
-    color: var(--black);
-    text-align: center;
-  }
-  
-  .signUp {
-    background-color: var(--red);
-    color: var(--white);
-    text-align: center;
-    margin-top: 80px;
-  }
+}
+.google {
+  background-color: var(--white);
+  color: var(--black);
+  text-align: center;
+}
+
+.signUp {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  margin-top: 80px;
+}
+
+.signIn {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+}
+
+.signUp2{
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+}
 
 /* input[type="submit"]:hover {
   cursor: pointer;
@@ -150,6 +192,17 @@ input[type="submit"].google {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.search {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+}
+.movies {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
 }
 /* input[type="submit"].search {
   background-color: var(--black);
@@ -185,6 +238,39 @@ input[type="submit"].movies {
 
 /* ---- SEARCH STYLES ---- */
 
+.searchMovie{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movieSearch{
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+}
+.details {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+}
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+}
+
+.red {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+}
 /* input[type="text"]#searchMov{
   margin: 5px 10px;
   padding: 8px 16px;
@@ -285,16 +371,16 @@ body {
   list-style: none;
   text-align: center;
   font-family: Verdadna, Arial, Helvetica;
-  color: darkslategrey;
+  color: black;
   line-height: 3em;
   height: 3em;
-  color: #369;
+  color: black;
   text-transform: none;
   font-weight: bold;
 }
 .menuppal ul li a {
   text-decoration: none;
-  color: #369;
+  color: black;
 }
 .menuppal ul li a:hover {
   text-decoration: none;

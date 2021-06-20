@@ -4,6 +4,10 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="../public/css/style.css")
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
         title Document
     body
         if title
@@ -26,30 +30,30 @@ html(lang="en")
             script(src="../public/js/burger.js") 
         if signIn
             main
-                img(src="../public/img/logo.jpeg" alt="logo")
+                img.logos(src="../public/img/logo.jpeg" alt="logo")
                 form(action="/signIn" method="POST" id="singInForm")
                     input(name="email" type="email" placeholder="Email")
                     input(name="password" type="password" placeholder="Password")
-                    input(type="submit" value="Sign In")
+                    input.signIn(type="submit" value="Sign In")
                 a(href='#')
                     button.google Sign in with Google
                 a(href='/signUp')
                     button.signUp Sign Up
         if signUp
             main
-                img(src="../public/img/logo.jpeg" alt="logo")
+                img.logos(src="../public/img/logo.jpeg" alt="logo")
                 form(action="/signUp" method="POST" id="singUpForm")
                     input(name="name" type="text" id="name" placeholder="Name")
                     input(name="email" type="email" id="email" placeholder="Email")
                     input(name="password" type="password" id="password" placeholder="Password")
                     input(name="passwordConfirm" type="password" placeholder="Confirm Password")
-                    input(type="submit" value="Sign Up")
+                    input.signUp2(type="submit" value="SignUp")
         if dashboard
             header.header
                 h1#header MovieApp
                 input(type="submit",href=("/logout"), value="Salir" id="salir")
             main
-                img(src="../public/img/logo.jpeg" alt="logo")
+                img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
                     button.search Search
                 a(href='/movies')
@@ -58,24 +62,24 @@ html(lang="en")
             main 
                 form(action="/search" method="GET" id="searchForm")
                     input(type="text" id="title" name="s")
-                    input(type="submit" value="search")
+                    input.movieSearch(type="submit" value="Search")
                 if search
                     each film in search
-                        div
+                        div.searchMovie
                             h2 #{film.Title} 
                             img(src=film.Poster, alt="poster")
                             p Director: #{film.Director}
-                            p Año: #{film.Year}
+                            p Year: #{film.Year}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}
                             form(action=`/search/${film.imdbID}` method="GET" id="form")
-                                input(type="submit" value="Details")
+                                input.details(type="submit" value="Details")
                 if dbSearch
                     div
                         h2 #{dbSearch.Title} 
                         img(src=dbSearch.Poster, alt="poster")
                         p Director: #{dbSearch.Director}
-                        p Año: #{film.Year}
+                        p Year: #{film.Year}
                         p Genre: #{dbSearch.Genre}
                         p Runtime: #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
@@ -94,7 +98,7 @@ html(lang="en")
         if detail 
             main
                 if data      
-                    div
+                    div.movieDetails
                         h2 #{data.Title}
                         img(src=data.Poster, alt="poster")
                         p Year: #{data.Year}
@@ -102,5 +106,5 @@ html(lang="en")
                         p Genre: #{data.Genre}
                         p Runtime: #{data.Runtime}
                         p Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}`)
+                        input#check(type="checkbox" name=`${data.imdbID}` value="Add to Favorites")
                         script(src="../public/js/fav.js")
