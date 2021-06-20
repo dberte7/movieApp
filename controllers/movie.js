@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
-const logged = require('../utils/fake/userLoggedIn');
 const apikey = process.env.API_KEY;
 
 //Variable global
