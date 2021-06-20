@@ -10,15 +10,12 @@
 body{
   background-color: ghostwhite;
 }
-
 h1, h2, h3 {
   font-family: 'Staatliches', cursive;
 }
-
 p {
   font-family: 'Quicksand', sans-serif;
 }
-
 .headerGen {
   background: #232526;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
