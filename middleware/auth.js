@@ -1,4 +1,4 @@
-const rol = require("../utils/userOrAdmin");
+const rol = require("../utils/fake/userOrAdmin");
 
 const checkAuth = (req, res, next) =>{
     console.log('auth');

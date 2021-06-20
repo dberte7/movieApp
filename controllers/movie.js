@@ -7,7 +7,8 @@ var privateKey = '674764936526529';
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
-const rol = require('../utils/userOrAdmin');
+const rol = require('../utils/fake/userOrAdmin');
+const logged = require('../utils/fake/userLoggedIn');
 const apikey = process.env.API_KEY;
 
 //Variable global
@@ -90,7 +91,12 @@ const routes = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-        },
+  },
+  fav: async (req, res) =>{
+    let fav = req.body
+    console.log("**********");
+    console.log(fav);
+  },
     postMovie: (req, res) => {
       const newMovie = req.body
         if (!newMovie.Create) {
