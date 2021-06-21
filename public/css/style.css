@@ -10,15 +10,12 @@
 body{
   background-color: ghostwhite;
 }
-
 h1, h2, h3 {
   font-family: 'Staatliches', cursive;
 }
-
 p {
   font-family: 'Quicksand', sans-serif;
 }
-
 .headerGen {
   background: #232526;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
@@ -79,7 +76,6 @@ img {
   margin: 10%;
 }
 
-
 form {
   width: 100%;
   display: flex;
@@ -134,7 +130,6 @@ button{
   text-align: center;
 }
 
-
 /* ---- SIGN UP ---- */
 
 /* ---- DASHBOARD STYLES ---- */
@@ -157,12 +152,15 @@ button{
 
 #salir{
  background-color: var(--black);
- width: 15%;
+ width: 60px;
  color: var(--white);
- margin: 0 auto;
  position: fixed;
  top: 0;
  right: 0;
+}
+
+#salir:hover {
+  color: var(--red);
 }
 
 /* ---- SEARCH STYLES ---- */
@@ -193,14 +191,15 @@ button{
   background-color: var(--black);
   color: var(--white);
   text-align: center;
+  width: 15%;
 }
 
 .red {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
+  width: 20%;
 }
-
 
 /* ----SEARCH TITLE STYLES ---- */
 /* ---- MOVIES STYLES ---- */
@@ -306,7 +305,7 @@ body {
 }
 .menuppal ul li a:hover {
   text-decoration: none;
-  color: #333;
+  color: red;
 }
 
 /* @media screen and (min-width: 600px) {
