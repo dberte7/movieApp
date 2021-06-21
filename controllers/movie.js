@@ -1,9 +1,9 @@
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
-
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
+const sc = require('../utils/scraping')
 const apikey = process.env.API_KEY;
 
 //Variable global
@@ -43,7 +43,6 @@ const routes = {
     console.log("Ya estoy aqui!!");
     console.log(req.user);
     let titleQ = req.query.s;
-    
     if (titleQ === undefined) {
       res.status(200).render("movies", { searchPage: true, burger: true, title:true });
     } else {
@@ -74,17 +73,19 @@ const routes = {
                       })
             }
         }
-    })
+      })
     }
   },
   searchTitle: async (req, res) => {
     console.log("Ya estoy aqui!!");
     console.log(req.user);
     let id = req.params.title;
+    console.log(req.params)
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        // scrap(data.Title)
+        let review = await sc.scrap(data.Title);
+        data["review"] = review
         res.status(200).render("movies", { detail: true, title:true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -113,7 +114,7 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
-        await res.status(200).render("admin", { edit: true, data: data });
+        await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

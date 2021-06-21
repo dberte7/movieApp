@@ -105,6 +105,7 @@ html(lang="en")
                         p Director: #{data.Director} 
                         p Genre: #{data.Genre}
                         p Runtime: #{data.Runtime}
+                        p Review: #{data.review}
                         p Add to favorites
                         input#check(type="checkbox" name=`${data.imdbID}` value="Add to Favorites")
                         script(src="../public/js/fav.js")
