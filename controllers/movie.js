@@ -33,6 +33,11 @@ const routes = {
   signUp: (req, res) => {
     res.status(200).render("movies", { signUp: true,title:true});
     //res.status(200).render("singin", { dashboard: true });
+  
+  },
+  logout: async(req, res) => {
+    await res.clearCookie('acces_token')
+    res.redirect('/')
   },
   dashboard: (req, res) => {
     console.log("Ya estoy aqui!!");
