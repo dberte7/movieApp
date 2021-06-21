@@ -30,12 +30,14 @@ const Users = {
       }
       return result
     },
-    searchEntries: async (email, password)=>{
+    addFav: async (favEntry)=>{
       console.log("funcionando")
       let conn;
       try {
         conn = await pool.getConnection();
-        const res = await conn.query("SELECT * FROM usuarios  WHERE usuarios.email=?",[email]);
+
+        let sql_query="INSERT INTO `favoritos`(`fav_ID`, `omdb`, `user_ID`) VALUES (?,?,?)"
+        const res = await conn.query(aql_query,favEntry);
         console.log("searchEntries",res); 
 
         let getEmail = email
@@ -45,23 +47,6 @@ const Users = {
         console.log(getPassword);
         console.log("******");
 
-      //   let infoVal = {
-      //     email: res[0].email,
-      //     password: res[0].password
-      //   }
-      
-      // let options = {
-      //     method: "POST",
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //         },
-      //     body: JSON.stringify(infoVal)
-      // }
-  
-      // let response = await fetch("http://localhost:3000/signIn", options)
-      // let data = await response.json()
-      // return data;
-        
       } catch (err) {
         console.log("error",err)
         throw err;
@@ -77,3 +62,4 @@ module.exports = Users;
 
 
 
+//INSERT INTO `favoritos`(`ID`, `fav_ID`, `omdb`, `user_ID`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')

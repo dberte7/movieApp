@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
-const getMoviesToDB = require('../utils/getMoviesToDB');
+const getMoviesToDB = require('../utils/getMoviesToDB'); 
 const apikey = process.env.API_KEY;
 
 //Variable global
@@ -96,6 +96,15 @@ const routes = {
     console.log(fav);
     if (fav.fav===true) {
       console.log(`add ${fav.movieId} to user`);
+
+      const entry = Object.values(req.body); // entry. Conversión de {} a []
+        try {
+            console.log("llamada a maria");
+            //const data = await Users.addFav(fav)
+            //res.status(201).redirect('/movies')
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
     } else if (fav.fav===false) {
       console.log(`delete ${fav.movieId} from user ${logged.user}`);
     }
