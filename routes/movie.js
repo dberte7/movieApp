@@ -3,6 +3,7 @@ const movie = require('../controllers/movie')
 const checkAuth = require("../middleware/auth");
 const verifyToken = require("../middleware/cookie");
 
+
 router.get('/', movie.inicio)
 router.post('/signIn', checkAuth, movie.signIn)
 router.get('/signUp', movie.signUp)

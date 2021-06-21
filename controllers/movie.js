@@ -2,21 +2,37 @@ const Users = require('../models/users')
 const bcrypt = require('bcrypt')
 
 const Film = require("../models/Film");
+const JWT = require('jsonwebtoken');
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB'); 
 const apikey = process.env.API_KEY;
+const mySecret = process.env.SECRET
 
 //Variable global
 let data3;
 let search = [];
-let rol;
 
 const routes = {
   signIn: (req, res) =>{
     req.body.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
   },
-  inicio: (req, res) => {
-    res.status(200).render("movies", { signIn: true, title:true });
+  inicio: async (req, res) => {
+    try {
+      const token = req.cookies.acces_token || '';
+      const decrypt = await JWT.verify(token, mySecret);
+      req.user = {
+        id:decrypt.id,
+        name:decrypt.name,
+        admin:decrypt.admin
+      }
+    if (!token) {
+      res.status(200).render("movies", { signIn: true, title:true })
+    } else {
+      req.user.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
+    }  
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
   },
   addUser: async (req, res) => { 
   const {name,email,password} = req.body
@@ -93,9 +109,16 @@ const routes = {
   fav: async (req, res) =>{
     let fav = req.body
     console.log("**********");
-    console.log(fav);
+    console.log(req.user);
     if (fav.fav===true) {
+
       console.log(`add ${fav.movieId} to user`);
+
+      favInfo = {
+        fav_ID:fav.movieId,
+        id: req.user.id,
+
+      }
 
       const entry = Object.values(req.body); // entry. Conversión de {} a []
         try {
