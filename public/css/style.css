@@ -17,16 +17,29 @@ p {
   font-family: 'Quicksand', sans-serif;
 }
 .headerGen {
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #232526; 
   overflow: hidden;
 }
 
+/* Style buttons */
+.btn {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 50px;
+  /* cursor: pointer; */
+  margin-left: 0;
+  padding: 0;
+  width: 40px;
+  position: absolute;
+  top: 50;
+  right: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+
 .header {
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #232526;
   overflow: hidden;
 }
 h1 {
@@ -58,12 +71,9 @@ h2 {
 }
 
 .logos {
-  position: relative;
   width: 80vw;
-  top: 5px;
-  border-radius: 50%;
-  box-shadow: 1px 1px 15px var(--black);
-  padding: 20px,40px;
+  border-radius: 35%;
+  box-shadow: 6px 6px 15px var(--black);
   margin: 10%;
 }
 
@@ -80,25 +90,26 @@ form {
 input{
   margin: 6px 12px;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 30px;
   border: 1px solid var(--grey);
-  color: var(--black);
+  /* color: var(--black); */
   width: 50%;
   text-align: center;
+  font-size: 18px;
 }
 
 button{	
 	margin: 6px 12px;
 	padding: 8px 16px;
-	border-radius: 6px;
+	border-radius: 30px;
 	border: 1px solid var(--grey);
-	color: var(--black);
 	width: 50%;
   margin-left: 25%;
+  font-size: 18px;
 }
 .google {
-  background-color: var(--grey);
-  color: var(--black);
+  background-color: dimgrey;
+  color: white;
   text-align: center;
 }
 
@@ -106,7 +117,7 @@ button{
   background-color: var(--red);
   color: var(--white);
   text-align: center;
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .signIn {
@@ -115,6 +126,13 @@ button{
   text-align: center;
 }
 
+.review{
+  margin-right: 40px;
+  margin-left: 40px;
+  text-align: justify;
+  border-style: solid;
+  padding: 10px;
+}
 /* .signUp2{
   background-color: var(--red);
   color: var(--white);
@@ -139,21 +157,6 @@ button{
   background-color: var(--black);
   color: var(--white);
   text-align: center;
-}
-
-#salir{
-  background-color: var(--black);
-  width: 60px;
-  color: var(--white);
-  position: fixed;
-  top: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-}
-
-#salir:hover {
-  color: var(--red);
 }
 
 /* ---- SEARCH STYLES ---- */

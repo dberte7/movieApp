@@ -8,6 +8,7 @@ html(lang="en")
         <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         title Document
     body
         if title
@@ -52,7 +53,8 @@ html(lang="en")
             header.header
                 h1#header MovieApp
                 a(href='/logout')
-                    button#salir Logout
+                    button.btn
+                        i.fa.fa-close
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
@@ -101,12 +103,12 @@ html(lang="en")
                 if data      
                     div.movieDetails
                         h2 #{data.Title}
-                        img(src=data.Poster, alt="poster")
+                        img.imgSearch(src=data.Poster, alt="poster")
                         p Year: #{data.Year}
                         p Director: #{data.Director} 
                         p Genre: #{data.Genre}
                         p Runtime: #{data.Runtime}
-                        p Review: #{data.review}
+                        p.review Review: #{data.review}
                         p Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}` value="Add to Favorites")
+                        input#check(type="checkbox" name=`${data.imdbID}`)
                         script(src="../public/js/fav.js")
