@@ -82,12 +82,16 @@ const routes = {
   },
   searchTitle: async (req, res) => {
     let id = req.params.title;
-    let review = req.body;
-    console.log(review)
+    console.log(req.params)
+
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        sc.scrap(data.Title, id)
+
+        let review = await sc.scrap(data.Title);
+        // console.log(review)
+        data["review"] = review
+        //sc.scrap(data.Title, id)
         res.status(200).render("movies", { detail: true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });

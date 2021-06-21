@@ -5,7 +5,7 @@ const scraping = {
   scrap: async (titulo, id) => {
     let imdb = id;
     const browser = await puppeteer.launch({
-      headless: false
+      headless: true
     });
     const page = await browser.newPage();
     await page.goto(`https://www.filmaffinity.com/es/search.php?stext=${titulo}`);
@@ -21,29 +21,29 @@ const scraping = {
       // console.log(review)
       return review.innerText
     }); 
-    // console.log(data)
-    // return data
-    console.log('******')
-    console.log(imdb)
-    const scrapJSON = {
-      "review": JSON.stringify(data)
-    }
-    console.log(scrapJSON)
-    let options = {
-      method: "POST",
-      headers: {
-          'Content-Type': 'application/json'
-          },
-      body: JSON.stringify(scrapJSON)
-    }
-    console.log(options);
-    let response = await fetch(`http://localhost:3000/search/${imdb}`, options)
-    let dataPost = await response.json()
-    console.log(dataPost)
+    console.log(data)
+     return data
+    // console.log('******')
+    // console.log(imdb)
+    // const scrapJSON = {
+    //   "review": JSON.stringify(data)
+    // }
+    // console.log(scrapJSON)
+    // let options = {
+    //   method: "POST",
+    //   headers: {
+    //       'Content-Type': 'application/json'
+    //       },
+    //   body: JSON.stringify(scrapJSON)
+    // }
+    // console.log(options);
+    // let response = await fetch(`http://localhost:3000/search/${imdb}`, options)
+    // let dataPost = await response.json()
+    // console.log(dataPost)
   }
 }
 
-// scrap("spiderman")
+//scraping.scrap("spiderman")
 
 module.exports = scraping
 
