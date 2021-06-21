@@ -47,12 +47,12 @@ html(lang="en")
                     input(name="email" type="email" id="email" placeholder="Email")
                     input(name="password" type="password" id="password" placeholder="Password")
                     input(name="passwordConfirm" type="password" placeholder="Confirm Password")
-                    input.signUp2(type="submit" value="SignUp")
+                    input.red(type="submit" value="SignUp")
         if dashboard
             header.header
                 h1#header MovieApp
                 a(href='/logout')
-                    button.salir Logout
+                    button#salir Logout
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
@@ -63,13 +63,13 @@ html(lang="en")
             main 
                 form(action="/search" method="GET" id="searchForm")
                     input(type="text" id="title" name="s")
-                    input.movieSearch(type="submit" value="Search")
+                    input.black(type="submit" value="Search")
                 if search
                     each film in search
                         div.searchMovie
                             h2 #{film.Title} 
-                            img(src=film.Poster, alt="poster")
-                            p Director: #{film.Director}
+                            img.imgSearch(src=film.Poster, alt="poster")
+                            p Director: #{film.Director}  
                             p Year: #{film.Year}
                             p Genre: #{film.Genre}
                             p Runtime: #{film.Runtime}

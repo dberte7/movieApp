@@ -17,9 +17,10 @@ html(lang="en")
                 a(href='/logout')
                     button.salir Logout
             main
-                h2 Mis Peliculas
-                form(action="/createMovie" method="POST")
-                    input.admin(type="submit" value="Crear") 
+                if mainScreen 
+                    h2 Mis Peliculas
+                    form(action="/createMovie" method="POST")
+                        input.admin(type="submit" value="Crear") 
                 if data 
                     each film in data 
                         div.searchMovie
