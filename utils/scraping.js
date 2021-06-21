@@ -18,34 +18,17 @@ const scraping = {
     await page.waitForSelector("#mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(1) > div.review-text1")
     const data = await page.evaluate(() => {
       const review = document.querySelector("div.review-text1");
-      // console.log(review)
       return review.innerText
     }); 
-    console.log(data)
      return data
-    // console.log('******')
-    // console.log(imdb)
-    // const scrapJSON = {
-    //   "review": JSON.stringify(data)
-    // }
-    // console.log(scrapJSON)
-    // let options = {
-    //   method: "POST",
-    //   headers: {
-    //       'Content-Type': 'application/json'
-    //       },
-    //   body: JSON.stringify(scrapJSON)
-    // }
-    // console.log(options);
-    // let response = await fetch(`http://localhost:3000/search/${imdb}`, options)
-    // let dataPost = await response.json()
-    // console.log(dataPost)
   }
 }
-
-//scraping.scrap("spiderman")
 
 module.exports = scraping
 
 // #mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(1) > div.review-text1
 // #mt-content-cell > div.moviecard-cont > div.reviews-wrapper > div:nth-child(2) > div.review-text1
+
+// nodelist = document.querySelectorAll("div.review-text1")
+// let datos = [...nodelist]
+// let comentarios = datos.map(peli=>peli.innerHTML)
