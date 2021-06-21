@@ -31,21 +31,30 @@ const Users = {
       return result
     },
     addFav: async (favEntry)=>{
-      console.log("funcionando")
       let conn;
       try {
         conn = await pool.getConnection();
 
         let sql_query="INSERT INTO `favoritos`(`fav_ID`, `omdb`, `user_ID`) VALUES (?,?,?)"
-        const res = await conn.query(aql_query,favEntry);
-        console.log("searchEntries",res); 
+        const res = await conn.query(sql_query,favEntry);
+        console.log("addFav",res); 
 
-        let getEmail = email
-        let getPassword = password
-        console.log("******");
-        console.log(getEmail);
-        console.log(getPassword);
-        console.log("******");
+      } catch (err) {
+        console.log("error",err)
+        throw err;
+      } finally {
+        if (conn) return conn.end();
+      }
+    },
+    deleteFav: async (favEntry)=>{
+      console.log("hola");
+      let conn;
+      try {
+        conn = await pool.getConnection();
+
+        let sql_query="DELETE FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.omdb=? AND favoritos.user_ID=?"
+        const res = await conn.query(sql_query,favEntry);
+        console.log("deleteFav",res); 
 
       } catch (err) {
         console.log("error",err)

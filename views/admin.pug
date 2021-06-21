@@ -14,7 +14,8 @@ html(lang="en")
         if movies
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("/logout"), value="Salir" id="salir")
+                a(href='/logout')
+                    button#salir Logout
             main
                 h2 Mis Peliculas
                 form(action="/createMovie" method="POST")

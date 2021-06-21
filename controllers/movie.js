@@ -16,23 +16,27 @@ const routes = {
   signIn: (req, res) =>{
     req.body.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
   },
+  logout: async(req, res) => {
+    await res.clearCookie('acces_token')
+    res.redirect('/')
+  },
   inicio: async (req, res) => {
-    try {
-      const token = req.cookies.acces_token || '';
-      const decrypt = await JWT.verify(token, mySecret);
-      req.user = {
-        id:decrypt.id,
-        name:decrypt.name,
-        admin:decrypt.admin
-      }
+    const token = req.cookies.acces_token || '';
     if (!token) {
       res.status(200).render("movies", { signIn: true, title:true })
     } else {
+      try {
+        const decrypt = await JWT.verify(token, mySecret);
+        req.user = {
+          id:decrypt.id,
+          name:decrypt.name,
+          admin:decrypt.admin
+        }
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
       req.user.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
     }  
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
   },
   addUser: async (req, res) => { 
   const {name,email,password} = req.body
@@ -94,42 +98,37 @@ const routes = {
     }
   },
   searchTitle: async (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
+    let userID = req.user.id
+    let dataUser = {user_ID:userID}
     let id = req.params.title;
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
         // scrap(data.Title)
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data });
+        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   },
   fav: async (req, res) =>{
     let fav = req.body
-    console.log("**********");
-    console.log(req.user);
+    const favInfo = Object.values(fav.like);
     if (fav.fav===true) {
-
-      console.log(`add ${fav.movieId} to user`);
-
-      favInfo = {
-        fav_ID:fav.movieId,
-        id: req.user.id,
-
-      }
-
-      const entry = Object.values(req.body); // entry. Conversión de {} a []
         try {
-            console.log("llamada a maria");
-            //const data = await Users.addFav(fav)
-            //res.status(201).redirect('/movies')
+          console.log("add");
+          console.log(favInfo);
+          const data = await Users.addFav(favInfo)
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     } else if (fav.fav===false) {
-      console.log(`delete ${fav.movieId} from user ${logged.user}`);
+      try {
+        console.log("delete");
+        console.log(favInfo);
+        const data = await Users.deleteFav(favInfo)
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
     }
   },
   postMovie: (req, res) => {

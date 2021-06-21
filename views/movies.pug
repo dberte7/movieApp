@@ -51,7 +51,8 @@ html(lang="en")
         if dashboard
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("/logout"), value="Salir" id="salir")
+                a(href='/logout')
+                    button#salir Logout
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
@@ -106,5 +107,5 @@ html(lang="en")
                         p Genre: #{data.Genre}
                         p Runtime: #{data.Runtime}
                         p Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}` value="Add to Favorites")
+                        input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         script(src="../public/js/fav.js")
