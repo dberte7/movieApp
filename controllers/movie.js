@@ -114,7 +114,7 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
-        await res.status(200).render("admin", { edit: true, data: data });
+        await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
