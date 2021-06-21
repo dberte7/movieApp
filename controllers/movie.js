@@ -1,31 +1,24 @@
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
-var jwt = require('jsonwebtoken');
-//token
-var privateKey = '674764936526529';
-const sc = require('../utils/scraping')
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
-const rol = require('../utils/userOrAdmin');
+const sc = require('../utils/scraping')
 const apikey = process.env.API_KEY;
 
 //Variable global
 let data3;
-let search = []; 
+let search = [];
+let rol;
 
 const routes = {
   signIn: (req, res) =>{
-    console.log("Test");
-    console.log(req.body);
-    rol.admin? res.redirect('/movies') : res.redirect('/dashboard')
+    req.body.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
   },
   inicio: (req, res) => {
     res.status(200).render("movies", { signIn: true, title:true });
   },
   addUser: async (req, res) => { 
-  //var token = jwt.signUP({ email: req.body.email }, privateKey, { algorithm: 'RS256'});
-  //console.log(token)
   const {name,email,password} = req.body
   const hashedPassword = await bcrypt.hash(password, 10)
   const entry =[name,email,hashedPassword]
@@ -42,9 +35,13 @@ const routes = {
     //res.status(200).render("singin", { dashboard: true });
   },
   dashboard: (req, res) => {
+    console.log("Ya estoy aqui!!");
+    console.log(req.user);
     res.status(200).render("movies", { dashboard: true, headerGen:true});
   },
   getMovies: async (req, res) => {
+    console.log("Ya estoy aqui!!");
+    console.log(req.user);
     let titleQ = req.query.s;
     if (titleQ === undefined) {
       res.status(200).render("movies", { searchPage: true, burger: true, title:true });
@@ -53,33 +50,35 @@ const routes = {
         if (err) {
             console.log(error);
         } else {
-          if (!result){
-            let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
-            for (let index = 0; index < data.Search.length; index++) {
-                    let id = data.Search[index].imdbID;
-                    let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-                    search.push(data2);
-                  }
-                  res.status(200).render("movies", { searchPage: true, burger: true, search: search });
-          } else {
-            const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
-                      let dbSearch = {
-                          Title: movie.Title,
-                          Year: movie.Year,
-                          Runtime: movie.Runtime,
-                          Genre: movie.Genre,
-                          Director: movie.Director,
-                          Poster: movie.Poster,
-                          imdbID: movie._id,
-                      }
-                      res.status(200).render("movies", { searchPage: true, burger: true, dbSearch: dbSearch });
-                    })
-          }
+            if (!result){
+              let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+              for (let index = 0; index < data.Search.length; index++) {
+                      let id = data.Search[index].imdbID;
+                      let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+                      search.push(data2);
+                    }
+                    res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search });
+            } else {
+              const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
+                        let dbSearch = {
+                            Title: movie.Title,
+                            Year: movie.Year,
+                            Runtime: movie.Runtime,
+                            Genre: movie.Genre,
+                            Director: movie.Director,
+                            Poster: movie.Poster,
+                            imdbID: movie._id,
+                        }
+                        res.status(200).render("movies", { searchPage: true, title:true, burger: true, dbSearch: dbSearch });
+                      })
+            }
         }
       })
     }
   },
   searchTitle: async (req, res) => {
+    console.log("Ya estoy aqui!!");
+    console.log(req.user);
     let id = req.params.title;
     console.log(req.params)
     try{
@@ -87,19 +86,29 @@ const routes = {
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
         let review = await sc.scrap(data.Title);
         data["review"] = review
-        res.status(200).render("movies", { detail: true, burger: true, data: data });
+        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   },
+  fav: async (req, res) =>{
+    let fav = req.body
+    console.log("**********");
+    console.log(fav);
+    if (fav.fav===true) {
+      console.log(`add ${fav.movieId} to user`);
+    } else if (fav.fav===false) {
+      console.log(`delete ${fav.movieId} from user ${logged.user}`);
+    }
+  },
   postMovie: (req, res) => {
     const newMovie = req.body
-    if (!newMovie.Create) {
-      res.status(200).render('admin', {create: true})
-    } else if (newMovie.Create) {
-      data3 = newMovie;
-      getMoviesToDB.arrayToDB(newMovie);
-    } 
+      if (!newMovie.Create) {
+        res.status(200).render('admin', {create: true})
+      } else if (newMovie.Create) {
+        data3 = newMovie;
+        getMoviesToDB.arrayToDB(newMovie);
+      } 
   },
   editMovie: async (req, res) => {
     let title = req.body
@@ -131,22 +140,25 @@ const routes = {
   },
   deleteMovie: async (req, res) => {
     const deleteMov = req.body;
-    try {
-      const data = await Film.findOneAndRemove({ Title: deleteMov.Title })
-      data3 = undefined;
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
-  myMovies: async (req, res) => {
-    if (!rol.admin) {
       try {
-        const data = await Film.find({ fav: "true" });
-        res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
+        const data = await Film.findOneAndRemove({ Title: deleteMov.Title })
+        data3 = undefined;
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-    } else if (rol.admin) {
+  },
+  myMovies: async (req, res) => {
+    console.log("Ya estoy aqui!!");
+    console.log(req.user);
+    if (!req.user.admin) {
+      console.log("Busco en sql los ids favoritos");
+      // try {
+      //   const data = await Film.find({ fav: "true" });
+      //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
+      // } catch (err) {
+      //   res.status(500).json({ message: err.message });
+      // }
+    } else if (req.user.admin) {
       try {
         const data = await Film.find();
         res.status(200).render("admin", { movies: true, data: data, data3: data3 })
@@ -155,7 +167,7 @@ const routes = {
         res.status(500).json({ message: err.message });
       }
     }
-  },
+    },
 };
 
 module.exports = routes;
