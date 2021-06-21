@@ -9,7 +9,6 @@ const apikey = process.env.API_KEY;
 //Variable global
 let data3;
 let search = [];
-let rol;
 
 const routes = {
   signIn: (req, res) =>{
