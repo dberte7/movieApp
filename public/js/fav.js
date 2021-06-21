@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api/'
+const BASE_URL = 'http://localhost:3000/'
 
 document.getElementById('check').onclick = () => {
     let value = document.getElementsByTagName('input')[0].checked
@@ -7,7 +7,6 @@ document.getElementById('check').onclick = () => {
 }
 
 const postFavInfo = async (favBoolean,id) => {
-
     let options = {
         method: "POST",
         headers: {
@@ -15,13 +14,11 @@ const postFavInfo = async (favBoolean,id) => {
             },
         body: JSON.stringify({fav: favBoolean, movieId: id})
     }
-    console.log(favBoolean);
-    console.log(id)
-    console.log(options);
-
+    // console.log(favBoolean);
+    // console.log(id)
+    // console.log(options);
     let response = await fetch(`${BASE_URL}search/${id}`, options)
     let data = await response.json()
-    console.log(data);
+    //console.log(data);
     return data;
-
-}
+};

@@ -6,13 +6,20 @@
 }
 
 /* ---- GENERAL STYLES ---- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+body{
+  background-color: ghostwhite;
+}
+h1, h2, h3 {
+  font-family: 'Staatliches', cursive;
+}
+p {
+  font-family: 'Quicksand', sans-serif;
 }
 .headerGen {
-  background-color: var(--black);
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   width: 50vp;
   background-size: cover;
@@ -25,7 +32,9 @@
 }
 
 .header {
-  background-color: var(--black);
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   width: 50vp;
   background-size: cover;
@@ -40,6 +49,10 @@ h1 {
   margin-top: 0;
   text-align: center;
 }
+
+h2 {
+  text-align: center;
+}
 #exit {
   display: none;
 }
@@ -49,11 +62,19 @@ img {
   width: 80vw;
   top: 5px;
   border-radius: 50%;
-  box-shadow: 1px 1px 15px var(--white);
+  box-shadow: 1px 1px 15px var(--black);
+  padding: 20px,40px;
+}
+
+.logos {
+  position: relative;
+  width: 80vw;
+  top: 5px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 15px var(--black);
   padding: 20px,40px;
   margin: 10%;
 }
-
 
 form {
   width: 100%;
@@ -64,29 +85,6 @@ form {
 }
 
 /* ---- SIGN IN STYLES ---- */
-/* 
-#authentication {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-#authentication input {
-  width: 85vw;
-} */
-
-
-/* input[type="password"],
-input[type="email"] {
-  margin: 5px 10px;
-  margin-bottom: 15px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  color: var(--black);
-  width: 50px;
-  display: flex;
-} */
 
 input{
   margin: 6px 12px;
@@ -106,31 +104,31 @@ button{
 	color: var(--black);
 	width: 50%;
   margin-left: 25%;
-  }
-
-
-/* input[type="submit"]:hover {
-  cursor: pointer;
+}
+.google {
+  background-color: var(--white);
+  color: var(--black);
+  text-align: center;
 }
 
-input[type="submit"].signIn {
+.signUp {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  margin-top: 80px;
+}
+
+.signIn {
   background-color: var(--black);
   color: var(--white);
   text-align: center;
 }
 
-input[type="submit"].google {
-  background-color: var(--white);
-  color: var(--black);
-  text-align: center;
-} */
-
-/* input[type="submit"].signUp {
+.signUp2{
   background-color: var(--red);
   color: var(--white);
   text-align: center;
-  margin-top: 80px;
-} */
+}
 
 /* ---- SIGN UP ---- */
 
@@ -140,48 +138,68 @@ input[type="submit"].google {
   flex-direction: column;
   align-items: center;
 }
-/* input[type="submit"].search {
-  background-color: var(--black);
-  color: white;
-  text-align: center;
-  margin: 8px 16px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  width: 50%,
-}
 
-input[type="submit"].movies {
+.search {
   background-color: var(--red);
-  color: white;
+  color: var(--white);
   text-align: center;
-  margin: 8px 16px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  width: 60vw;
-} */
+}
+.movies {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+}
 
 #salir{
  background-color: var(--black);
- width: 15%;
+ width: 60px;
  color: var(--white);
- margin: 0 auto;
  position: fixed;
  top: 0;
  right: 0;
 }
 
+#salir:hover {
+  color: var(--red);
+}
+
 /* ---- SEARCH STYLES ---- */
 
-/* input[type="text"]#searchMov{
-  margin: 5px 10px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  color: var(--black);
-  width: 50px;
-} */
+.searchMovie{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movieSearch{
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+}
+.details {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+}
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+  width: 15%;
+}
+
+.red {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  width: 20%;
+}
 
 /* ----SEARCH TITLE STYLES ---- */
 /* ---- MOVIES STYLES ---- */
@@ -274,20 +292,20 @@ body {
   list-style: none;
   text-align: center;
   font-family: Verdadna, Arial, Helvetica;
-  color: darkslategrey;
+  color: black;
   line-height: 3em;
   height: 3em;
-  color: #369;
+  color: black;
   text-transform: none;
   font-weight: bold;
 }
 .menuppal ul li a {
   text-decoration: none;
-  color: #369;
+  color: black;
 }
 .menuppal ul li a:hover {
   text-decoration: none;
-  color: #333;
+  color: red;
 }
 
 /* @media screen and (min-width: 600px) {

@@ -1,5 +1,7 @@
 // require express
 const express = require("express");
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 //require .env
 require('dotenv').config();
 // require rutas
@@ -14,6 +16,8 @@ app.set("views", "./views");
 // uses para JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 // para añadir acceso a ficheros en carpeta public
 app.use("/public", express.static("public"));
 

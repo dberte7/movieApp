@@ -11,7 +11,6 @@ document.getElementById('create').addEventListener("click", async (e) => {
 });
 
 const postCreateMovie = async (moviInfo) => {
-
     let options = {
         method: "POST",
         headers: {
@@ -19,9 +18,7 @@ const postCreateMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-
     let response = await fetch(`${BASE_URL}createMovie/`, options)
     let data = await response.json()
     return data;
-
 }
