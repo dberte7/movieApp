@@ -6,11 +6,6 @@
 }
 
 /* ---- GENERAL STYLES ---- */
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
 
 body{
   background-color: ghostwhite;
@@ -94,29 +89,6 @@ form {
 }
 
 /* ---- SIGN IN STYLES ---- */
-/* 
-#authentication {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-#authentication input {
-  width: 85vw;
-} */
-
-
-/* input[type="password"],
-input[type="email"] {
-  margin: 5px 10px;
-  margin-bottom: 15px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  color: var(--black);
-  width: 50px;
-  display: flex;
-} */
 
 input{
   margin: 6px 12px;
@@ -162,28 +134,6 @@ button{
   text-align: center;
 }
 
-/* input[type="submit"]:hover {
-  cursor: pointer;
-}
-
-input[type="submit"].signIn {
-  background-color: var(--black);
-  color: var(--white);
-  text-align: center;
-}
-
-input[type="submit"].google {
-  background-color: var(--white);
-  color: var(--black);
-  text-align: center;
-} */
-
-/* input[type="submit"].signUp {
-  background-color: var(--red);
-  color: var(--white);
-  text-align: center;
-  margin-top: 80px;
-} */
 
 /* ---- SIGN UP ---- */
 
@@ -204,27 +154,6 @@ input[type="submit"].google {
   color: var(--white);
   text-align: center;
 }
-/* input[type="submit"].search {
-  background-color: var(--black);
-  color: white;
-  text-align: center;
-  margin: 8px 16px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  width: 50%,
-}
-
-input[type="submit"].movies {
-  background-color: var(--red);
-  color: white;
-  text-align: center;
-  margin: 8px 16px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  width: 60vw;
-} */
 
 #salir{
  background-color: var(--black);
@@ -271,14 +200,7 @@ input[type="submit"].movies {
   color: var(--white);
   text-align: center;
 }
-/* input[type="text"]#searchMov{
-  margin: 5px 10px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--grey);
-  color: var(--black);
-  width: 50px;
-} */
+
 
 /* ----SEARCH TITLE STYLES ---- */
 /* ---- MOVIES STYLES ---- */

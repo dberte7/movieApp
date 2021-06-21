@@ -51,7 +51,8 @@ html(lang="en")
         if dashboard
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("/logout"), value="Salir" id="salir")
+                a(href='/logout')
+                    button.salir Logout
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
