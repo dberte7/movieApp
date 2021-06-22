@@ -1,5 +1,5 @@
 :root {
-  --red: #f24726;
+  --red: rgb(216, 1, 1);
   --black: #000;
   --grey: #cfcece;
   --white: #ffff;
@@ -13,67 +13,86 @@ body{
 h1, h2, h3 {
   font-family: 'Staatliches', cursive;
 }
-p {
-  font-family: 'Quicksand', sans-serif;
+* {
+  font-family: monospace;
+  font-size: 18px;
 }
 .headerGen {
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  margin: 0;
-  width: 50vp;
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative;
+  background: #232526; 
   overflow: hidden;
-  height: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Style buttons */
+.btn {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 50px;
+  margin-left: 0;
+  padding: 0;
+  width: 40px;
+  position: absolute;
+  top: 50;
+  right: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.btn1 {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 50px;
+  margin-left: 0;
+  padding: 0;
+  width: 40px;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  margin: 0;
+  margin-right: 10px;
 }
 
 .header {
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  margin: 0;
-  width: 50vp;
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative;
+  background: #232526;
   overflow: hidden;
-  height: auto;
 }
 h1 {
   color: var(--white);
   margin: 6px;
-  margin-top: 0;
+  font-size: 80px;
   text-align: center;
 }
 
 h2 {
   text-align: center;
-}
-#exit {
-  display: none;
+  font-size: 50px;
 }
 
-img {
+.borrar {
+  color: var(--red);
+}
+
+.imgSearch{
   position: relative;
   width: 80vw;
   top: 5px;
-  border-radius: 50%;
   box-shadow: 1px 1px 15px var(--black);
-  padding: 20px,40px;
+  margin-bottom: 20px;
 }
 
 .logos {
-  position: relative;
   width: 80vw;
-  top: 5px;
-  border-radius: 50%;
-  box-shadow: 1px 1px 15px var(--black);
-  padding: 20px,40px;
+  border-radius: 35%;
+  /* box-shadow: 6px 6px 15px var(--black); */
   margin: 10%;
+}
+
+.imgDelete {
+  width: 80vw;
+  box-shadow: 1px 1px 15px var(--black);
+  margin-left: 10%;
+  margin-bottom: 5%;
 }
 
 form {
@@ -89,33 +108,38 @@ form {
 input{
   margin: 6px 12px;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 30px;
   border: 1px solid var(--grey);
-  color: var(--black);
   width: 50%;
   text-align: center;
+  font-size: 17px;
 }
+
+#title {
+  margin-top: 20px;
+} 
 
 button{	
 	margin: 6px 12px;
 	padding: 8px 16px;
-	border-radius: 6px;
+	border-radius: 30px;
 	border: 1px solid var(--grey);
-	color: var(--black);
 	width: 50%;
   margin-left: 25%;
+  font-size: 17px;
 }
 .google {
-  background-color: var(--white);
-  color: var(--black);
+  background-color: dimgrey;
+  color: white;
   text-align: center;
+  font-size: 16px;
 }
 
 .signUp {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .signIn {
@@ -124,10 +148,12 @@ button{
   text-align: center;
 }
 
-.signUp2{
-  background-color: var(--red);
-  color: var(--white);
-  text-align: center;
+.review{
+  margin-right: 40px;
+  margin-left: 40px;
+  text-align: justify;
+  border-style: solid;
+  padding: 10px;
 }
 
 /* ---- SIGN UP ---- */
@@ -150,36 +176,23 @@ button{
   text-align: center;
 }
 
-#salir{
- background-color: var(--black);
- width: 60px;
- color: var(--white);
- position: fixed;
- top: 0;
- right: 0;
-}
-
-#salir:hover {
-  color: var(--red);
-}
-
 /* ---- SEARCH STYLES ---- */
 
 .searchMovie{
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
+  border: solid;
+  margin: 20px;
 }
 
-.movieSearch{
-  background-color: var(--black);
-  color: var(--white);
-  text-align: center;
-}
 .details {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
+  margin-bottom: 20px;
+  width: 30%;
 }
 .movieDetails {
   display: flex;
@@ -187,11 +200,11 @@ button{
   align-items: center;
 }
 
-.admin {
+.black {
   background-color: var(--black);
   color: var(--white);
   text-align: center;
-  width: 15%;
+  width: 21.5%;
 }
 
 .red {
@@ -201,7 +214,16 @@ button{
   width: 20%;
 }
 
+.red.delete {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  width: 20%;
+  margin-left: 40%;
+}
+
 /* ----SEARCH TITLE STYLES ---- */
+
 /* ---- MOVIES STYLES ---- */
 
 /* CSS BURGER MENU*/
@@ -233,7 +255,7 @@ body {
   background-color: none;
 }
 ._layer {
-  background: #333333;
+  background: rgb(216, 1, 1);
   margin-bottom: 4px;
   border-radius: 2px;
   width: 28px;
@@ -305,7 +327,7 @@ body {
 }
 .menuppal ul li a:hover {
   text-decoration: none;
-  color: red;
+  color: rgb(216, 1, 1);
 }
 
 /* @media screen and (min-width: 600px) {

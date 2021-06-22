@@ -1,15 +1,14 @@
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
-
 const Film = require("../models/Film");
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
+const sc = require('../utils/scraping')
 const apikey = process.env.API_KEY;
 
 //Variable global
 let data3;
 let search = [];
-let rol;
 
 const routes = {
   signIn: (req, res) =>{
@@ -43,7 +42,6 @@ const routes = {
     console.log("Ya estoy aqui!!");
     console.log(req.user);
     let titleQ = req.query.s;
-    
     if (titleQ === undefined) {
       res.status(200).render("movies", { searchPage: true, burger: true, title:true });
     } else {
@@ -74,17 +72,19 @@ const routes = {
                       })
             }
         }
-    })
+      })
     }
   },
   searchTitle: async (req, res) => {
     console.log("Ya estoy aqui!!");
     console.log(req.user);
     let id = req.params.title;
+    console.log(req.params)
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        // scrap(data.Title)
+        let review = await sc.scrap(data.Title);
+        data["review"] = review
         res.status(200).render("movies", { detail: true, title:true, burger: true, data: data });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -103,7 +103,7 @@ const routes = {
   postMovie: (req, res) => {
     const newMovie = req.body
       if (!newMovie.Create) {
-        res.status(200).render('admin', {create: true})
+        res.status(200).render('admin', {create: true, movies: true})
       } else if (newMovie.Create) {
         data3 = newMovie;
         getMoviesToDB.arrayToDB(newMovie);
@@ -113,7 +113,7 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
-        await res.status(200).render("admin", { edit: true, data: data });
+        await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -135,7 +135,7 @@ const routes = {
   },
   deleteMovScreen: async (req, res) => {
     const deleteMov = req.body
-    res.status(200).render('admin', { remove: true, deleteMov: deleteMov })
+    res.status(200).render('admin', { remove: true, movies: true, deleteMov: deleteMov })
   },
   deleteMovie: async (req, res) => {
     const deleteMov = req.body;
@@ -160,7 +160,7 @@ const routes = {
     } else if (req.user.admin) {
       try {
         const data = await Film.find();
-        res.status(200).render("admin", { movies: true, data: data, data3: data3 })
+        res.status(200).render("admin", { movies: true, mainScreen: true, data: data, data3: data3 })
         data3 = undefined;
       } catch (err) {
         res.status(500).json({ message: err.message });
