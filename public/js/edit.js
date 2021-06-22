@@ -1,4 +1,3 @@
-const BASE_URL = "http://localhost:3000/"
 
 document.getElementById('edit').addEventListener("click", async (e) => {
     const inputs = document.querySelectorAll("body > main > input")
@@ -18,7 +17,7 @@ const postEditMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-    let response = await fetch(`${BASE_URL}editMovie/${moviInfo._id}`, options)
+    let response = await fetch(`/editMovie/${moviInfo._id}`, options)
     let data = await response.json()
     return data;
 }

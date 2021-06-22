@@ -26,7 +26,7 @@ const routes = {
       res.status(200).render("movies", { signIn: true, title:true })
     } else {
       try {
-        const decrypt = await JWT.verify(token, mySecret);
+        const decrypt = JWT.verify(token, mySecret);
         req.user = {
           id:decrypt.id,
           name:decrypt.name,
@@ -73,6 +73,7 @@ const routes = {
             if (!result){
               search = []
               let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+              console.log(data);
               for (let index = 0; index < data.Search.length; index++) {
                       let id = data.Search[index].imdbID;
                       let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
@@ -101,16 +102,14 @@ const routes = {
     let userID = req.user.id
     let dataUser = {user_ID:userID}
     let id = req.params.title;
-    //buscar si el usuario tiene la peli en favoritos y marcar el check al cargar el pug
-    let exists = await Users.existsFav(["tt0372784",7])
-    console.log(exists);
-    let notest = true;
+    let exists = await Users.existsFav([id,userID])
+    let checked = exists===true? true : false
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        let review = await sc.scrap(data.Title);
-        data["review"] = review
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, notest:notest });
+        //let review = await sc.scrap(data.Title);
+        //data["review"] = review
+        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -186,10 +185,18 @@ const routes = {
       }
   },
   myMovies: async (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
     if (!req.user.admin) {
-      console.log("Busco en sql los ids favoritos");
+      let userID = req.user.id
+    let dataUser = {user_ID:userID}
+      let dataFav =[] ;
+      let fav = await Users.allFav(req.user.id)
+      for (let index = 0; index < fav.length; index++) {
+        let id = fav[index].fav_ID;
+        let data = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+        dataFav.push(data)
+      }
+      res.status(200).render("movies", { movies: true, title: true, burger: true, dataUser:dataUser, dataFav:dataFav });
+      dataFav=[];
       // try {
       //   const data = await Film.find({ fav: "true" });
       //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
