@@ -46,7 +46,7 @@ p, input {
 .btn1 {
   background: none;
   border: none;
-  color: var(--red);
+  color: var(--white);
   font-size: 50px;
   margin-left: 0;
   padding: 0;
@@ -229,8 +229,8 @@ button{
   background-color: var(--red);
   color: var(--white);
   text-align: center;
-  width: 20%;
-  margin-left: 40%;
+  width: 21%;
+  margin-left: 39.5%;
 }
 
 /* ----SEARCH TITLE STYLES ---- */

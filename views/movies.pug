@@ -8,7 +8,7 @@ html(lang="en")
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Staatliches" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        title Document
+        title MovieApp
     body
         if title
             header.headerGen
@@ -87,13 +87,21 @@ html(lang="en")
                 if dbSearch
                     div.searchMovie
                         h2 #{dbSearch.Title} 
-                        img(src=dbSearch.Poster, alt="poster")
-                        p Director: #{dbSearch.Director}
-                        p Year: #{dbSearch.Year}
-                        p Genre: #{dbSearch.Genre}
-                        p Runtime: #{dbSearch.Runtime}
+                        img.imgSearch(src=dbSearch.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{dbSearch.Director}  
+                        p 
+                            strong Year: 
+                            | #{dbSearch.Year}
+                        p 
+                            strong Genre: 
+                            | #{dbSearch.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
-                            input(type="submit" value="Details")
+                            input.details(type="submit" value="Details")
         if movies
             main 
                 if data 

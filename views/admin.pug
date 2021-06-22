@@ -9,14 +9,15 @@ html(lang="en")
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Staatliches" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        title Document
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        title MovieApp
     body    
         if movies
             header.header
                 h1 MovieApp
                 a(href='/logout')
                     button.btn1
-                        i.fa.fa-close
+                        i.fa.fa-sign-out(aria-hidden='true')
             main
                 if mainScreen 
                     h2 Mis Peliculas
