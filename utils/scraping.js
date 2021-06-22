@@ -20,7 +20,7 @@ const scraping = {
       const review = document.querySelector("div.review-text1");
       return review.innerText
     }); 
-     return data
+    return data
   }
 }
 

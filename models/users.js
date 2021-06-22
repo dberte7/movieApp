@@ -64,28 +64,20 @@ const Users = {
       }
     },
     existsFav: async (favEntry)=>{
-      console.log("hola");
+      let exists;
       let conn;
       try {
         conn = await pool.getConnection();
-
         let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.user_ID=?" 
         const res = await conn.query(sql_query,favEntry);
-        console.log("existsFav",res); 
-
-        let exists;
-
-        await res[0].fav_ID===undefined? exists = false : exists = true
-
-        console.log(exists);
-        return exists
-
+        exists = res[0].fav_ID===undefined? false : true
       } catch (err) {
         console.log("error",err)
         throw err;
       } finally {
-        if (conn) return conn.end();
+        if (conn) conn.end();
       }
+      return exists
     }
 }
 

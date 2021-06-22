@@ -103,10 +103,8 @@ const routes = {
     let id = req.params.title;
     //buscar si el usuario tiene la peli en favoritos y marcar el check al cargar el pug
     let exists = await Users.existsFav(["tt0372784",7])
-    console.log("llega?");
     console.log(exists);
     let notest = true;
-    console.log(req.params)
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
