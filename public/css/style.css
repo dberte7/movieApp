@@ -31,14 +31,14 @@ p, input {
 .btn {
   background: none;
   border: none;
-  color: var(--red);
-  font-size: 50px;
+  color: var(--white);
+  font-size: 40px;
   margin-left: 0;
   padding: 0;
   width: 40px;
   position: absolute;
-  top: 50;
-  right: 0;
+  top: 50px;
+  right: -5px;
   margin: 0;
   margin-right: 10px;
 }
@@ -47,13 +47,13 @@ p, input {
   background: none;
   border: none;
   color: var(--white);
-  font-size: 50px;
+  font-size: 40px;
   margin-left: 0;
   padding: 0;
   width: 40px;
   position: absolute;
-  top: 60px;
-  right: 0;
+  top: 50px;
+  right: -5px;
   margin: 0;
   margin-right: 10px;
 }
@@ -63,6 +63,7 @@ h1 {
   margin: 6px;
   font-size: 80px;
   text-align: center;
+  margin-bottom: -10px;
 }
 
 h2 {
