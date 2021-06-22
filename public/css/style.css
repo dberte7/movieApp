@@ -1,5 +1,5 @@
 :root {
-  --red: #f24726;
+  --red: rgb(216, 1, 1);
   --black: #000;
   --grey: #cfcece;
   --white: #ffff;
@@ -13,8 +13,9 @@ body{
 h1, h2, h3 {
   font-family: 'Staatliches', cursive;
 }
-p {
-  font-family: 'Quicksand', sans-serif;
+* {
+  font-family: monospace;
+  font-size: 18px;
 }
 .headerGen {
   background: #232526; 
@@ -27,12 +28,26 @@ p {
   border: none;
   color: var(--red);
   font-size: 50px;
-  /* cursor: pointer; */
   margin-left: 0;
   padding: 0;
   width: 40px;
   position: absolute;
   top: 50;
+  right: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.btn1 {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 50px;
+  margin-left: 0;
+  padding: 0;
+  width: 40px;
+  position: absolute;
+  top: 60px;
   right: 0;
   margin: 0;
   margin-right: 10px;
@@ -54,13 +69,9 @@ h2 {
   font-size: 50px;
 }
 
-/* img {
-  position: relative;
-  width: 80vw;
-  top: 5px;
-  border-radius: 50%;
-  box-shadow: 1px 1px 15px var(--black);
-} */
+.borrar {
+  color: var(--red);
+}
 
 .imgSearch{
   position: relative;
@@ -73,8 +84,15 @@ h2 {
 .logos {
   width: 80vw;
   border-radius: 35%;
-  box-shadow: 6px 6px 15px var(--black);
+  /* box-shadow: 6px 6px 15px var(--black); */
   margin: 10%;
+}
+
+.imgDelete {
+  width: 80vw;
+  box-shadow: 1px 1px 15px var(--black);
+  margin-left: 10%;
+  margin-bottom: 5%;
 }
 
 form {
@@ -92,11 +110,14 @@ input{
   padding: 8px 16px;
   border-radius: 30px;
   border: 1px solid var(--grey);
-  /* color: var(--black); */
   width: 50%;
   text-align: center;
-  font-size: 18px;
+  font-size: 17px;
 }
+
+#title {
+  margin-top: 20px;
+} 
 
 button{	
 	margin: 6px 12px;
@@ -105,12 +126,13 @@ button{
 	border: 1px solid var(--grey);
 	width: 50%;
   margin-left: 25%;
-  font-size: 18px;
+  font-size: 17px;
 }
 .google {
   background-color: dimgrey;
   color: white;
   text-align: center;
+  font-size: 16px;
 }
 
 .signUp {
@@ -133,11 +155,6 @@ button{
   border-style: solid;
   padding: 10px;
 }
-/* .signUp2{
-  background-color: var(--red);
-  color: var(--white);
-  text-align: center;
-} */
 
 /* ---- SIGN UP ---- */
 
@@ -170,15 +187,12 @@ button{
   margin: 20px;
 }
 
-/* .movieSearch{
-  background-color: var(--black);
-  color: var(--white);
-  text-align: center;
-} */
 .details {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
+  margin-bottom: 20px;
+  width: 30%;
 }
 .movieDetails {
   display: flex;
@@ -190,7 +204,7 @@ button{
   background-color: var(--black);
   color: var(--white);
   text-align: center;
-  width: 20%;
+  width: 21.5%;
 }
 
 .red {
@@ -198,6 +212,14 @@ button{
   color: var(--white);
   text-align: center;
   width: 20%;
+}
+
+.red.delete {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  width: 20%;
+  margin-left: 40%;
 }
 
 /* ----SEARCH TITLE STYLES ---- */
@@ -233,7 +255,7 @@ body {
   background-color: none;
 }
 ._layer {
-  background: var(--red);
+  background: rgb(216, 1, 1);
   margin-bottom: 4px;
   border-radius: 2px;
   width: 28px;
@@ -305,7 +327,7 @@ body {
 }
 .menuppal ul li a:hover {
   text-decoration: none;
-  color: red;
+  color: rgb(216, 1, 1);
 }
 
 /* @media screen and (min-width: 600px) {
