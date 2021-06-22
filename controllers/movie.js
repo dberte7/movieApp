@@ -72,6 +72,7 @@ const routes = {
             console.log(error);
         } else {
             if (!result){
+              search = []
               let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
               for (let index = 0; index < data.Search.length; index++) {
                       let id = data.Search[index].imdbID;
@@ -101,11 +102,17 @@ const routes = {
     let userID = req.user.id
     let dataUser = {user_ID:userID}
     let id = req.params.title;
+    //buscar si el usuario tiene la peli en favoritos y marcar el check al cargar el pug
+
+    let exists = await Users.existsFav(["tt0372784",7])
+    console.log("llega?");
+    console.log(exists);
+    let notest = true;
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
         // scrap(data.Title)
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser });
+        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, notest:notest });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

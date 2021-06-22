@@ -107,5 +107,8 @@ html(lang="en")
                         p Genre: #{data.Genre}
                         p Runtime: #{data.Runtime}
                         p Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                        if test
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                        if notest
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         script(src="../public/js/fav.js")
