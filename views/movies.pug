@@ -163,9 +163,9 @@ html(lang="en")
                             | #{data.review}
                         p 
                             strong Add to favorites
-                        if test
+                        if checked===true
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
-                        if notest
+                        if checked===false
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         a(href='/search')
                             button.back Back
