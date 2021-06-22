@@ -5,36 +5,51 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="../public/css/style.css")
+        link(rel="stylesheet", href="../public/css/normalize.css")
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         title Document
     body    
         if movies
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("/logout"), value="Salir" id="salir")
+                a(href='/logout')
+                    button.btn1
+                        i.fa.fa-close
             main
-                h2 Mis Peliculas
-                form(action="/createMovie" method="POST")
-                    input.admin(type="submit" value="Crear") 
+                if mainScreen 
+                    h2 Mis Peliculas
+                    form(action="/createMovie" method="POST")
+                        input.black(type="submit" value="Create") 
                 if data 
                     each film in data 
                         div.searchMovie
-                            h2 #{film.Title}
-                            img(src=film.Poster, alt="poster")
-                            p Year: #{film.Year} 
-                            p Director: #{film.Director} 
-                            p Genre: #{film.Genre}
-                            p Runtime: #{film.Runtime}
+                            h2 #{film.Title} 
+                            img.imgSearch(src=film.Poster, alt="poster")
+                            p 
+                                strong Director: 
+                                | #{film.Director}  
+                            p 
+                                strong Year: 
+                                | #{film.Year}
+                            p 
+                                strong Genre: 
+                                | #{film.Genre}
+                            p 
+                                strong Runtime: 
+                                | #{film.Runtime}
                             form(method="POST" action="/editMovie")
                                 input(type='hidden' name='Title' value=`${film.Title}`)
-                                input.admin(type="submit" value="Edit") 
+                                input.black(type="submit" value="Edit") 
                             form(method="POST" action="/removeMovie")
                                 input(type='hidden' name='Title' value=`${film.Title}`)
                                 input(type='hidden' name='Poster' value=`${film.Poster}`)
-                                input.red(type="submit" value="Delete") 
+                                input.details(type="submit" value="Delete") 
                 if data3
                     h2 #{data3.Title}
                     img(src=data3.Poster, alt="poster")
@@ -66,7 +81,7 @@ html(lang="en")
                             input(type="submit" value="Delete") 
         if create 
             main 
-                h2 Peliculas
+                h2 Create Movie
                 form(action='/movies' method='POST' id='createForm')
                     input(type='text' name='Title' placeholder='Title')
                     input(type='text' name='Poster' placeholder='Poster')
@@ -74,32 +89,32 @@ html(lang="en")
                     input(type='text' name='Director' placeholder='Director')
                     input(type='text' name='Genre' placeholder='Genre')
                     input(type='text' name='Runtime' placeholder='Runtime')
-                    input(type="submit" name='Create' value="Create" id='create')
+                    input.black(type="submit" name='Create' value="Create" id='create')
             script(src="../public/js/admin.js")
         if edit
             if data  
                 main 
-                    h2 Peliculas
-                    input(type="hidden" name='_id' value=`${data._id}`)
-                    input(type='text' name='Title' placeholder=`${data.Title}`)
-                    input(type='text' name='Poster' placeholder=`${data.Poster}`)
-                    input(type='text' name='Year' placeholder=`${data.Year}`)
-                    input(type='text' name='Director' placeholder=`${data.Director}`)
-                    input(type='text' name='Genre' placeholder=`${data.Genre}`)
-                    input(type='text' name='Runtime' placeholder=`${data.Runtime}`)
-                    input(type="hidden" name='edit' value='true')
+                    h2 Edit Movie
                     form(action="/movies" method="POST") 
-                        input(type="submit" name='Edit' value="Edit" id='edit')
+                        input(type="hidden" name='_id' value=`${data._id}`)
+                        input(type='text' name='Title' placeholder=`${data.Title}`)
+                        input(type='text' name='Poster' placeholder=`${data.Poster}`)
+                        input(type='text' name='Year' placeholder=`${data.Year}`)
+                        input(type='text' name='Director' placeholder=`${data.Director}`)
+                        input(type='text' name='Genre' placeholder=`${data.Genre}`)
+                        input(type='text' name='Runtime' placeholder=`${data.Runtime}`)
+                        input(type="hidden" name='edit' value='true')
+                        input.black(type="submit" name='Edit' value="Edit" id='edit')
                 script(src="../public/js/edit.js")
         if remove 
             main 
-                h1 Delete Is Coming! 
+                h2.borrar Delete Is Coming! 
             if deleteMov
                 h2 #{deleteMov.Title}
-                img(src=deleteMov.Poster, alt="poster")
-                a(href='/movies')
-                    button Cancelar
+                img.imgDelete(src=deleteMov.Poster, alt="poster")
                 form(action='/movies' method='POST' id="confirmForm")
-                    input(type='hidden' name='Title' value=`${deleteMov.Title}`)
-                    input(type="submit" name='confirm' value="Confirm" id="confirm")
+                    input.black(type='hidden' name='Title' value=`${deleteMov.Title}`)
+                    input.black(type="submit" name='confirm' value="Confirm" id="confirm")
+                a(href='/movies')
+                    button.red.delete Cancel
             script(src="../public/js/remove.js")

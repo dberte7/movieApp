@@ -9,7 +9,6 @@ const apikey = process.env.API_KEY;
 //Variable global
 let data3;
 let search = [];
-let rol;
 
 const routes = {
   signIn: (req, res) =>{
@@ -104,7 +103,7 @@ const routes = {
   postMovie: (req, res) => {
     const newMovie = req.body
       if (!newMovie.Create) {
-        res.status(200).render('admin', {create: true})
+        res.status(200).render('admin', {create: true, movies: true})
       } else if (newMovie.Create) {
         data3 = newMovie;
         getMoviesToDB.arrayToDB(newMovie);
@@ -136,7 +135,7 @@ const routes = {
   },
   deleteMovScreen: async (req, res) => {
     const deleteMov = req.body
-    res.status(200).render('admin', { remove: true, deleteMov: deleteMov })
+    res.status(200).render('admin', { remove: true, movies: true, deleteMov: deleteMov })
   },
   deleteMovie: async (req, res) => {
     const deleteMov = req.body;
@@ -161,7 +160,7 @@ const routes = {
     } else if (req.user.admin) {
       try {
         const data = await Film.find();
-        res.status(200).render("admin", { movies: true, data: data, data3: data3 })
+        res.status(200).render("admin", { movies: true, mainScreen: true, data: data, data3: data3 })
         data3 = undefined;
       } catch (err) {
         res.status(500).json({ message: err.message });

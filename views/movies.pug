@@ -4,10 +4,14 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="../public/css/style.css")
+        link(rel="stylesheet", href="../public/css/normalize.css")
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         title Document
     body
         if title
@@ -47,11 +51,13 @@ html(lang="en")
                     input(name="email" type="email" id="email" placeholder="Email")
                     input(name="password" type="password" id="password" placeholder="Password")
                     input(name="passwordConfirm" type="password" placeholder="Confirm Password")
-                    input.signUp2(type="submit" value="SignUp")
+                    input.red(type="submit" value="SignUp")
         if dashboard
             header.header
                 h1#header MovieApp
-                input(type="submit",href=("/logout"), value="Salir" id="salir")
+                a(href='/logout')
+                    button.btn
+                        i.fa.fa-close
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 a(href='/search')
@@ -61,17 +67,25 @@ html(lang="en")
         if searchPage
             main 
                 form(action="/search" method="GET" id="searchForm")
-                    input(type="text" id="title" name="s")
-                    input.movieSearch(type="submit" value="Search")
+                    input(type="text" id="title" name="s" placeholder="Favorite movie??")
+                    input.black(type="submit" value="Search")
                 if search
                     each film in search
                         div.searchMovie
                             h2 #{film.Title} 
-                            img(src=film.Poster, alt="poster")
-                            p Director: #{film.Director}
-                            p Year: #{film.Year}
-                            p Genre: #{film.Genre}
-                            p Runtime: #{film.Runtime}
+                            img.imgSearch(src=film.Poster, alt="poster")
+                            p 
+                                strong Director: 
+                                | #{film.Director}  
+                            p 
+                                strong Year: 
+                                | #{film.Year}
+                            p 
+                                strong Genre: 
+                                | #{film.Genre}
+                            p 
+                                strong Runtime: 
+                                | #{film.Runtime}
                             form(action=`/search/${film.imdbID}` method="GET" id="form")
                                 input.details(type="submit" value="Details")
                 if dbSearch
@@ -89,23 +103,42 @@ html(lang="en")
                 if data 
                     each film in data 
                         div
-                            h2 #{film.title}
-                            img(src=film.image, alt="poster")
-                            p Year: #{film.year} 
-                            p Director: #{film.director} 
-                            p Genre: #{film.genre}
-                            p Runtime: #{film.runtime}
+                            h2 #{film.title} 
+                            img.imgSearch(src=film.image, alt="poster")
+                            p 
+                                strong Director: 
+                                | #{film.director}  
+                            p 
+                                strong Year: 
+                                | #{film.year}
+                            p 
+                                strong Genre: 
+                                | #{film.genre}
+                            p 
+                                strong Runtime: 
+                                | #{film.runtime}
         if detail 
             main
                 if data      
                     div.movieDetails
-                        h2 #{data.Title}
-                        img(src=data.Poster, alt="poster")
-                        p Year: #{data.Year}
-                        p Director: #{data.Director} 
-                        p Genre: #{data.Genre}
-                        p Runtime: #{data.Runtime}
-                        p Review: #{data.review}
-                        p Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}` value="Add to Favorites")
+                        h2 #{data.Title} 
+                        img.imgSearch(src=data.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{data.Director}  
+                        p 
+                            strong Year: 
+                            | #{data.Year}
+                        p 
+                            strong Genre: 
+                            | #{data.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{data.Runtime}                    
+                        p.review 
+                            strong Review: 
+                            | #{data.review}
+                        p 
+                            strong Add to favorites
+                        input#check(type="checkbox" name=`${data.imdbID}`)
                         script(src="../public/js/fav.js")
