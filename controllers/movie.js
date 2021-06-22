@@ -1,10 +1,12 @@
 const Users = require('../models/users')
 const bcrypt = require('bcrypt')
 const Film = require("../models/Film");
+const JWT = require('jsonwebtoken');
 const movies = require("../utils/movies");
 const getMoviesToDB = require('../utils/getMoviesToDB');
 const sc = require('../utils/scraping')
 const apikey = process.env.API_KEY;
+const mySecret = process.env.SECRET
 
 //Variable global
 let data3;
@@ -14,8 +16,27 @@ const routes = {
   signIn: (req, res) =>{
     req.body.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
   },
-  inicio: (req, res) => {
-    res.status(200).render("movies", { signIn: true, title:true });
+  logout: async(req, res) => {
+    await res.clearCookie('acces_token')
+    res.redirect('/')
+  },
+  inicio: async (req, res) => {
+    const token = req.cookies.acces_token || '';
+    if (!token) {
+      res.status(200).render("movies", { signIn: true, title:true })
+    } else {
+      try {
+        const decrypt = await JWT.verify(token, mySecret);
+        req.user = {
+          id:decrypt.id,
+          name:decrypt.name,
+          admin:decrypt.admin
+        }
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+      req.user.admin===false? res.redirect('/dashboard') : res.redirect('/movies')
+    }  
   },
   addUser: async (req, res) => { 
   const {name,email,password} = req.body
@@ -50,6 +71,7 @@ const routes = {
             console.log(error);
         } else {
             if (!result){
+              search = []
               let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
               for (let index = 0; index < data.Search.length; index++) {
                       let id = data.Search[index].imdbID;
@@ -76,28 +98,42 @@ const routes = {
     }
   },
   searchTitle: async (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
+    let userID = req.user.id
+    let dataUser = {user_ID:userID}
     let id = req.params.title;
-    console.log(req.params)
+    //buscar si el usuario tiene la peli en favoritos y marcar el check al cargar el pug
+    let exists = await Users.existsFav(["tt0372784",7])
+    console.log(exists);
+    let notest = true;
     try{
       let data = await movies.getfilm(
         `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
         let review = await sc.scrap(data.Title);
         data["review"] = review
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data });
+        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, notest:notest });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   },
   fav: async (req, res) =>{
     let fav = req.body
-    console.log("**********");
-    console.log(fav);
+    const favInfo = Object.values(fav.like);
     if (fav.fav===true) {
-      console.log(`add ${fav.movieId} to user`);
+        try {
+          console.log("add");
+          console.log(favInfo);
+          const data = await Users.addFav(favInfo)
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
     } else if (fav.fav===false) {
-      console.log(`delete ${fav.movieId} from user ${logged.user}`);
+      try {
+        console.log("delete");
+        console.log(favInfo);
+        const data = await Users.deleteFav(favInfo)
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
     }
   },
   postMovie: (req, res) => {

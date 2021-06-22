@@ -30,50 +30,60 @@ const Users = {
       }
       return result
     },
-    searchEntries: async (email, password)=>{
-      console.log("funcionando")
+    addFav: async (favEntry)=>{
       let conn;
       try {
         conn = await pool.getConnection();
-        const res = await conn.query("SELECT * FROM usuarios  WHERE usuarios.email=?",[email]);
-        console.log("searchEntries",res); 
 
-        let getEmail = email
-        let getPassword = password
-        console.log("******");
-        console.log(getEmail);
-        console.log(getPassword);
-        console.log("******");
+        let sql_query="INSERT INTO `favoritos`(`fav_ID`, `omdb`, `user_ID`) VALUES (?,?,?)"
+        const res = await conn.query(sql_query,favEntry);
+        console.log("addFav",res); 
 
-      //   let infoVal = {
-      //     email: res[0].email,
-      //     password: res[0].password
-      //   }
-      
-      // let options = {
-      //     method: "POST",
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //         },
-      //     body: JSON.stringify(infoVal)
-      // }
-  
-      // let response = await fetch("http://localhost:3000/signIn", options)
-      // let data = await response.json()
-      // return data;
-        
       } catch (err) {
         console.log("error",err)
         throw err;
       } finally {
         if (conn) return conn.end();
       }
+    },
+    deleteFav: async (favEntry)=>{
+      console.log("hola");
+      let conn;
+      try {
+        conn = await pool.getConnection();
+
+        let sql_query="DELETE FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.omdb=? AND favoritos.user_ID=?"
+        const res = await conn.query(sql_query,favEntry);
+        console.log("deleteFav",res); 
+
+      } catch (err) {
+        console.log("error",err)
+        throw err;
+      } finally {
+        if (conn) return conn.end();
+      }
+    },
+    existsFav: async (favEntry)=>{
+      let exists;
+      let conn;
+      try {
+        conn = await pool.getConnection();
+        let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.user_ID=?" 
+        const res = await conn.query(sql_query,favEntry);
+        exists = res[0].fav_ID===undefined? false : true
+      } catch (err) {
+        console.log("error",err)
+        throw err;
+      } finally {
+        if (conn) conn.end();
+      }
+      return exists
     }
 }
-
 
 
 module.exports = Users;
 
 
 
+//INSERT INTO `favoritos`(`ID`, `fav_ID`, `omdb`, `user_ID`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')

@@ -58,34 +58,3 @@ const checkAuth = async (req, res, next) =>{
 
 module.exports = checkAuth
 
- // console.log('query');
-    // console.log(req.query.email);
-    // console.log(req.query.password);
-
-
-    // console.log('body');
-    // console.log(req.body);
-
-    //
-    // logged.user = consula la bbdd y dame el email del usuario para comparar
-    // logged.password = consula la bbdd y dame el password del usuario para comparar
-        
-    
-    // if (email){
-
-    //         if(passwordBBDD===password){
-    //             console.log("generar token");
-    //         } else {
-    //             res.send("contraseña incorrecta");
-    //         }
-    
-    //     } else {
-    //         res.send("contraseña incorrecta");
-    //     }
-    
-    //console.log("Authenticate if identity is confirmed next");
-
-    //console.log(`User:${logged.user} is logged in`);
-    
-    //logged.user ? next() : res.send("Please Log In")
-// }
