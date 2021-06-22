@@ -148,6 +148,7 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
+        console.log(data)
         await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -164,6 +165,8 @@ const routes = {
           data3 = undefined;
         }
     })
+    console.log('**********')
+    console.log(data)
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -209,7 +212,7 @@ const routes = {
         res.status(500).json({ message: err.message });
       }
     }
-    },
+  },
 };
 
 module.exports = routes;

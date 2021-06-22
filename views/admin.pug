@@ -7,20 +7,17 @@ html(lang="en")
         link(rel="stylesheet", href="../public/css/style.css")
         //- link(rel="stylesheet", href="../public/css/normalize.css")
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Staatliches" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-        title Document
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        title MovieApp
     body    
         if movies
             header.header
-                h1#header MovieApp
+                h1 MovieApp
                 a(href='/logout')
                     button.btn1
-                        i.fa.fa-close
+                        i.fa.fa-sign-out(aria-hidden='true')
             main
                 if mainScreen 
                     h2 Mis Peliculas
@@ -51,19 +48,28 @@ html(lang="en")
                                 input(type='hidden' name='Poster' value=`${film.Poster}`)
                                 input.details(type="submit" value="Delete") 
                 if data3
-                    h2 #{data3.Title}
-                    img(src=data3.Poster, alt="poster")
-                    p Year: #{data3.Year} 
-                    p Director: #{data3.Director} 
-                    p Genre: #{data3.Genre}
-                    p Runtime: #{data3.Runtime}
-                    form(method="POST" action="/editMovie")
-                        input(type='hidden' name='Title' value=`${data3.Title}`)
-                        input(type="submit" value="Edit") 
-                    form(method="POST" action="/removeMovie")
-                        input(type='hidden' name='Title' value=`${data3.Title}`)
-                        input(type='hidden' name='Poster' value=`${data3.Poster}`)
-                        input(type="submit" value="Delete") 
+                    div.searchMovie
+                        h2 #{data3.Title} 
+                        img.imgSearch(src=data3.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{data3.Director}  
+                        p 
+                            strong Year: 
+                            | #{data3.Year}
+                        p 
+                            strong Genre: 
+                            | #{data3.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{data3.Runtime}
+                        form(method="POST" action="/editMovie")
+                            input(type='hidden' name='Title' value=`${data3.Title}`)
+                            input.black(type="submit" value="Edit") 
+                        form(method="POST" action="/removeMovie")
+                            input(type='hidden' name='Title' value=`${data3.Title}`)
+                            input(type='hidden' name='Poster' value=`${data3.Poster}`)
+                            input.red(type="submit" value="Delete") 
                 if base 
                     div
                         h2 #{base.Title}

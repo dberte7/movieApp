@@ -5,6 +5,7 @@ document.getElementById('edit').addEventListener("click", async (e) => {
     for(let input of inputs){
         dataEdit[input.name] = input.value===""?input.placeholder:input.value
     }
+    console.log(dataEdit)
     await postEditMovie(dataEdit)
 });
 
