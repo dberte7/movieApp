@@ -117,6 +117,25 @@ html(lang="en")
                             p 
                                 strong Runtime: 
                                 | #{film.runtime}
+                if dataFav  
+                    each film in dataFav 
+                        div
+                            h2 #{film.Title} 
+                            img.imgSearch(src=film.Poster, alt="poster")
+                            p 
+                                strong Director: 
+                                | #{film.Director}  
+                            p 
+                                strong Year: 
+                                | #{film.Year}
+                            p 
+                                strong Genre: 
+                                | #{film.Genre}
+                            p 
+                                strong Runtime: 
+                                | #{film.Runtime}
+                            input#check(type="checkbox" name=`${film.imdbID}` value=`${dataUser.user_ID}` checked)
+                            script(src="../public/js/fav.js")
         if detail 
             main
                 if data      
@@ -140,8 +159,8 @@ html(lang="en")
                             | #{data.review}
                         p 
                             strong Add to favorites
-                        if test
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
-                        if notest
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                        if checked===true
+                                input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                        if checked===false
+                                input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         script(src="../public/js/fav.js")

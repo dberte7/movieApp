@@ -66,11 +66,12 @@ const Users = {
     existsFav: async (favEntry)=>{
       let exists;
       let conn;
+      console.log(favEntry);
       try {
         conn = await pool.getConnection();
         let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.user_ID=?" 
         const res = await conn.query(sql_query,favEntry);
-        exists = res[0].fav_ID===undefined? false : true
+        exists = res[0]===undefined? false : true
       } catch (err) {
         console.log("error",err)
         throw err;
@@ -78,6 +79,26 @@ const Users = {
         if (conn) conn.end();
       }
       return exists
+    },
+    allFav: async (userID)=>{
+      let allFavs;
+      let conn;
+      try {
+        conn = await pool.getConnection();
+        let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.user_ID=?" 
+        const res = await conn.query(sql_query,userID);
+        delete res['meta']
+        allFavs = res
+        // console.log(res);
+        // let data = res.map(obj => obj.fav_ID)
+        // console.log(data);
+      } catch (err) {
+        console.log("error",err)
+        throw err;
+      } finally {
+        if (conn) conn.end();
+      }
+      return allFavs
     }
 }
 

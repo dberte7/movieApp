@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/"
+
 
 document.getElementById('create').addEventListener("click", async (e) => { 
     //e.preventDefault();
@@ -18,7 +18,7 @@ const postCreateMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-    let response = await fetch(`${BASE_URL}createMovie/`, options)
+    let response = await fetch('/createMovie/', options)
     let data = await response.json()
     return data;
 }
