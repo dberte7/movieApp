@@ -82,6 +82,7 @@ const routes = {
                     res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search });
             } else {
               const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
+                        let mov_ID = "D" + movie.movieId.toString()
                         let dbSearch = {
                             Title: movie.Title,
                             Year: movie.Year,
@@ -89,8 +90,9 @@ const routes = {
                             Genre: movie.Genre,
                             Director: movie.Director,
                             Poster: movie.Poster,
-                            imdbID: movie._id,
+                            imdbID: mov_ID
                         }
+                        
                         res.status(200).render("movies", { searchPage: true, title:true, burger: true, dbSearch: dbSearch });
                       })
             }
@@ -99,19 +101,43 @@ const routes = {
     }
   },
   searchTitle: async (req, res) => {
+    let omdb;
+    const str = JSON.stringify(req.params.title)
+    str[1]==="D"? omdb = true : omdb = false
     let userID = req.user.id
     let dataUser = {user_ID:userID}
-    let id = req.params.title;
-    let exists = await Users.existsFav([id,userID])
-    let checked = exists===true? true : false
-    try{
-      let data = await movies.getfilm(
-        `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        //let review = await sc.scrap(data.Title);
-        //data["review"] = review
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+    let dataD;
+    let exists;
+    let checked;
+
+    if (omdb) {
+      let split = str.split("D")
+      let replace = split[1].replace(/^"|"$/g, '')
+      let mov_ID = Number(replace)
+      exists = await Users.existsFav([mov_ID,userID])
+      checked = exists===true? true : false
+      console.log(checked);
+      try{
+        const data = await Film.findOne({movieId:mov_ID});
+        dataD = data
+        console.log(dataD); 
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+      res.status(200).render("movies", { detail: true, title:true, burger: true, dataD: dataD, dataUser:dataUser, checked:checked})
+    } else {
+      let id = req.params.title;
+      exists = await Users.existsFav([id,userID])
+      checked = exists===true? true : false
+      try{
+        let data = await movies.getfilm(
+          `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+          //let review = await sc.scrap(data.Title);
+          //data["review"] = review
+          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
     }
   },
   fav: async (req, res) =>{
