@@ -27,6 +27,15 @@ p, input {
   overflow: hidden;
 }
 
+#check {
+  display: none;
+}
+
+label {
+  font-size: 40px;
+  margin: 10px;
+}
+
 /* Style buttons */
 .btn {
   background: none;

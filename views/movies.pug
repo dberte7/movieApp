@@ -106,7 +106,7 @@ html(lang="en")
             main 
                 if data 
                     each film in data 
-                        div
+                        div.searchMovie
                             h2 #{film.title} 
                             img.imgSearch(src=film.image, alt="poster")
                             p 
@@ -123,7 +123,7 @@ html(lang="en")
                                 | #{film.runtime}
                 if dataFav  
                     each film in dataFav 
-                        div
+                        div.searchMovie
                             h2 #{film.Title} 
                             img.imgSearch(src=film.Poster, alt="poster")
                             p 
@@ -138,7 +138,9 @@ html(lang="en")
                             p 
                                 strong Runtime: 
                                 | #{film.Runtime}
-                            input#check(type="checkbox" name=`${film.imdbID}` value=`${dataUser.user_ID}` checked)
+                            label
+                                i.fa.fa-trash(aria-hidden='true')
+                                input#check(type="checkbox" name=`${film.imdbID}` value=`${dataUser.user_ID}` checked)
                             script(src="../public/js/fav.js")
         if detail 
             main
@@ -164,9 +166,13 @@ html(lang="en")
                         p 
                             strong Add to favorites
                         if checked===true
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                            label
+                                i.fa.fa-heart(aria-hidden='true')
+                                input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
                         if checked===false
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                            label
+                                i.fa.fa-heart(aria-hidden='true')
+                                input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         a(href='/search')
                             button.back Back
                         script(src="../public/js/fav.js")
