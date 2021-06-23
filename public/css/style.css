@@ -290,6 +290,44 @@ body {
   color: rgb(216, 1, 1);
 }
 
+
+[id="check"] {
+  position: absolute;
+  left: -100vw;
+}
+
+[for="check"] {
+  color: #aab8c2;
+  cursor: pointer;
+  font-size: 3em;
+  align-self: center;  
+  transition: color 0.2s ease-in-out;
+}
+
+[for="check"]:hover {
+  color: grey;
+}
+
+[for="check"]::selection {
+  color: none;
+  background: transparent;
+}
+
+[for="check"]::moz-selection {
+  color: none;
+  background: transparent;
+}
+
+[id="check"]:checked + label {
+  color: var(--red);
+  will-change: font-size;
+  animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+}
+
+
+
+@keyframes heart {0%, 17.5% {font-size: 0;}}
+
 @media screen and (min-width: 600px) {
   
 
