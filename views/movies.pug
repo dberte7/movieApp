@@ -50,16 +50,17 @@ html(lang="en")
                     input.red(type="submit" value="SignUp")
         if dashboard
             header.header
-                h1#header MovieApp
+                h1 MovieApp
                 a(href='/logout')
                     button.btn
-                        i.fa.fa-close
+                        i.fa.fa-sign-out(aria-hidden='true')
             main
-                img.logos(src="../public/img/logo.jpeg" alt="logo")
-                a(href='/search')
-                    button.search Search
-                a(href='/movies')
-                    button.movies Movies
+                div.container
+                    img.logos(src="../public/img/logo.jpeg" alt="logo")
+                    a(href='/search')
+                        button.search Search
+                    a(href='/movies')
+                        button.movies Movies
         if searchPage
             main 
                 form(action="/search" method="GET" id="searchForm")
@@ -106,7 +107,7 @@ html(lang="en")
             main 
                 if data 
                     each film in data 
-                        div
+                        div.searchMovie
                             h2 #{film.title} 
                             img.imgSearch(src=film.image, alt="poster")
                             p 
@@ -123,7 +124,7 @@ html(lang="en")
                                 | #{film.runtime}
                 if dataFav  
                     each film in dataFav 
-                        div
+                        div.searchMovie
                             h2 #{film.Title} 
                             img.imgSearch(src=film.Poster, alt="poster")
                             p 
@@ -163,8 +164,10 @@ html(lang="en")
                             strong Add to favorites
                         if checked===true
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                            label(for='check') ❤
                         if checked===false
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                            label(for='check') ❤
                         a(href=`/search?s=${searchKey}`)
                             button.back Back
                         script(src="../public/js/fav.js")
@@ -191,8 +194,10 @@ html(lang="en")
                             strong Add to favorites
                         if checked===true
                             input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}` checked)
+                            label(for='check') ❤
                         if checked===false
                             input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}`)
+                            label(for='check') ❤
                         a(href=`/search?s=${searchKey}`)
                             button.back Back
                         script(src="../public/js/fav.js")

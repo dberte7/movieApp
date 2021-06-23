@@ -4,98 +4,33 @@
   --grey: #cfcece;
   --white: #ffff;
 }
-
 /* ---- GENERAL STYLES ---- */
-
 body{
   background-color: ghostwhite;
 }
 h1, h2, h3 {
-  font-family: 'Staatliches'
+  display: flex;
+  justify-content: center;
+  font-family: 'Staatliches';
+  text-align: center;
+}
+h1 {
+  color: var(--white);
+  margin: 6px;
+  font-size: 80px;
+  margin-bottom: -10px;
+}
+h2 {
+  font-size: 50px;
 }
 p, input {
   font-family: monospace;
   font-size: 18px;
 }
-.headerGen {
-  background: #232526; 
-  overflow: hidden;
+label {
+  font-size: 40px;
+  margin: 10px;
 }
-
-.header {
-  background: #232526;
-  overflow: hidden;
-}
-
-/* Style buttons */
-.btn {
-  background: none;
-  border: none;
-  color: var(--red);
-  font-size: 50px;
-  margin-left: 0;
-  padding: 0;
-  width: 40px;
-  position: absolute;
-  top: 50;
-  right: 0;
-  margin: 0;
-  margin-right: 10px;
-}
-
-.btn1 {
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 50px;
-  margin-left: 0;
-  padding: 0;
-  width: 40px;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  margin: 0;
-  margin-right: 10px;
-}
-
-h1 {
-  color: var(--white);
-  margin: 6px;
-  font-size: 80px;
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-  font-size: 50px;
-}
-
-.borrar {
-  color: var(--red);
-}
-
-.imgSearch{
-  position: relative;
-  width: 80vw;
-  top: 5px;
-  box-shadow: 1px 1px 15px var(--black);
-  margin-bottom: 20px;
-}
-
-.logos {
-  width: 80vw;
-  border-radius: 35%;
-  /* box-shadow: 6px 6px 15px var(--black); */
-  margin: 10%;
-}
-
-.imgDelete {
-  width: 80vw;
-  box-shadow: 1px 1px 15px var(--black);
-  margin-left: 10%;
-  margin-bottom: 5%;
-}
-
 form {
   width: 100%;
   display: flex;
@@ -103,9 +38,6 @@ form {
   margin: 0 auto;
   flex-direction: column;
 }
-
-/* ---- SIGN IN STYLES ---- */
-
 input{
   margin: 6px 12px;
   padding: 8px 16px;
@@ -115,11 +47,25 @@ input{
   text-align: center;
   font-size: 17px;
 }
-
-#title {
-  margin-top: 20px;
-} 
-
+.headerGen {
+  background: #232526; 
+  overflow: hidden;
+}
+.header {
+  background: #232526;
+  overflow: hidden;
+}
+#check {
+  display: none;
+}
+.review{
+  margin-right: 40px;
+  margin-left: 40px;
+  text-align: justify;
+  border-style: solid;
+  padding: 10px;
+}
+/* Style buttons */
 button{	
 	margin: 6px 12px;
 	padding: 8px 16px;
@@ -135,37 +81,31 @@ button{
   text-align: center;
   font-size: 16px;
 }
-
 .signUp {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
   margin-top: 40px;
 }
-
 .signIn {
   background-color: var(--black);
   color: var(--white);
   text-align: center;
 }
-
-.review{
-  margin-right: 40px;
-  margin-left: 40px;
-  text-align: justify;
-  border-style: solid;
-  padding: 10px;
+.btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 40px;
+  margin-left: 0;
+  padding: 0;
+  width: 40px;
+  position: absolute;
+  top: 50px;
+  right: -5px;
+  margin: 0;
+  margin-right: 10px;
 }
-
-/* ---- SIGN UP ---- */
-
-/* ---- DASHBOARD STYLES ---- */
-#dashboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .search {
   background-color: var(--red);
   color: var(--white);
@@ -176,18 +116,6 @@ button{
   color: var(--white);
   text-align: center;
 }
-
-/* ---- SEARCH STYLES ---- */
-
-.searchMovie{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  border: solid;
-  margin: 20px;
-}
-
 .details {
   background-color: var(--red);
   color: var(--white);
@@ -195,7 +123,6 @@ button{
   margin-bottom: 20px;
   width: 30%;
 }
-
 .back {
   background-color: var(--red);
   color: var(--white);
@@ -204,27 +131,19 @@ button{
   width: 100%;
   margin-left: 0;
 }
-
-.movieDetails {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .black {
+  display: flex;
+  justify-content: center;
   background-color: var(--black);
   color: var(--white);
-  text-align: center;
   width: 21.5%;
 }
-
 .red {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
   width: 20%;
 }
-
 .red.delete {
   background-color: var(--red);
   color: var(--white);
@@ -232,11 +151,42 @@ button{
   width: 21%;
   margin-left: 39.5%;
 }
-
-/* ----SEARCH TITLE STYLES ---- */
-
-/* ---- MOVIES STYLES ---- */
-
+.borrar {
+  color: var(--red);
+}
+/* Style Img */
+.imgSearch{
+  position: relative;
+  width: 80vw;
+  top: 5px;
+  box-shadow: 1px 1px 15px var(--black);
+  margin-bottom: 20px;
+}
+.logos {
+  width: 80vw;
+  border-radius: 35%;
+  margin: 10%;
+}
+.imgDelete {
+  width: 80vw;
+  box-shadow: 1px 1px 15px var(--black);
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+/* ---- DIV STYLES ---- */
+.searchMovie{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: solid;
+  margin: 20px;
+}
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /* CSS BURGER MENU*/
 body {
   margin: 0;
@@ -245,7 +195,7 @@ body {
 .hamburger {
   position: fixed;
   background-color: transparent;
-  right: 0;
+  right: -15px;
   bottom: 0;
   height: 30px;
   width: 30px;
@@ -300,7 +250,6 @@ body {
   -ms-transform: translateY(-200%) rotate(135deg) !important;
   transform: translateY(-200%) rotate(135deg) !important;
 }
-
 .menuppal.is_active {
   transform: translate3d(0px, 0px, 0px);
 }
@@ -341,21 +290,69 @@ body {
   color: rgb(216, 1, 1);
 }
 
-/* @media screen and (min-width: 600px) {
-  . {
+
+[id="check"] {
+  position: absolute;
+  left: -100vw;
+}
+
+[for="check"] {
+  color: #aab8c2;
+  cursor: pointer;
+  font-size: 3em;
+  align-self: center;  
+  transition: color 0.2s ease-in-out;
+}
+
+[for="check"]:hover {
+  color: grey;
+}
+
+[for="check"]::selection {
+  color: none;
+  background: transparent;
+}
+
+[for="check"]::moz-selection {
+  color: none;
+  background: transparent;
+}
+
+[id="check"]:checked + label {
+  color: var(--red);
+  will-change: font-size;
+  animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+}
+
+
+
+@keyframes heart {0%, 17.5% {font-size: 0;}}
+
+@media screen and (min-width: 600px) {
+  
+
+  }
+
+
+@media screen and (min-width: 960px) {
+
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+  .logos{
+    width: 400px;
+    height: 400px;
+    margin: 0px;
+  
+  } 
+  .search{
+    margin: 0px;
+  }
+  .movies{
+    margin: 0px;
+  }
+  .buttonsMain{
     display: flex;
   }
 }
-
-@media screen and (min-width: 1024px) {
-  . {
-    width: 60%;
-  }
-
-  . {
-    width: 20%;
-  }
-  . {
-    justify-content: center;
-  }
-} */
