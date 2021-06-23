@@ -134,7 +134,7 @@ const routes = {
           `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
           let review = await sc.scrap(data.Title);
           data["review"] = review
-          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
+          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, searchKey:searchKey, checked:checked});
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
