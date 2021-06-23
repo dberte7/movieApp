@@ -31,9 +31,6 @@ p {
 }
 label {
   font-size: 35px;
-  /* position: fixed; */
-  /* bottom: 100px; */
-  /* right: 195px; */
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -67,12 +64,10 @@ input{
   display: none;
 }
 .review{
-  /* margin-right: 40px;
-  margin-left: 40px; */
   text-align: justify;
   border-style: solid;
   padding: 10px;
-  width: 80%;
+  width: 76%;
 }
 /* Style buttons */
 button{	
@@ -165,11 +160,10 @@ button{
 }
 /* Style Img */
 .imgSearch{
+  display: flex;
   width: 90%;
-    /* top: 5px; */
   box-shadow: 1px 1px 15px var(--black);
-    /* margin-bottom: 20px; */
-  margin: 24px;
+  margin: 17px;
 }
 .logos {
   width: 80vw;
@@ -184,9 +178,6 @@ button{
 }
 /* ---- DIV STYLES ---- */
 .searchMovie{
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   border-radius: 20px;
   border: solid;
   margin: 20px;
@@ -195,9 +186,6 @@ button{
   border-radius: 20px;
   border: solid;
   margin: 20px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
 }
 /* CSS BURGER MENU*/
 body {

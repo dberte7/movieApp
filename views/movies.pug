@@ -164,8 +164,7 @@ html(lang="en")
                             | #{data.Genre}
                         p 
                             strong Runtime: 
-                            | #{data.Runtime}    
-                    if data.review               
+                            | #{data.Runtime}                 
                         p.review 
                             strong Review: 
                             | #{data.review}
@@ -176,6 +175,12 @@ html(lang="en")
                     div.movieDetails
                         h2 #{dataD.Title} 
                         img.imgSearch(src=dataD.Poster, alt="poster")
+                        if checked===true
+                            input#check(type="checkbox" name=`${dataD.imdbID}` value=`${dataUser.user_ID}` checked)
+                            label(for='check') ❤
+                        if checked===false
+                            input#check(type="checkbox" name=`${dataD.imdbID}` value=`${dataUser.user_ID}`)
+                            label(for='check') ❤
                         p 
                             strong Director: 
                             | #{dataD.Director}  
@@ -187,7 +192,8 @@ html(lang="en")
                             | #{dataD.Genre}
                         p 
                             strong Runtime: 
-                            | #{dataD.Runtime}                    
+                            | #{dataD.Runtime}  
+                    if dataD.review                  
                         p.review 
                             strong Review: 
                             | #{dataD.review}
