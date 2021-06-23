@@ -55,13 +55,9 @@ const routes = {
     //res.status(200).render("singin", { dashboard: true });
   },
   dashboard: (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
     res.status(200).render("movies", { dashboard: true, headerGen:true});
   },
   getMovies: async (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
     let titleQ = req.query.s;
     if (titleQ === undefined) {
       res.status(200).render("movies", { searchPage: true, burger: true, title:true });
@@ -70,37 +66,40 @@ const routes = {
         if (err) {
             console.log(error);
         } else {
-            if (!result){
-              search = []
-              let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
-              console.log(data);
-              for (let index = 0; index < data.Search.length; index++) {
-                      let id = data.Search[index].imdbID;
-                      let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-                      search.push(data2);
-                    }
-                    res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search });
-            } else {
-              const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
-                        let mov_ID = "D" + movie.movieId.toString()
-                        let dbSearch = {
-                            Title: movie.Title,
-                            Year: movie.Year,
-                            Runtime: movie.Runtime,
-                            Genre: movie.Genre,
-                            Director: movie.Director,
-                            Poster: movie.Poster,
-                            imdbID: mov_ID
-                        }
-                        
-                        res.status(200).render("movies", { searchPage: true, title:true, burger: true, dbSearch: dbSearch });
-                      })
+          let passTitleQ = titleQ
+          if (!result){
+            search = []  
+            let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+            for (let index = 0; index < data.Search.length; index++) {
+              let id = data.Search[index].imdbID;
+              let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+              search.push(data2);
             }
+              res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search, passTitleQ:passTitleQ });
+          } else {
+            const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
+              let mov_ID = "D" + movie.movieId.toString()
+              let dbSearch = {
+                              Title: movie.Title,
+                              Year: movie.Year,
+                              Runtime: movie.Runtime,
+                              Genre: movie.Genre,
+                              Director: movie.Director,
+                              Poster: movie.Poster,
+                              imdbID: mov_ID
+                            }
+              res.status(200).render("movies", { searchPage: true, title:true, burger: true, dbSearch: dbSearch, passTitleQ:passTitleQ });
+            })
+          }
         }
       })
     }
   },
   searchTitle: async (req, res) => {
+    let split = JSON.stringify(req.params)
+    let keySearch = split.split("=")
+    let key = keySearch[1].replace(/^"|}|"$/g, '')
+    let searchKey = key.replace(/^"|"$/g, '')
     let omdb;
     const str = JSON.stringify(req.params.title)
     str[1]==="D"? omdb = true : omdb = false
@@ -109,24 +108,24 @@ const routes = {
     let dataD;
     let exists;
     let checked;
-
     if (omdb) {
       let split = str.split("D")
-      let replace = split[1].replace(/^"|"$/g, '')
+      let split2 = split[1].split("&")
+      let replace = split2[0].replace(/^"|"$/g, '')
       let mov_ID = Number(replace)
       exists = await Users.existsFav([mov_ID,userID])
       checked = exists===true? true : false
-      console.log(checked);
       try{
         const data = await Film.findOne({movieId:mov_ID});
         dataD = data
-        console.log(dataD); 
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
-      res.status(200).render("movies", { detail: true, title:true, burger: true, dataD: dataD, dataUser:dataUser, checked:checked})
+      res.status(200).render("movies", { detail: true, title:true, burger: true, dataD: dataD, dataUser:dataUser, searchKey:searchKey, checked:checked})
     } else {
-      let id = req.params.title;
+      let str2 = req.params.title
+      let split3 = str2.split("&")
+      let id = split3[0]
       exists = await Users.existsFav([id,userID])
       checked = exists===true? true : false
       try{
@@ -134,7 +133,7 @@ const routes = {
           `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
           //let review = await sc.scrap(data.Title);
           //data["review"] = review
-          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
+          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, searchKey:searchKey, checked:checked});
       } catch (err) {
         res.status(500).json({ message: err.message });
       }
@@ -145,16 +144,12 @@ const routes = {
     const favInfo = Object.values(fav.like);
     if (fav.fav===true) {
         try {
-          console.log("add");
-          console.log(favInfo);
           const data = await Users.addFav(favInfo)
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     } else if (fav.fav===false) {
       try {
-        console.log("delete");
-        console.log(favInfo);
         const data = await Users.deleteFav(favInfo)
       } catch (err) {
         res.status(400).json({ message: err.message });
@@ -190,8 +185,6 @@ const routes = {
           data3 = undefined;
         }
     })
-    console.log('**********')
-    console.log(data)
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -215,10 +208,16 @@ const routes = {
     let dataUser = {user_ID:userID}
       let dataFav =[] ;
       let fav = await Users.allFav(req.user.id)
+      let fav2 = await Users.allFavDB(req.user.id)
       for (let index = 0; index < fav.length; index++) {
         let id = fav[index].fav_ID;
         let data = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
         dataFav.push(data)
+      }
+      for (let index = 0; index < fav2.length; index++) {
+        let mov_ID = fav2[index].fav_ID;
+        let data2 = await Film.find({movieId:mov_ID});
+        dataFav.push(data2[0]);
       }
       res.status(200).render("movies", { movies: true, title: true, burger: true, dataUser:dataUser, dataFav:dataFav });
       dataFav=[];

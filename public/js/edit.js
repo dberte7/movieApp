@@ -18,6 +18,5 @@ const putEditMovie = async (moviInfo) => {
     }
     let response = await fetch(`/editMovie/${moviInfo._id}`, options)
     let data = await response.json()
-    console.log(data);
     return data;
 }

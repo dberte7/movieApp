@@ -82,7 +82,7 @@ html(lang="en")
                             p 
                                 strong Runtime: 
                                 | #{film.Runtime}
-                            form(action=`/search/${film.imdbID}` method="GET" id="form")
+                            form(action=`/search/${film.imdbID}&search=${passTitleQ}` method="GET" id="form")
                                 input.details(type="submit" value="Details")
                 if dbSearch
                     div.searchMovie
@@ -100,7 +100,7 @@ html(lang="en")
                         p 
                             strong Runtime: 
                             | #{dbSearch.Runtime}
-                        form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
+                        form(action=`/search/${dbSearch.imdbID}&search=${passTitleQ}` method="GET" id="form")
                             input.details(type="submit" value="Details")
         if movies
             main 
@@ -138,8 +138,6 @@ html(lang="en")
                             p 
                                 strong Runtime: 
                                 | #{film.Runtime}
-                            input#check(type="checkbox" name=`${film.imdbID}` value=`${dataUser.user_ID}` checked)
-                            script(src="../public/js/fav.js")
         if detail 
             main
                 if data      
@@ -167,7 +165,7 @@ html(lang="en")
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
                         if checked===false
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
-                        a(href=`/search?s=${data.Title}`)
+                        a(href=`/search?s=${searchKey}`)
                             button.back Back
                         script(src="../public/js/fav.js")
                 if dataD      
@@ -195,6 +193,6 @@ html(lang="en")
                             input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}` checked)
                         if checked===false
                             input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}`)
-                        a(href=`/search?s=${dataD.Title}`)
+                        a(href=`/search?s=${searchKey}`)
                             button.back Back
                         script(src="../public/js/fav.js")
