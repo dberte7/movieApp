@@ -1,3 +1,17 @@
+// const dotenv = require('dotenv');
+// const fetch = require('node-fetch');
+
+// dotenv.config();
+// // Conexión
+// const mariadb = require('mariadb');
+// const pool = mariadb.createPool({
+//   host: 'db4free.net',
+//   user:'adriandez',
+//   password:'',
+//   connectionLimit: 5,
+//   database:"moviapp"
+// });
+
 const fetch = require('node-fetch');
 
 // Conexión
@@ -13,7 +27,6 @@ const pool = mariadb.createPool({
 const Users = {
        //entry -->[]
     createUser: async (entry) => {
-      console.log(entry)
       let result
       let conn;
       try {
@@ -21,7 +34,6 @@ const Users = {
         
         let sql_query="INSERT INTO `usuarios`( `name`, `email`, `password`) VALUES (?,?,?)"
         result = await conn.query(sql_query,entry);
-        console.log("searchEntries",result); 
       } catch (err) {
         console.log("error",err)
         throw err;
@@ -37,8 +49,6 @@ const Users = {
 
         let sql_query="INSERT INTO `favoritos`(`fav_ID`, `omdb`, `user_ID`) VALUES (?,?,?)"
         const res = await conn.query(sql_query,favEntry);
-        console.log("addFav",res); 
-
       } catch (err) {
         console.log("error",err)
         throw err;
@@ -47,15 +57,12 @@ const Users = {
       }
     },
     deleteFav: async (favEntry)=>{
-      console.log("hola");
       let conn;
       try {
         conn = await pool.getConnection();
 
         let sql_query="DELETE FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.omdb=? AND favoritos.user_ID=?"
         const res = await conn.query(sql_query,favEntry);
-        console.log("deleteFav",res); 
-
       } catch (err) {
         console.log("error",err)
         throw err;
@@ -66,7 +73,6 @@ const Users = {
     existsFav: async (favEntry)=>{
       let exists;
       let conn;
-      console.log(favEntry);
       try {
         conn = await pool.getConnection();
         let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.user_ID=?" 
@@ -85,7 +91,7 @@ const Users = {
       let conn;
       try {
         conn = await pool.getConnection();
-        let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.user_ID=?" 
+        let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.user_ID=? AND favoritos.omdb=0" 
         const res = await conn.query(sql_query,userID);
         delete res['meta']
         allFavs = res
@@ -99,6 +105,23 @@ const Users = {
         if (conn) conn.end();
       }
       return allFavs
+    },
+    allFavDB: async (userID)=>{
+      let allFavsDB;
+      let conn;
+      try {
+        conn = await pool.getConnection();
+        let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.user_ID=? AND favoritos.omdb=1" 
+        const res = await conn.query(sql_query,userID);
+        delete res['meta']
+        allFavsDB = res
+      } catch (err) {
+        console.log("error",err)
+        throw err;
+      } finally {
+        if (conn) conn.end();
+      }
+      return allFavsDB
     }
 }
 
