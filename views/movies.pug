@@ -162,9 +162,7 @@ html(lang="en")
                             strong Review: 
                             | #{data.review}
                         if checked===true
-                            label
-                                i.fa.fa-heart(aria-hidden='true')
-                                input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
                         if checked===false
                             input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
                         a(href=`/search?s=${searchKey}`)
