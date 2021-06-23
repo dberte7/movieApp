@@ -22,14 +22,21 @@ h1 {
 }
 h2 {
   font-size: 50px;
+  margin-bottom: 0px;
 }
-p, input {
+p {
   font-family: monospace;
   font-size: 18px;
+  margin-left: 27px;
 }
 label {
-  font-size: 40px;
-  margin: 10px;
+  font-size: 35px;
+  /* position: fixed; */
+  /* bottom: 100px; */
+  /* right: 195px; */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 form {
   width: 100%;
@@ -39,6 +46,7 @@ form {
   flex-direction: column;
 }
 input{
+  font-family: monospace;
   margin: 6px 12px;
   padding: 8px 16px;
   border-radius: 30px;
@@ -59,11 +67,12 @@ input{
   display: none;
 }
 .review{
-  margin-right: 40px;
-  margin-left: 40px;
+  /* margin-right: 40px;
+  margin-left: 40px; */
   text-align: justify;
   border-style: solid;
   padding: 10px;
+  width: 80%;
 }
 /* Style buttons */
 button{	
@@ -128,8 +137,8 @@ button{
   color: var(--white);
   text-align: center;
   margin-bottom: 20px;
-  width: 100%;
-  margin-left: 0;
+  width: 30%;
+  margin-left: 145px;
 }
 .black {
   display: flex;
@@ -156,11 +165,11 @@ button{
 }
 /* Style Img */
 .imgSearch{
-  position: relative;
-  width: 80vw;
-  top: 5px;
+  width: 90%;
+    /* top: 5px; */
   box-shadow: 1px 1px 15px var(--black);
-  margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+  margin: 24px;
 }
 .logos {
   width: 80vw;
@@ -175,17 +184,20 @@ button{
 }
 /* ---- DIV STYLES ---- */
 .searchMovie{
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   border-radius: 20px;
   border: solid;
   margin: 20px;
 }
 .movieDetails {
-  display: flex;
+  border-radius: 20px;
+  border: solid;
+  margin: 20px;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 /* CSS BURGER MENU*/
 body {
@@ -193,12 +205,12 @@ body {
   padding: 0;
 }
 .hamburger {
-  position: fixed;
+  position: absolute;
   background-color: transparent;
-  right: -15px;
-  bottom: 0;
+  right: 0px;
+  top: 40px;
   height: 30px;
-  width: 30px;
+  width: 20px;
   padding: 20px 20px;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
@@ -216,7 +228,7 @@ body {
   background-color: none;
 }
 ._layer {
-  background: rgb(216, 1, 1);
+  background: var(--white);
   margin-bottom: 4px;
   border-radius: 2px;
   width: 28px;

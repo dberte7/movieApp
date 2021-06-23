@@ -132,8 +132,8 @@ const routes = {
       try{
         let data = await movies.getfilm(
           `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-          // let review = await sc.scrap(data.Title);
-          // data["review"] = review
+          let review = await sc.scrap(data.Title);
+          data["review"] = review
           res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
       } catch (err) {
         res.status(500).json({ message: err.message });

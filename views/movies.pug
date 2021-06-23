@@ -32,13 +32,14 @@ html(lang="en")
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
                 form(action="/signIn" method="POST" id="singInForm")
-                    input(name="email" type="email" placeholder="Email")
-                    input(name="password" type="password" placeholder="Password")
-                    input.signIn(type="submit" value="Sign In")
+                    input(name="email" type="email" placeholder="Email" id="mail")
+                    input(name="password" type="password" placeholder="Password" id="psswrd")
+                    input.signIn(type="submit" value="Sign In" id="sigIn")
                 a(href='#')
                     button.google Sign in with Google
                 a(href='/signUp')
                     button.signUp Sign Up
+            script(src="../public/js/signIn.js") 
         if signUp
             main
                 img.logos(src="../public/img/logo.jpeg" alt="logo")
@@ -46,8 +47,9 @@ html(lang="en")
                     input(name="name" type="text" id="name" placeholder="Name")
                     input(name="email" type="email" id="email" placeholder="Email")
                     input(name="password" type="password" id="password" placeholder="Password")
-                    input(name="passwordConfirm" type="password" placeholder="Confirm Password")
-                    input.red(type="submit" value="SignUp")
+                    input(name="passwordConfirm" type="password" id="passwordConfirm" placeholder="Confirm Password")
+                    input.signUp(type="submit" value="SignUp" id="signUp")
+            script(src="../public/js/signUp.js") 
         if dashboard
             header.header
                 h1 MovieApp
@@ -163,8 +165,6 @@ html(lang="en")
                         p.review 
                             strong Review: 
                             | #{data.review}
-                        p 
-                            strong Add to favorites
                         if checked===true
                             label
                                 i.fa.fa-heart(aria-hidden='true')
@@ -203,7 +203,7 @@ html(lang="en")
                                 input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}` checked)
                         if checked===false
                             label
-                                i.fa.fa-heart(aria-hidden='true')
+                                i.fa.fa-heart-o(aria-hidden='true')
                                 input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}`)
                         a(href=`/search?s=${dataD.Title}`)
                             button.back Back
