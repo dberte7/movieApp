@@ -70,7 +70,7 @@ const Users = {
         conn = await pool.getConnection();
         let sql_query="SELECT `fav_ID` FROM `favoritos` WHERE favoritos.fav_ID=? AND favoritos.user_ID=?" 
         const res = await conn.query(sql_query,favEntry);
-        exists = res[0].fav_ID===undefined? false : true
+        exists = res[0]===undefined? false : true
       } catch (err) {
         console.log("error",err)
         throw err;

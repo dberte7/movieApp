@@ -47,19 +47,28 @@ html(lang="en")
                                 input(type='hidden' name='Poster' value=`${film.Poster}`)
                                 input.details(type="submit" value="Delete") 
                 if data3
-                    h2 #{data3.Title}
-                    img(src=data3.Poster, alt="poster")
-                    p Year: #{data3.Year} 
-                    p Director: #{data3.Director} 
-                    p Genre: #{data3.Genre}
-                    p Runtime: #{data3.Runtime}
-                    form(method="POST" action="/editMovie")
-                        input(type='hidden' name='Title' value=`${data3.Title}`)
-                        input(type="submit" value="Edit") 
-                    form(method="POST" action="/removeMovie")
-                        input(type='hidden' name='Title' value=`${data3.Title}`)
-                        input(type='hidden' name='Poster' value=`${data3.Poster}`)
-                        input(type="submit" value="Delete") 
+                    div.searchMovie
+                        h2 #{data3.Title} 
+                        img.imgSearch(src=data3.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{data3.Director}  
+                        p 
+                            strong Year: 
+                            | #{data3.Year}
+                        p 
+                            strong Genre: 
+                            | #{data3.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{data3.Runtime}
+                        form(method="POST" action="/editMovie")
+                            input(type='hidden' name='Title' value=`${data3.Title}`)
+                            input.black(type="submit" value="Edit") 
+                        form(method="POST" action="/removeMovie")
+                            input(type='hidden' name='Title' value=`${data3.Title}`)
+                            input(type='hidden' name='Poster' value=`${data3.Poster}`)
+                            input.red(type="submit" value="Delete") 
                 if base 
                     div
                         h2 #{base.Title}

@@ -195,6 +195,16 @@ button{
   margin-bottom: 20px;
   width: 30%;
 }
+
+.back {
+  background-color: var(--red);
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  margin-left: 0;
+}
+
 .movieDetails {
   display: flex;
   flex-direction: column;
