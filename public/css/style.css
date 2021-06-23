@@ -331,21 +331,31 @@ body {
   color: rgb(216, 1, 1);
 }
 
-/* @media screen and (min-width: 600px) {
-  . {
+@media screen and (min-width: 600px) {
+  
+
+  }
+
+
+@media screen and (min-width: 960px) {
+
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+  .logos{
+    width: 400px;
+    height: 400px;
+    margin: 0px;
+  
+  } 
+  .search{
+    margin: 0px;
+  }
+  .movies{
+    margin: 0px;
+  }
+  .buttonsMain{
     display: flex;
   }
 }
-
-@media screen and (min-width: 1024px) {
-  . {
-    width: 60%;
-  }
-
-  . {
-    width: 20%;
-  }
-  . {
-    justify-content: center;
-  }
-} */

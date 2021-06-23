@@ -55,11 +55,12 @@ html(lang="en")
                     button.btn
                         i.fa.fa-close
             main
-                img.logos(src="../public/img/logo.jpeg" alt="logo")
-                a(href='/search')
-                    button.search Search
-                a(href='/movies')
-                    button.movies Movies
+                div.container
+                    img.logos(src="../public/img/logo.jpeg" alt="logo")
+                    a(href='/search')
+                        button.search Search
+                    a(href='/movies')
+                        button.movies Movies
         if searchPage
             main 
                 form(action="/search" method="GET" id="searchForm")
