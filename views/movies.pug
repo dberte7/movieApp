@@ -147,6 +147,12 @@ html(lang="en")
                     div.movieDetails
                         h2 #{data.Title} 
                         img.imgSearch(src=data.Poster, alt="poster")
+                        if checked===true
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                            label(for='check') ❤
+                        if checked===false
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                            label(for='check') ❤
                         p 
                             strong Director: 
                             | #{data.Director}  
@@ -158,16 +164,11 @@ html(lang="en")
                             | #{data.Genre}
                         p 
                             strong Runtime: 
-                            | #{data.Runtime}                    
+                            | #{data.Runtime}    
+                    if data.review               
                         p.review 
                             strong Review: 
                             | #{data.review}
-                        if checked===true
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
-                            label(for='check') ❤
-                        if checked===false
-                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
-                            label(for='check') ❤
                         a(href=`/search?s=${searchKey}`)
                             button.back Back
                         script(src="../public/js/fav.js")
