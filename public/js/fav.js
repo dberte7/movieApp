@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:3000/'
-
 document.getElementById('check').onclick = () => {
     let fav = document.getElementsByTagName('input')[0].checked
     let imdb = document.getElementsByTagName('input')[0].name
@@ -27,7 +25,7 @@ const postFavInfo = async (favBoolean,id,user) => {
             }
         })
     }
-    let response = await fetch(`${BASE_URL}search/${id}`, options)
+    let response = await fetch(`/search/${id}`, options)
     let data = await response.json()
     return data;
 };

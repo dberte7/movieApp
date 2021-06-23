@@ -26,7 +26,7 @@ const routes = {
       res.status(200).render("movies", { signIn: true, title:true })
     } else {
       try {
-        const decrypt = await JWT.verify(token, mySecret);
+        const decrypt = JWT.verify(token, mySecret);
         req.user = {
           id:decrypt.id,
           name:decrypt.name,
@@ -73,6 +73,7 @@ const routes = {
             if (!result){
               search = []
               let data = await movies.getfilm(`http://www.omdbapi.com/?s=${titleQ}&type=movie&apikey=${apikey}&`);
+              console.log(data);
               for (let index = 0; index < data.Search.length; index++) {
                       let id = data.Search[index].imdbID;
                       let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
@@ -81,6 +82,7 @@ const routes = {
                     res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search });
             } else {
               const dataDb = Film.findOne({Title:titleQ}).lean().exec(async (err, movie) => {
+                        let mov_ID = "D" + movie.movieId.toString()
                         let dbSearch = {
                             Title: movie.Title,
                             Year: movie.Year,
@@ -88,8 +90,9 @@ const routes = {
                             Genre: movie.Genre,
                             Director: movie.Director,
                             Poster: movie.Poster,
-                            imdbID: movie._id,
+                            imdbID: mov_ID
                         }
+                        
                         res.status(200).render("movies", { searchPage: true, title:true, burger: true, dbSearch: dbSearch });
                       })
             }
@@ -98,21 +101,43 @@ const routes = {
     }
   },
   searchTitle: async (req, res) => {
+    let omdb;
+    const str = JSON.stringify(req.params.title)
+    str[1]==="D"? omdb = true : omdb = false
     let userID = req.user.id
     let dataUser = {user_ID:userID}
-    let id = req.params.title;
-    //buscar si el usuario tiene la peli en favoritos y marcar el check al cargar el pug
-    let exists = await Users.existsFav(["tt0372784",7])
-    console.log(exists);
-    let notest = true;
-    try{
-      let data = await movies.getfilm(
-        `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
-        // let review = await sc.scrap(data.Title);
-        // data["review"] = review
-        res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, notest:notest });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+    let dataD;
+    let exists;
+    let checked;
+
+    if (omdb) {
+      let split = str.split("D")
+      let replace = split[1].replace(/^"|"$/g, '')
+      let mov_ID = Number(replace)
+      exists = await Users.existsFav([mov_ID,userID])
+      checked = exists===true? true : false
+      console.log(checked);
+      try{
+        const data = await Film.findOne({movieId:mov_ID});
+        dataD = data
+        console.log(dataD); 
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+      res.status(200).render("movies", { detail: true, title:true, burger: true, dataD: dataD, dataUser:dataUser, checked:checked})
+    } else {
+      let id = req.params.title;
+      exists = await Users.existsFav([id,userID])
+      checked = exists===true? true : false
+      try{
+        let data = await movies.getfilm(
+          `http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+          //let review = await sc.scrap(data.Title);
+          //data["review"] = review
+          res.status(200).render("movies", { detail: true, title:true, burger: true, data: data, dataUser:dataUser, checked:checked});
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
     }
   },
   fav: async (req, res) =>{
@@ -149,8 +174,7 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
-        console.log(data)
-        await res.status(200).render('admin', { edit: true, movies: true, data: data });
+        await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -186,16 +210,18 @@ const routes = {
       }
   },
   myMovies: async (req, res) => {
-    console.log("Ya estoy aqui!!");
-    console.log(req.user);
     if (!req.user.admin) {
-      console.log("Busco en sql los ids favoritos");
-      // try {
-      //   const data = await Film.find({ fav: "true" });
-      //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
-      // } catch (err) {
-      //   res.status(500).json({ message: err.message });
-      // }
+      let userID = req.user.id
+    let dataUser = {user_ID:userID}
+      let dataFav =[] ;
+      let fav = await Users.allFav(req.user.id)
+      for (let index = 0; index < fav.length; index++) {
+        let id = fav[index].fav_ID;
+        let data = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+        dataFav.push(data)
+      }
+      res.status(200).render("movies", { movies: true, title: true, burger: true, dataUser:dataUser, dataFav:dataFav });
+      dataFav=[];
     } else if (req.user.admin) {
       try {
         const data = await Film.find();
@@ -209,3 +235,10 @@ const routes = {
 };
 
 module.exports = routes;
+
+      // try {
+      //   const data = await Film.find({ fav: "true" });
+      //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
+      // } catch (err) {
+      //   res.status(500).json({ message: err.message });
+      // }

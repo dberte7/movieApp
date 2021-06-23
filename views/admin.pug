@@ -9,14 +9,15 @@ html(lang="en")
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Staatliches" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        title Document
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        title MovieApp
     body    
         if movies
             header.header
                 h1 MovieApp
                 a(href='/logout')
                     button.btn1
-                        i.fa.fa-close
+                        i.fa.fa-sign-out(aria-hidden='true')
             main
                 if mainScreen 
                     h2 Mis Peliculas
@@ -95,12 +96,19 @@ html(lang="en")
                     input(type='text' name='Genre' placeholder='Genre')
                     input(type='text' name='Runtime' placeholder='Runtime')
                     input.black(type="submit" name='Create' value="Create" id='create')
+                a(href='/movies')
+                    button.red.delete Cancel
             script(src="../public/js/admin.js")
         if edit
-            if data  
-                main 
+            if data
+                header.header
+                    h1 MovieApp
+                    a(href='/logout')
+                        button.btn1
+                            i.fa.fa-sign-out(aria-hidden='true')
+                main
                     h2 Edit Movie
-                    form(action="/movies" method="POST") 
+                    form(action="/movies" method="POST")
                         input(type="hidden" name='_id' value=`${data._id}`)
                         input(type='text' name='Title' placeholder=`${data.Title}`)
                         input(type='text' name='Poster' placeholder=`${data.Poster}`)
@@ -110,6 +118,8 @@ html(lang="en")
                         input(type='text' name='Runtime' placeholder=`${data.Runtime}`)
                         input(type="hidden" name='edit' value='true')
                         input.black(type="submit" name='Edit' value="Edit" id='edit')
+                    a(href='/movies')
+                        button.red.delete Cancel
                 script(src="../public/js/edit.js")
         if remove 
             main 

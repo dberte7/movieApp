@@ -1,16 +1,14 @@
-const BASE_URL = "http://localhost:3000/"
 
 document.getElementById('edit').addEventListener("click", async (e) => {
-    const inputs = document.querySelectorAll("body > main > input")
+    const inputs = document.querySelectorAll("body > main > form > input")
     const dataEdit = {}
     for(let input of inputs){
         dataEdit[input.name] = input.value===""?input.placeholder:input.value
     }
-    console.log(dataEdit)
-    await postEditMovie(dataEdit)
+    await putEditMovie(dataEdit)
 });
 
-const postEditMovie = async (moviInfo) => {
+const putEditMovie = async (moviInfo) => {
     let options = {
         method: "PUT",
         headers: {
@@ -18,7 +16,8 @@ const postEditMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-    let response = await fetch(`${BASE_URL}editMovie/${moviInfo._id}`, options)
+    let response = await fetch(`/editMovie/${moviInfo._id}`, options)
     let data = await response.json()
+    console.log(data);
     return data;
 }
