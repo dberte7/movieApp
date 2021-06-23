@@ -6,17 +6,13 @@ html(lang="en")
         link(rel="stylesheet", href="../public/css/style.css")
         //- link(rel="stylesheet", href="../public/css/normalize.css")
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Staatliches" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-        title Document
+        title MovieApp
     body
         if title
             header.headerGen
-                h1#header MovieApp
+                h1 MovieApp
         if burger 
             header 
                 div.hamburger
@@ -91,13 +87,21 @@ html(lang="en")
                 if dbSearch
                     div.searchMovie
                         h2 #{dbSearch.Title} 
-                        img(src=dbSearch.Poster, alt="poster")
-                        p Director: #{dbSearch.Director}
-                        p Year: #{dbSearch.Year}
-                        p Genre: #{dbSearch.Genre}
-                        p Runtime: #{dbSearch.Runtime}
+                        img.imgSearch(src=dbSearch.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{dbSearch.Director}  
+                        p 
+                            strong Year: 
+                            | #{dbSearch.Year}
+                        p 
+                            strong Genre: 
+                            | #{dbSearch.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{dbSearch.Runtime}
                         form(action=`/search/${dbSearch.imdbID}` method="GET" id="form")
-                            input(type="submit" value="Details")
+                            input.details(type="submit" value="Details")
         if movies
             main 
                 if data 
@@ -117,6 +121,25 @@ html(lang="en")
                             p 
                                 strong Runtime: 
                                 | #{film.runtime}
+                if dataFav  
+                    each film in dataFav 
+                        div
+                            h2 #{film.Title} 
+                            img.imgSearch(src=film.Poster, alt="poster")
+                            p 
+                                strong Director: 
+                                | #{film.Director}  
+                            p 
+                                strong Year: 
+                                | #{film.Year}
+                            p 
+                                strong Genre: 
+                                | #{film.Genre}
+                            p 
+                                strong Runtime: 
+                                | #{film.Runtime}
+                            input#check(type="checkbox" name=`${film.imdbID}` value=`${dataUser.user_ID}` checked)
+                            script(src="../public/js/fav.js")
         if detail 
             main
                 if data      
@@ -140,5 +163,38 @@ html(lang="en")
                             | #{data.review}
                         p 
                             strong Add to favorites
-                        input#check(type="checkbox" name=`${data.imdbID}`)
+                        if checked===true
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}` checked)
+                        if checked===false
+                            input#check(type="checkbox" name=`${data.imdbID}` value=`${dataUser.user_ID}`)
+                        a(href=`/search?s=${data.Title}`)
+                            button.back Back
+                        script(src="../public/js/fav.js")
+                if dataD      
+                    div.movieDetails
+                        h2 #{dataD.Title} 
+                        img.imgSearch(src=dataD.Poster, alt="poster")
+                        p 
+                            strong Director: 
+                            | #{dataD.Director}  
+                        p 
+                            strong Year: 
+                            | #{dataD.Year}
+                        p 
+                            strong Genre: 
+                            | #{dataD.Genre}
+                        p 
+                            strong Runtime: 
+                            | #{dataD.Runtime}                    
+                        p.review 
+                            strong Review: 
+                            | #{dataD.review}
+                        p 
+                            strong Add to favorites
+                        if checked===true
+                            input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}` checked)
+                        if checked===false
+                            input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}`)
+                        a(href=`/search?s=${dataD.Title}`)
+                            button.back Back
                         script(src="../public/js/fav.js")

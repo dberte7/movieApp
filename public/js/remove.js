@@ -17,7 +17,7 @@ const deleteMovie = async (moviInfo) => {
             },
         body: JSON.stringify(moviInfo)
     }
-    let response = await fetch(`${BASE_URL}removeMovie/`, options)
+    let response = await fetch('/removeMovie/', options)
     let data = await response.json()
     return data;
 }
