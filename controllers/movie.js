@@ -73,6 +73,7 @@ const routes = {
             for (let index = 0; index < data.Search.length; index++) {
               let id = data.Search[index].imdbID;
               let data2 = await movies.getfilm(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}&`);
+              if(data2.Poster==="N/A") data2.Poster = "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg"
               search.push(data2);
             }
               res.status(200).render("movies", { searchPage: true, title:true, burger: true, search: search, passTitleQ:passTitleQ });
