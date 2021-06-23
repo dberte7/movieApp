@@ -99,10 +99,15 @@ html(lang="en")
                     button.red.delete Cancel
             script(src="../public/js/admin.js")
         if edit
-            if data  
-                main 
+            if data
+                header.header
+                    h1 MovieApp
+                    a(href='/logout')
+                        button.btn1
+                            i.fa.fa-sign-out(aria-hidden='true')
+                main
                     h2 Edit Movie
-                    form(action="/movies" method="POST") 
+                    form(action="/movies" method="POST")
                         input(type="hidden" name='_id' value=`${data._id}`)
                         input(type='text' name='Title' placeholder=`${data.Title}`)
                         input(type='text' name='Poster' placeholder=`${data.Poster}`)

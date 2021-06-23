@@ -174,7 +174,6 @@ const routes = {
     let title = req.body
       try {
         const data = await Film.findOne({Title:title.Title});
-        console.log(data)
         await res.status(200).render('admin', { edit: true, data: data });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -223,12 +222,6 @@ const routes = {
       }
       res.status(200).render("movies", { movies: true, title: true, burger: true, dataUser:dataUser, dataFav:dataFav });
       dataFav=[];
-      // try {
-      //   const data = await Film.find({ fav: "true" });
-      //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
-      // } catch (err) {
-      //   res.status(500).json({ message: err.message });
-      // }
     } else if (req.user.admin) {
       try {
         const data = await Film.find();
@@ -242,3 +235,10 @@ const routes = {
 };
 
 module.exports = routes;
+
+      // try {
+      //   const data = await Film.find({ fav: "true" });
+      //   res.status(200).render("movies", { movies: true,headerGen: true, burger: true, data: data });
+      // } catch (err) {
+      //   res.status(500).json({ message: err.message });
+      // }
