@@ -169,7 +169,8 @@ html(lang="en")
                             strong Review: 
                             | #{data.review}
                         a(href=`/search?s=${searchKey}`)
-                            button.back Back
+                            button.back
+                                i.fa.fa-arrow-circle-left(aria-hidden='true')
                         script(src="../public/js/fav.js")
                 if dataD      
                     div.movieDetails
@@ -204,5 +205,6 @@ html(lang="en")
                             input#check(type="checkbox" name=`${dataD.movieId}` value=`${dataUser.user_ID}`)
                             label(for='check') ❤
                         a(href=`/search?s=${searchKey}`)
-                            button.back Back
+                            button.back
+                            i.fa.fa-arrow-circle-left(aria-hidden='true')
                         script(src="../public/js/fav.js")

@@ -68,7 +68,7 @@ html(lang="en")
                         form(method="POST" action="/removeMovie")
                             input(type='hidden' name='Title' value=`${data3.Title}`)
                             input(type='hidden' name='Poster' value=`${data3.Poster}`)
-                            input.red(type="submit" value="Delete") 
+                            input.details(type="submit" value="Delete") 
                 if base 
                     div
                         h2 #{base.Title}
@@ -96,7 +96,7 @@ html(lang="en")
                     input(type='text' name='Runtime' placeholder='Runtime')
                     input.black(type="submit" name='Create' value="Create" id='create')
                 a(href='/movies')
-                    button.red.delete Cancel
+                    button.delete Cancel
             script(src="../public/js/admin.js")
         if edit
             if data
@@ -118,7 +118,7 @@ html(lang="en")
                         input(type="hidden" name='edit' value='true')
                         input.black(type="submit" name='Edit' value="Edit" id='edit')
                     a(href='/movies')
-                        button.red.delete Cancel
+                        button.delete Cancel
                 script(src="../public/js/edit.js")
         if remove 
             main 
@@ -130,5 +130,5 @@ html(lang="en")
                     input.black(type='hidden' name='Title' value=`${deleteMov.Title}`)
                     input.black(type="submit" name='confirm' value="Confirm" id="confirm")
                 a(href='/movies')
-                    button.red.delete Cancel
+                    button.delete Cancel
             script(src="../public/js/remove.js")

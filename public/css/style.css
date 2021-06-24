@@ -76,7 +76,7 @@ button{
 	border-radius: 30px;
 	border: 1px solid var(--grey);
 	width: 50%;
-  margin-left: 25%;
+  /* margin-left: 25%; */
   font-size: 17px;
 }
 .google {
@@ -130,10 +130,14 @@ button{
 .back {
   background-color: var(--red);
   color: var(--white);
-  text-align: center;
   margin-bottom: 20px;
-  width: 30%;
-  margin-left: 145px;
+  width: 18%;
+  font-size: 30px;
+}
+a {
+  display: flex;
+  justify-content: center;
+  text-decoration: auto;
 }
 .black {
   display: flex;
@@ -148,12 +152,11 @@ button{
   text-align: center;
   width: 20%;
 }
-.red.delete {
+.delete {
   background-color: var(--red);
   color: var(--white);
   text-align: center;
   width: 21%;
-  margin-left: 39.5%;
 }
 .borrar {
   color: var(--red);
@@ -175,6 +178,7 @@ button{
   box-shadow: 1px 1px 15px var(--black);
   margin-left: 10%;
   margin-bottom: 5%;
+  margin-top: 5%;
 }
 /* ---- DIV STYLES ---- */
 .searchMovie{
@@ -325,8 +329,6 @@ body {
   animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
 }
 
-
-
 @keyframes heart {0%, 17.5% {font-size: 0;}}
 
 @media screen and (min-width: 600px) {
@@ -342,16 +344,20 @@ body {
     flex-direction: column;
   }
   .logos{
-    width: 400px;
-    height: 400px;
-    margin: 0px;
+    width: 600px;
+    height: 600px;
+    margin-left: 410px;
+    margin-top: 50px;
+    margin-bottom: 40px;
   
   } 
   .search{
-    margin: 0px;
+    margin-left: 550px;
+    width: 300px;
   }
   .movies{
-    margin: 0px;
+    margin-left: 550px;
+    width: 300px;
   }
   .buttonsMain{
     display: flex;
