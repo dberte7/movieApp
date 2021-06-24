@@ -19,7 +19,6 @@ html(lang="en")
                         i.fa.fa-sign-out(aria-hidden='true')
             main
                 if mainScreen 
-                    h2 Mis Peliculas
                     form(action="/createMovie" method="POST")
                         input.black(type="submit" value="Create") 
                 if data 
